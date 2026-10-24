@@ -11,7 +11,7 @@
     "format": "biome format --write .",
     "test": "vitest run",
     "test:slow": "vitest run --config vitest.slow.config.ts",
-    "e2e": "node -e \"console.log(\\\"e2e: not implemented (stage 5)\\\")\"",
+    "e2e": "playwright test",
     "eval": "node -e \"console.log(\\\"eval: not implemented (stage 8)\\\")\"",
     "check": "npm run typecheck && npm run lint && npm run test"
   },

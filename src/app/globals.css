@@ -1,21 +1,86 @@
 @import "tailwindcss";
 
-/* Colour tokens. Stage 6 adds the dark / high-contrast / forced-colors variants and user typography settings. */
+/*
+ * Colour tokens. Every foreground/background pair below is chosen for at least 4.5:1 (7:1 for body
+ * text), and status is never carried by colour alone: StatusBadge always pairs an icon with words.
+ * Stage 6 adds the high-contrast / forced-colors variants and the typography settings.
+ */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --muted: #4b5563;
+  --surface: #f4f5f7;
+  --border: #d1d5db;
+  --border-strong: #6b7280;
+  --accent: #1d4ed8;
+  --accent-fg: #ffffff;
+  --ok-fg: #14532d;
+  --ok-bg: #dcfce7;
+  --warn-fg: #713f12;
+  --warn-bg: #fef3c7;
+  --danger-fg: #7f1d1d;
+  --danger-bg: #fee2e2;
+  --highlight-bg: #fde68a;
+  --highlight-fg: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b0f14;
+    --foreground: #e5e7eb;
+    --muted: #a3aab5;
+    --surface: #141a22;
+    --border: #2a323d;
+    --border-strong: #8b94a3;
+    --accent: #93c5fd;
+    --accent-fg: #0b0f14;
+    --ok-fg: #bbf7d0;
+    --ok-bg: #052e16;
+    --warn-fg: #fde68a;
+    --warn-bg: #422006;
+    --danger-fg: #fecaca;
+    --danger-bg: #450a0a;
+    --highlight-bg: #713f12;
+    --highlight-fg: #fef3c7;
   }
+}
+
+@theme inline {
+  --color-bg: var(--background);
+  --color-fg: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-ok: var(--ok-fg);
+  --color-ok-bg: var(--ok-bg);
+  --color-warn: var(--warn-fg);
+  --color-warn-bg: var(--warn-bg);
+  --color-danger: var(--danger-fg);
+  --color-danger-bg: var(--danger-bg);
+  --color-mark-bg: var(--highlight-bg);
+  --color-mark-fg: var(--highlight-fg);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+/* A visible focus ring on every interactive element, in a colour that has contrast on both themes. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+    transition: none;
+    animation: none;
+  }
 }

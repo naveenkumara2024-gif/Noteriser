@@ -35,3 +35,12 @@
 
 ## Report
 Final report block for the fixture, events per stage, what the repair step changed in each repaired item, and run latency (fake vs live).
+
+## As built (2026-10-24) — what differs from the plan above
+- `runPipeline(input, deps): Promise<RunResult>` with an `onEvent` callback, not an async generator; it never throws (status `complete` | `incomplete` | `failed`). Extra events: `progress` (per model call). Error codes: `aborted`, `parse_failed`, `generation_failed` (every call failed: a failed run, never an empty success), `internal`.
+- Each draft is one `Entry` for its whole life; `report.generated` is counted independently when drafts are produced, so `reconciles` is a real check. An interrupted run reports `unreviewed`. A verification cut short by cancellation is not a verdict.
+- Repair: PARTIAL/UNSUPPORTED once; CONTRADICTED never. The repaired draft is adopted if its verdict is not worse (`improved`/`unchanged`), otherwise discarded (`rejected`); no replacement = `failed`. Context is the whole document when <= 40 sentences, else the item's sections.
+- Valid-but-unneeded questions (beyond five) and duplicates are listed as removed with kind `surplus`/`duplicate`, never dropped silently; `few_questions` warns instead of padding.
+- Dedupe: exact normalised text (glossary: same term), plus cosine >= 0.95 when an embedder exists; embedder failure raises `duplicate_detection_limited`.
+- Store: `done` events are stored without `result`; drafts and verifications are keyed by attempt (1 generated, 2 repaired); run ids are unique; SQLite uses `secure_delete` and a WAL checkpoint on purge (a test proves purged source text is gone from the file). A failing store raises one `audit_log_unavailable` warning and the run continues.
+- Found by reading real output: glossary entries lost their `term` in the envelope (now `ItemEnvelope.term`), and contradicted items got a meaningless "closest sentence" hint (now only for UNSUPPORTED/PARTIAL).

@@ -77,7 +77,8 @@ src/
     schema/  text/  ingest/  segment/  generate/  verify/  repair/  pipeline/  report/  export/
   llm/                    the ONLY place pi-ai is imported: pi adapter implementing core/ports/llm, plus fake
   nlp/                    Transformers.js NLI + embedding adapters implementing core/ports, plus fakes
-  store/                  node:sqlite implementation of core/ports/store
+  store/                  RunStore implementations: node:sqlite (data/noteriser.db, WAL, numbered migrations), in-memory, JSONL export, hourly retention purge
+  demo/                   scripted fakes for fixtures/lecture7.md (lore §6 situation): powers `scripts/run.ts --fake`, the tests and Stage 5 fake mode
   config/                 env.ts (TypeBox-validated, fail fast)
   app/                    Next.js routes, pages, route handlers
   ui/                     React components
@@ -110,12 +111,18 @@ npm run test:slow                         # real NLI model (downloads once to .c
 npm run e2e                               # Playwright, LLM_MODE=fake
 npm run check                             # typecheck + lint + test   ← the gate for every stage
 npm run eval                              # stage 8
-npx tsx scripts/<name>.ts <args>
+npx tsx scripts/<name>.ts <args>               # run.ts <file> [--fake] [--profile p] [--verbose] [--export f.jsonl]
 ```
 
-Env (`.env.local`, template in `.env.example`): `GEN_MODEL`, `JUDGE_MODEL` (format `provider:model`),
-provider keys as pi-ai expects (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`, …),
-`LLM_MODE=live|fake`, `RUN_TTL_HOURS`. Tests must never need a key.
+Env (`.env.local`, template in `.env.example`). **Provider switch: `LLM_PROFILE=nararouter|openrouter`.**
+A profile is a prefix group: `<NAME>_BASE_URL`, `<NAME>_GEN_MODEL`, `<NAME>_JUDGE_MODEL`, `<NAME>_API_KEY`
+(`my-proxy` -> `MY_PROXY_*`); the name is the provider id. A name pi-ai knows (`openrouter`) uses its
+catalog; any other name plus a base URL is a custom OpenAI-compatible provider. `GEN_PROFILE` /
+`JUDGE_PROFILE` put the two roles on different profiles. `--profile <name>` on the CLI scripts overrides
+the flag for one command. Generic variables (`LLM_PROVIDER`, `GEN_PROVIDER`/`JUDGE_PROVIDER`, `GEN_MODEL`,
+`JUDGE_MODEL`, `LLM_BASE_URL`/`GEN_BASE_URL`/`JUDGE_BASE_URL`, `LLM_API_KEY`) still work and always win over
+a profile's value. Keys: pi-ai's own (`OPENROUTER_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY` for `google`, …)
+or `<PROVIDER>_API_KEY` / `LLM_API_KEY` for custom ones. Also `LLM_MODE=live|fake`, `RUN_TTL_HOURS`. Tests must never need a key.
 
 ---
 
@@ -156,7 +163,8 @@ before writing the adapter. pi-ai and Transformers.js APIs move quickly; memory 
 - DeBERTa NLI: premise ≤ 512 tokens including hypothesis. Always window; never silently truncate.
 - First NLI/embedding run downloads models; `.cache/models` is gitignored; CI/Docker must pre-fetch.
 - `node:sqlite` prints an ExperimentalWarning on Node 24 — expected.
-- npm 11 blocks dependency install scripts by default (`allow-scripts`). `onnxruntime-node`'s postinstall is **not yet approved**; Stage 3 must test whether the NLI model runs without it and, only if needed, run `npm approve-scripts onnxruntime-node` and record that in STAGE.md.
+- npm 11 blocks dependency install scripts by default (`allow-scripts`). Verified in Stage 3: the NLI and embedding models run **without** approving `onnxruntime-node`'s postinstall, so leave it unapproved. The first real-model run downloads ~160 MB (NLI) + ~23 MB (embeddings) into `.cache/models`, which takes a minute or two; later runs load in seconds.
+- The NLI model (`Xenova/nli-deberta-v3-small`) is context-sensitive: the same claim can entail against one sentence and not against that sentence plus others. The verifier therefore scores the claim against several *views* of the cited evidence and takes the best (`premiseViews`), prefixes the real section heading, and never truncates. Do not simplify this back to one concatenated premise; Stage 3 measured the difference (lore §6.2 point 3: 0.016 -> 0.99).
 - `npm run typecheck` runs `next typegen` first: `LayoutProps`/route types are generated into `.next/types` and a fresh clone has none. Never add `.next` to tsconfig `exclude`.
 - `next dev` rewrites `AGENTS.md` (Next's agent-rules block). Leave it; read `node_modules/next/dist/docs/` before using a Next API, as the bundled docs match the installed version.
 - `turbopack.root` is pinned to the project dir in `next.config.ts` (a stray lockfile in the home directory otherwise breaks root detection). Tailwind goes through the `@tailwindcss/turbopack` loader rule in the same file.

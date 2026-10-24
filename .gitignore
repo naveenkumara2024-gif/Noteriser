@@ -46,3 +46,7 @@ next-env.d.ts
 /data/
 /playwright-report/
 /test-results/
+
+# playwright
+/test-results/
+/playwright-report/
