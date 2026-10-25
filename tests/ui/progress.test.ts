@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { failedChecks } from "@/ui/checks";
-import { initialProgress, reduceProgress, STAGES, stageStatus, stagesFor } from "@/ui/progress";
+import {
+  ACTIVITY_LIMIT,
+  initialProgress,
+  reduceProgress,
+  STAGES,
+  stageStatus,
+  stagesFor,
+} from "@/ui/progress";
 import { runWith } from "../support/pipeline";
 
 describe("progress reducer over a real (scripted) run", () => {
@@ -70,5 +77,75 @@ describe("plain-language stage", () => {
     const h = await runWith(undefined, undefined, { plain: true });
     const state = h.events.reduce(reduceProgress, initialProgress);
     expect(stagesFor(true).every((s) => stageStatus(state, s) === "done")).toBe(true);
+  });
+});
+
+describe("activity log", () => {
+  it("has a line for each kind of event, in order, and never contains item or source text", async () => {
+    const h = await runWith();
+    const state = h.events.reduce(reduceProgress, initialProgress);
+    const log = state.activity;
+    expect(log.length).toBeGreaterThan(20);
+    expect(log.map((l) => l.seq)).toEqual([...log.map((l) => l.seq)].sort((a, b) => a - b));
+    const text = log.map((l) => l.text).join("\n");
+    expect(text).toMatch(/Reading your notes: started/);
+    expect(text).toMatch(/Drafted glossary entry glo-1/);
+    expect(text).toMatch(
+      /Checked question q-\d: (Supported|Not supported|Contradicted by the notes)/,
+    );
+    expect(text).toMatch(/Removed .*: /);
+
+    // The log may name ids, kinds and verdict words. Item text, the notes' sentences and the
+    // verifier's reasons (which quote both) must never reach it.
+    for (const s of h.result.doc?.sentences ?? []) expect(text).not.toContain(s.text);
+    for (const e of h.events) {
+      if (e.type === "draft") expect(text).not.toContain(e.item.text);
+      if (e.type === "verdict") for (const r of e.reasons) expect(text).not.toContain(r);
+      if (e.type === "repaired") expect(text).not.toContain(e.before);
+    }
+  });
+
+  it("keeps only the newest 200 lines", () => {
+    let state = initialProgress;
+    for (let i = 1; i <= 260; i++) {
+      state = reduceProgress(state, {
+        type: "warning",
+        code: "some_code",
+        message: `SECRET-${i}`,
+        runId: "r",
+        seq: i,
+        at: "2026-10-24T00:00:00.000Z",
+      });
+    }
+    expect(state.activity).toHaveLength(ACTIVITY_LIMIT);
+    expect(state.activity[0]?.seq).toBe(61);
+    expect(state.activity.at(-1)?.seq).toBe(260);
+    // a warning's own message is never copied into the log, only its code
+    expect(state.activity.map((l) => l.text).join()).not.toContain("SECRET");
+    expect(state.activity.at(-1)?.text).toBe("Notice: some code");
+  });
+
+  it("names the type of an item that a later event only knows by id", () => {
+    const at = "2026-10-24T00:00:00.000Z";
+    let s = reduceProgress(initialProgress, {
+      type: "draft",
+      runId: "r",
+      seq: 1,
+      at,
+      item: { type: "glossary", itemId: "glo-9", term: "T", text: "X" } as never,
+    });
+    s = reduceProgress(s, {
+      type: "removed",
+      runId: "r",
+      seq: 2,
+      at,
+      itemId: "glo-9",
+      kind: "unsupported",
+      reasons: ["quotes the notes"],
+    });
+    expect(s.activity.map((l) => l.text)).toEqual([
+      "Drafted glossary entry glo-9",
+      expect.stringMatching(/^Removed glossary entry glo-9: /),
+    ]);
   });
 });

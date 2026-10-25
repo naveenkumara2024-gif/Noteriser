@@ -17,6 +17,21 @@ export function ownerCookie(runId: string, ttlHours: number, secure: boolean): s
   ].join("; ");
 }
 
+const RUN_ID = /^[A-Za-z0-9-]{8,64}$/;
+const PREFIX = "nb_owner_";
+
+/** Run ids this browser holds an owner cookie for, in cookie order. Malformed names are ignored. */
+export function ownedRunIds(request: Request): string[] {
+  const out: string[] = [];
+  for (const part of (request.headers.get("cookie") ?? "").split(";")) {
+    const [name, value] = part.trim().split("=");
+    if (!name?.startsWith(PREFIX) || value !== "1") continue;
+    const id = name.slice(PREFIX.length);
+    if (RUN_ID.test(id)) out.push(id);
+  }
+  return out;
+}
+
 export function isOwner(request: Request, runId: string): boolean {
   const cookies = request.headers.get("cookie") ?? "";
   return cookies.split(";").some((c) => c.trim() === `${NAME(runId)}=1`);

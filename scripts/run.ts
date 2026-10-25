@@ -6,7 +6,7 @@
  *   --profile <name>       provider profile for this run (see .env.example); default LLM_PROFILE
  *   --verbose              also print every verdict as it happens
  *   --export <file.jsonl>  write the run's audit trail (needs a stored run; contains the source text)
- *   --concurrency N        parallel model calls (default 3 for generation, 4 for review)
+ *   --concurrency N        model calls in flight at once across the whole run (default 8)
  * Press Ctrl+C to stop; what finished is still reported.
  *
  * Real mode loads the entailment model (first run downloads about 160 MB) and stores the run in
@@ -83,7 +83,7 @@ if (values.fake) {
       "note: --fake is scripted for fixtures/lecture7.md; other files will give meaningless results",
     );
   }
-  deps = { ...lecture7Fakes(), store: new MemoryRunStore(), concurrency };
+  deps = { ...lecture7Fakes(), store: new MemoryRunStore(), concurrency, maxInFlight: concurrency };
 } else {
   let env: ReturnType<typeof parseEnv>;
   try {
@@ -115,7 +115,7 @@ if (values.fake) {
   const store = SqliteRunStore.open(process.env.NOTERISER_DB ?? "data/noteriser.db");
   const purge = startPurgeSchedule(store, { ttlHours: env.runTtlHours });
   stopPurge = purge.stop;
-  deps = { llm: client.value, nli, embedder, store, concurrency };
+  deps = { llm: client.value, nli, embedder, store, concurrency, maxInFlight: concurrency };
 }
 
 // --- run ----------------------------------------------------------------------------------------

@@ -1,26 +1,54 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useRef } from "react";
 import { copy } from "./copy";
+import { Settings as GearIcon } from "./icons";
 import { useSettings } from "./SettingsProvider";
 import { type FontChoice, type Spacing, TEXT_SIZE, THEMES, type Theme } from "./settings";
 
 const FIELD = "max-w-full rounded border border-line-strong bg-bg px-2 py-1";
 
-/** Theme, text size, font and spacing. Applied at once and remembered in this browser only. */
+/**
+ * Theme, text size, font and spacing. Applied at once and remembered in this browser only.
+ * A `<details>` styled as an icon button with a popover: the summary's text content stays
+ * "Display settings" (visually hidden) so it keeps its name, and the browser handles open/closed.
+ */
 export function DisplaySettings() {
   const { settings, update, reset } = useSettings();
+  const host = useRef<HTMLDetailsElement>(null);
   const sizeId = useId();
   const fontId = useId();
   const spacingId = useId();
   const t = copy.settings;
 
+  // Escape or a click outside closes the popover; Escape puts focus back on the button.
+  useEffect(() => {
+    const el = host.current;
+    if (!el) return;
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === "Escape" && el.open) {
+        el.open = false;
+        el.querySelector("summary")?.focus();
+      }
+    };
+    const onPointer = (e: PointerEvent): void => {
+      if (el.open && e.target instanceof Node && !el.contains(e.target)) el.open = false;
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, []);
+
   return (
-    <details className="w-full sm:w-auto">
-      <summary className="inline-flex min-h-6 cursor-pointer items-center rounded border border-line-strong px-3 py-1 font-medium hover:bg-surface">
-        {t.title}
+    <details ref={host} className="nb-pop-host">
+      <summary className="nb-icon-btn" data-tip={t.title}>
+        <GearIcon size={18} />
+        <span className="sr-only">{t.title}</span>
       </summary>
-      <div className="mt-3 space-y-4 rounded-lg border border-line p-4">
+      <div className="nb-pop space-y-4">
         <fieldset>
           <legend className="font-medium">{t.theme}</legend>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
@@ -86,11 +114,7 @@ export function DisplaySettings() {
           </select>
         </div>
 
-        <button
-          type="button"
-          onClick={reset}
-          className="min-h-6 rounded border border-line-strong px-3 py-1 font-medium hover:bg-surface"
-        >
+        <button type="button" onClick={reset} className="nb-pill">
           {t.reset}
         </button>
       </div>

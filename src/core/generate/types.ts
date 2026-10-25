@@ -76,7 +76,7 @@ export interface GenerateDeps {
 }
 
 export const GENERATOR_TEMPERATURE = 0.1;
-export const DEFAULT_CONCURRENCY = 3;
+export const DEFAULT_CONCURRENCY = 8;
 /** Above this many sentences, summaries get a roll-up pass and questions are generated per section. */
 export const LONG_DOC_SENTENCES = 40;
 /** Over-generate so verification can drop some and still leave five (lore §6.5). */

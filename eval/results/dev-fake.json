@@ -1,6 +1,6 @@
 {
   "meta": {
-    "startedAt": "2026-10-24T19:54:40.195Z",
+    "startedAt": "2026-10-25T04:59:43.402Z",
     "wallSeconds": 1,
     "split": "dev",
     "judge": "fake",
@@ -16,9 +16,9 @@
     "drafts": 72,
     "degradedDrafts": 0,
     "latencyMs": {
-      "mean": 16,
-      "p50": 11,
-      "p95": 40
+      "mean": 15,
+      "p50": 10,
+      "p95": 43
     },
     "usage": {
       "inputTokens": 7200,
@@ -254,7 +254,7 @@
           "novel": []
         }
       },
-      "latencyMs": 46,
+      "latencyMs": 50,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -318,7 +318,7 @@
           "novel": []
         }
       },
-      "latencyMs": 40,
+      "latencyMs": 43,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -428,7 +428,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -482,7 +482,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -550,7 +550,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 12,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -601,7 +601,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -652,7 +652,7 @@
           "novel": []
         }
       },
-      "latencyMs": 78,
+      "latencyMs": 82,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -703,7 +703,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 12,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -769,7 +769,7 @@
           "novel": []
         }
       },
-      "latencyMs": 9,
+      "latencyMs": 19,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -833,7 +833,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 13,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -887,7 +887,7 @@
           "novel": []
         }
       },
-      "latencyMs": 19,
+      "latencyMs": 13,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -938,7 +938,7 @@
           "novel": []
         }
       },
-      "latencyMs": 51,
+      "latencyMs": 50,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1001,7 +1001,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1052,7 +1052,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1110,7 +1110,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1164,7 +1164,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1226,7 +1226,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1283,7 +1283,7 @@
           "novel": []
         }
       },
-      "latencyMs": 38,
+      "latencyMs": 32,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1338,7 +1338,7 @@
           "novel": []
         }
       },
-      "latencyMs": 12,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1395,7 +1395,7 @@
           "novel": []
         }
       },
-      "latencyMs": 12,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1454,7 +1454,7 @@
           "novel": []
         }
       },
-      "latencyMs": 8,
+      "latencyMs": 7,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1529,7 +1529,7 @@
           "novel": []
         }
       },
-      "latencyMs": 8,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1594,7 +1594,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1704,7 +1704,7 @@
           "novel": []
         }
       },
-      "latencyMs": 13,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1759,7 +1759,7 @@
           "novel": []
         }
       },
-      "latencyMs": 34,
+      "latencyMs": 33,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1934,7 +1934,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -1985,7 +1985,7 @@
           "novel": []
         }
       },
-      "latencyMs": 38,
+      "latencyMs": 40,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2040,7 +2040,7 @@
           "novel": []
         }
       },
-      "latencyMs": 12,
+      "latencyMs": 14,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2091,7 +2091,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2202,7 +2202,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2265,7 +2265,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2318,7 +2318,7 @@
           "novel": []
         }
       },
-      "latencyMs": 14,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2373,7 +2373,7 @@
           "novel": []
         }
       },
-      "latencyMs": 34,
+      "latencyMs": 32,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2434,7 +2434,7 @@
           "novel": []
         }
       },
-      "latencyMs": 31,
+      "latencyMs": 32,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2497,7 +2497,7 @@
           "novel": []
         }
       },
-      "latencyMs": 14,
+      "latencyMs": 15,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2609,7 +2609,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2666,7 +2666,7 @@
           "novel": []
         }
       },
-      "latencyMs": 33,
+      "latencyMs": 34,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2778,7 +2778,7 @@
           "novel": []
         }
       },
-      "latencyMs": 12,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2843,7 +2843,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2905,7 +2905,7 @@
           "novel": []
         }
       },
-      "latencyMs": 9,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -2976,7 +2976,7 @@
           "novel": []
         }
       },
-      "latencyMs": 8,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3030,7 +3030,7 @@
           "novel": []
         }
       },
-      "latencyMs": 12,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3081,7 +3081,7 @@
           "novel": []
         }
       },
-      "latencyMs": 32,
+      "latencyMs": 28,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3132,7 +3132,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3190,7 +3190,7 @@
           "novel": []
         }
       },
-      "latencyMs": 8,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3245,7 +3245,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3298,7 +3298,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3353,7 +3353,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 12,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3455,7 +3455,7 @@
           "novel": []
         }
       },
-      "latencyMs": 12,
+      "latencyMs": 14,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3565,7 +3565,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3630,7 +3630,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 13,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3691,7 +3691,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 13,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3793,7 +3793,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 8,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3847,7 +3847,7 @@
           "novel": []
         }
       },
-      "latencyMs": 10,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -3974,7 +3974,7 @@
           "novel": []
         }
       },
-      "latencyMs": 11,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -4086,7 +4086,7 @@
           "novel": []
         }
       },
-      "latencyMs": 8,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -4137,7 +4137,7 @@
           "novel": []
         }
       },
-      "latencyMs": 9,
+      "latencyMs": 13,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -4188,7 +4188,7 @@
           "novel": []
         }
       },
-      "latencyMs": 9,
+      "latencyMs": 11,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -4241,7 +4241,7 @@
           "novel": []
         }
       },
-      "latencyMs": 7,
+      "latencyMs": 9,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,
@@ -4299,7 +4299,7 @@
           "novel": []
         }
       },
-      "latencyMs": 9,
+      "latencyMs": 10,
       "usage": {
         "inputTokens": 100,
         "outputTokens": 50,

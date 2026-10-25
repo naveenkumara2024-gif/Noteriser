@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import type { Envelope, RunResult, ShownItem } from "@/core/pipeline";
 import type { QuestionItem } from "@/core/schema/items";
 import { copy, docWarningLabel } from "../copy";
+import { useRunSession } from "../shell/RunSession";
 import { queueFor } from "../speech-text";
 import { useReader } from "../use-reader";
 import { DeleteRun } from "./DeleteRun";
@@ -65,7 +66,14 @@ export function ResultsView({ result }: { result: RunResult }) {
     questions: true,
   });
   const reader = useReader();
+  const { setShown } = useRunSession();
   const doc = result.doc;
+
+  // Tell the shell which run this page shows, so the activity panel can report on it.
+  useEffect(() => {
+    setShown(result);
+    return () => setShown(null);
+  }, [result, setShown]);
   const sentences: SentenceIndex = new Map((doc?.sentences ?? []).map((s) => [s.id, s]));
   const allOpen = Object.values(open).every(Boolean);
 
@@ -112,7 +120,9 @@ export function ResultsView({ result }: { result: RunResult }) {
   });
 
   return (
-    <div className="space-y-6">
+    // A container, not the window, decides when the Source column fits: the history and activity
+    // columns of the shell take width from the page.
+    <div className="@container space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <h1 className="text-3xl font-semibold">{doc?.title ?? copy.results.untitled}</h1>
         <Link
@@ -195,7 +205,7 @@ export function ResultsView({ result }: { result: RunResult }) {
         </button>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] print:block">
+      <div className="grid gap-6 @3xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] print:block">
         <div className="space-y-8">
           <Section
             id="summary-heading"

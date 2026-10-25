@@ -94,7 +94,12 @@ export function useRun(onFinished: (runId: string) => void) {
             name: "failed",
             message: error?.message ?? "The run ended without a result.",
           });
-        } else onFinished(runId);
+        } else {
+          // The run is over and stored. The session outlives the page that started it, so the phase
+          // goes back to idle here rather than being discarded with a form that no longer unmounts.
+          setPhase({ name: "idle" });
+          onFinished(runId);
+        }
       } catch {
         if (abort.signal.aborted) setPhase({ name: "cancelled" });
         else setPhase({ name: "failed", message: copy.home.networkError });

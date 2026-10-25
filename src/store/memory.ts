@@ -1,12 +1,13 @@
 import type { DraftItem } from "../core/generate/types";
 import type { RunEvent, RunResult } from "../core/pipeline/types";
+import { type RunIndex, type RunSummary, titleOf } from "../core/ports/run-index";
 import type { Feedback, RunStore, StoredFeedback, StoredRun } from "../core/ports/store";
 import type { SourceDoc } from "../core/schema/source";
 import type { Verification } from "../core/verify/verify";
 import { toJsonl, toStoredEvent } from "./jsonl";
 
 /** In-memory `RunStore` for tests, fake mode and demos. Same contract as the SQLite store. */
-export class MemoryRunStore implements RunStore {
+export class MemoryRunStore implements RunStore, RunIndex {
   private readonly runs = new Map<string, StoredRun>();
 
   private need(runId: string): StoredRun {
@@ -114,5 +115,30 @@ export class MemoryRunStore implements RunStore {
   async exportJsonl(runId: string): Promise<string | undefined> {
     const run = await this.getRun(runId);
     return run ? toJsonl(run) : undefined;
+  }
+
+  async summaries(runIds: readonly string[]): Promise<RunSummary[]> {
+    const out: RunSummary[] = [];
+    for (const id of new Set(runIds)) {
+      const run = this.runs.get(id);
+      if (!run) continue;
+      const r = run.result?.report;
+      out.push({
+        runId: run.runId,
+        title: titleOf(run.doc),
+        createdAt: run.createdAt,
+        status: run.status,
+        counts: r
+          ? {
+              generated: r.generated,
+              supported: r.supported,
+              partial: r.partial,
+              removed: r.removed,
+            }
+          : null,
+        degraded: run.result?.degraded ?? false,
+      });
+    }
+    return out.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
 }

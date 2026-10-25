@@ -36,10 +36,26 @@ const TRANSIENT =
 const RATE_LIMITED = /\b429\b|rate.?limit|too many requests/i;
 const RATE_LIMIT_BACKOFF = 8;
 
-/** Heuristic on the provider's message: worth retrying, as opposed to a bad key or unknown model. */
-export function isTransientError(message: string): boolean {
-  return TRANSIENT.test(message);
+/**
+ * A quota that resets tomorrow, or needs credits: waiting seconds cannot help, so retrying only
+ * burns minutes (a daily free-tier limit looks like "429 ... free-models-per-day").
+ */
+const QUOTA_EXHAUSTED =
+  /per[- ]?day|daily|insufficient (?:credits|funds|quota)|(?:quota|credits?) (?:exceeded|exhausted|used up)|out of credits|payment required|\b402\b|add \d+ credits/i;
+/** After a quota error, calls to that model are refused at once for this long instead of being sent. */
+const QUOTA_COOLDOWN_MS = 5 * 60_000;
+
+export function isQuotaExhausted(message: string): boolean {
+  return QUOTA_EXHAUSTED.test(message);
 }
+
+/** Heuristic on the provider's message: worth retrying, as opposed to a bad key, unknown model or used-up quota. */
+export function isTransientError(message: string): boolean {
+  return TRANSIENT.test(message) && !isQuotaExhausted(message);
+}
+
+const quotaMessage = (message: string): string =>
+  `The model provider's quota is used up, so the call was not retried (change LLM_PROFILE, add credits, or wait for the reset): ${message.slice(0, 240)}`;
 
 /** Resolves true after `ms`, or false right away if the signal aborts first. */
 function sleep(ms: number, signal?: AbortSignal): Promise<boolean> {
@@ -85,6 +101,8 @@ const modelKey = (m: Model<Api>): string => `${m.provider}:${m.id}`;
 export class PiLlmClient implements LlmClient {
   /** Models that rejected `temperature`; it is omitted for them from then on. */
   private readonly rejectsTemperature = new Set<string>();
+  /** Models whose quota is used up: when to try them again, and what the provider said. */
+  private readonly quotaUntil = new Map<string, { until: number; message: string }>();
 
   constructor(private readonly opts: PiLlmOptions) {}
 
@@ -101,6 +119,12 @@ export class PiLlmClient implements LlmClient {
     };
     const systemPrompt = `${req.system}\n\nRespond by calling the tool \`${req.toolName}\` exactly once with your complete answer. Do not reply in plain text.`;
     const messages: Message[] = [{ role: "user", content: req.user, timestamp: Date.now() }];
+
+    // A model whose quota ran out a moment ago would only answer the same error: say so at once.
+    const exhausted = this.quotaUntil.get(key);
+    if (exhausted && Date.now() < exhausted.until) {
+      return err({ code: "provider", message: exhausted.message, usage: ZERO_USAGE });
+    }
 
     let usage = ZERO_USAGE;
     let last: Omit<LlmError, "usage"> = { code: "no_tool_call", message: "no attempt was made" };
@@ -131,6 +155,11 @@ export class PiLlmClient implements LlmClient {
           this.rejectsTemperature.add(key);
           temperatureDropped = true;
           continue;
+        }
+        if (isQuotaExhausted(message)) {
+          const friendly = quotaMessage(message);
+          this.quotaUntil.set(key, { until: Date.now() + QUOTA_COOLDOWN_MS, message: friendly });
+          return err({ code: "provider", message: friendly, usage });
         }
         // Gateways and free tiers fail transiently ("temporarily unavailable", 429, 503). Back off
         // and try again a couple of times before giving up; permanent errors (401, bad model) do not.

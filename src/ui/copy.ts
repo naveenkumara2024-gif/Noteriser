@@ -161,6 +161,114 @@ export const copy = {
     failed: "The feedback could not be saved. Try again.",
   },
 
+  /** Lines of the activity log: ids, kinds and verdict words only, never item or source text. */
+  activity: {
+    started: "started",
+    finished: "done",
+    drafted: (what: string): string => `Drafted ${what}`,
+    checked: (what: string, verdict: string, again: boolean): string =>
+      `Checked ${what}${again ? " (repaired version)" : ""}: ${verdict}`,
+    repaired: (what: string, outcome: string): string => `Repair of ${what}: ${outcome}`,
+    removed: (what: string, why: string): string => `Removed ${what}: ${why}`,
+    plain: (what: string, outcome: string): string =>
+      `Plain wording for ${what}: ${outcome.replaceAll("_", " ")}`,
+    notice: (code: string): string => `Notice: ${code}`,
+    stopped: (code: string): string => `Stopped: ${code}`,
+  },
+
+  shell: {
+    skip: "Skip to main content",
+    logoLabel: "NoteBridge home",
+    historyShow: "Show history",
+    historyHide: "Hide history",
+    historyClose: "Close history",
+    activityShow: "Show verification activity",
+    activityHide: "Hide verification activity",
+    notifications: (unread: number): string =>
+      unread > 0 ? `Notifications, ${unread} new` : "Notifications",
+    notificationsTitle: "Recent activity",
+    notificationsNone: "Nothing new.",
+    notificationFinished: (title: string, supported: number, partial: number, removed: number) =>
+      `${title} finished: ${supported} supported, ${partial} to check, ${removed} removed.`,
+    notificationStatus: {
+      failed: (title: string) => `${title} could not produce study aids.`,
+      incomplete: (title: string) => `${title} was stopped before it finished.`,
+      running: (title: string) => `${title} is still running.`,
+    },
+    displaySettings: "Display settings",
+    guest: "Guest",
+    retention: (hours: number): string =>
+      hours % 24 === 0
+        ? `Runs are kept for ${hours / 24 === 1 ? "24 hours" : `${hours / 24} days`}`
+        : `Runs are kept for ${hours} hours`,
+    newStudyAid: "New study aid",
+    demoBadge: "Demo mode: scripted answers",
+  },
+
+  history: {
+    title: "History",
+    nav: "History",
+    tabs: "History view",
+    timeline: "Timeline",
+    project: "Project",
+    searchLabel: "Search your runs",
+    searchPlaceholder: "Search",
+    searchClear: "Clear search",
+    yourRuns: "Your runs",
+    results: (n: number): string => `${n} ${n === 1 ? "result" : "results"}`,
+    noMatch: (q: string): string => `No runs match “${q}”.`,
+    empty: "No runs yet. Make your first study aid.",
+    loading: "Loading your runs",
+    error: "History could not be loaded.",
+    retry: "Try again",
+    deleteRun: (title: string): string => `Delete ${title}`,
+    deleted: (title: string): string => `Deleted ${title}.`,
+    deleteFailed: "The run could not be deleted. Try again.",
+    groupRuns: (n: number): string => `${n} ${n === 1 ? "run" : "runs"}`,
+    status: {
+      running: "Running",
+      failed: "Failed",
+      incomplete: "Stopped early",
+      degraded: "Verifier degraded",
+      flagged: "Has items to check",
+    },
+    limitNote: (n: number): string => `Showing the latest ${n} runs.`,
+  },
+
+  panel: {
+    title: "Verification activity",
+    close: "Close verification activity",
+    tabs: "Activity view",
+    summary: "Summary",
+    details: "Details",
+    idle: "Nothing running. When you make study aids, each step appears here as it happens.",
+    noLog: "No activity yet.",
+    logLabel: "Activity log",
+    reportHeading: "Run report",
+    flagged: (n: number): string => `${n} to check against the source`,
+    noticesHeading: "Notices from this run",
+    noNotices: "No notices.",
+  },
+
+  composer: {
+    heading: ["What are you", "studying", "today?"],
+    headingLabel: "What are you studying today?",
+    notesLabel: "Paste your lecture notes",
+    placeholder: "Paste your lecture notes or drop a file…",
+    upload: "Upload a file",
+    dropHint: "Drop the file to use it",
+    dropped: "File added.",
+    removeFile: "Remove file",
+    fileReplaces: "It will be used instead of the pasted text.",
+    dictate: "Dictate notes",
+    stopDictation: "Stop dictation",
+    listening: "Listening…",
+    dictationFailed: "Dictation stopped. Check your microphone and try again.",
+    submitHint: "Press Ctrl+Enter (or ⌘+Enter) to make study aids.",
+    limits: (text: string, file: string): string => `Up to ${text} of text or a ${file} file.`,
+    runningStatus: "Working. Cancel from the round button.",
+  },
+
   report: {
     heading: "Run report",
     reconciles: (generated: number): string =>

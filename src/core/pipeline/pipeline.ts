@@ -12,6 +12,7 @@ import { readability } from "../readability";
 import { isRepairable, repairItem } from "../repair";
 import { makeReport } from "../report";
 import type { SourceDoc } from "../schema/source";
+import { limitInFlight } from "../util/limit";
 import { mapPool } from "../util/pool";
 import { createVerifier, toEnvelope, type Verification, type Verifier } from "../verify";
 import { assemble, DEFAULT_QUESTION_COUNT, type Entry, VERDICT_RANK } from "./assemble";
@@ -28,7 +29,9 @@ import type {
   Stage,
 } from "./types";
 
-const DEFAULT_REVIEW_CONCURRENCY = 4;
+const DEFAULT_REVIEW_CONCURRENCY = 8;
+/** Model calls in flight at once, across every stage; the stages' own limits only apply below it. */
+const DEFAULT_IN_FLIGHT = 8;
 
 /** An event without the fields the pipeline stamps on it. */
 type EventBody = RunEvent extends infer E
@@ -56,7 +59,7 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
   // One signal for everything: the caller's (a cancelled request) and the run's own limits.
   const guard = new LimitGuard(deps.limits ?? {});
   const signal = deps.signal ? AbortSignal.any([deps.signal, guard.signal]) : guard.signal;
-  const llm = guard.wrap(deps.llm);
+  const llm = limitInFlight(guard.wrap(deps.llm), deps.maxInFlight ?? DEFAULT_IN_FLIGHT);
   const aborted = (): boolean => signal.aborted;
 
   let seq = 0;

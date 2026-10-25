@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./shell.css";
 
 /*
  * Colour tokens. Every foreground/background pair is chosen for at least 4.5:1 (7:1 in high
@@ -24,9 +25,30 @@
   --danger-bg: #fee2e2;
   --highlight-bg: #fde68a;
   --highlight-fg: #171717;
+  /* App shell (Stage 12). Raised/inset depth is shadow on top of a real border (shadows vanish in
+     forced-colours mode). Every pair below is checked by tests/ui/contrast.test.ts. */
+  --stage: #4b4b4b;
+  --frame-top: #e4e4e4;
+  --frame-bottom: #c6c6c6;
+  --side-top: #dcdcdc;
+  --side-bottom: #bebebe;
+  --text: #171717;
+  --text-muted: #3b3b3b;
+  --control-border: #5c5c5c;
+  --control-fill: #ececec;
+  --control-active: #fafafa;
+  --raise-hi: rgba(255, 255, 255, 0.8);
+  --raise-lo: rgba(0, 0, 0, 0.18);
+  --headline-fill: #666666;
+  --headline-hi: rgba(255, 255, 255, 0.75);
+  --headline-lo: rgba(0, 0, 0, 0.28);
+  --send-top: #747474;
+  --send-bottom: #4a4a4a;
+  --send-fg: #ffffff;
+  --guide: rgba(0, 0, 0, 0.07);
 
   --text-scale: 1;
-  --body-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --body-font: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --lh: 1.6;
   --ls: normal;
   --ws: normal;
@@ -52,6 +74,25 @@
     --danger-bg: #450a0a;
     --highlight-bg: #713f12;
     --highlight-fg: #fef3c7;
+    --stage: #0a0a0b;
+    --frame-top: #1f2227;
+    --frame-bottom: #14161a;
+    --side-top: #1a1d21;
+    --side-bottom: #101215;
+    --text: #e5e7eb;
+    --text-muted: #b4bac4;
+    --control-border: #8b94a3;
+    --control-fill: #262a30;
+    --control-active: #323842;
+    --raise-hi: rgba(255, 255, 255, 0.07);
+    --raise-lo: rgba(0, 0, 0, 0.55);
+    --headline-fill: #8a909b;
+    --headline-hi: rgba(255, 255, 255, 0.12);
+    --headline-lo: rgba(0, 0, 0, 0.6);
+    --send-top: #d6d9de;
+    --send-bottom: #9aa0aa;
+    --send-fg: #0b0f14;
+    --guide: rgba(255, 255, 255, 0.06);
   }
 }
 :root[data-theme="dark"] {
@@ -71,6 +112,25 @@
   --danger-bg: #450a0a;
   --highlight-bg: #713f12;
   --highlight-fg: #fef3c7;
+  --stage: #0a0a0b;
+  --frame-top: #1f2227;
+  --frame-bottom: #14161a;
+  --side-top: #1a1d21;
+  --side-bottom: #101215;
+  --text: #e5e7eb;
+  --text-muted: #b4bac4;
+  --control-border: #8b94a3;
+  --control-fill: #262a30;
+  --control-active: #323842;
+  --raise-hi: rgba(255, 255, 255, 0.07);
+  --raise-lo: rgba(0, 0, 0, 0.55);
+  --headline-fill: #8a909b;
+  --headline-hi: rgba(255, 255, 255, 0.12);
+  --headline-lo: rgba(0, 0, 0, 0.6);
+  --send-top: #d6d9de;
+  --send-bottom: #9aa0aa;
+  --send-fg: #0b0f14;
+  --guide: rgba(255, 255, 255, 0.06);
 }
 
 /* High contrast: black, white and yellow, 7:1 or better everywhere. */
@@ -92,6 +152,25 @@
     --danger-bg: #000000;
     --highlight-bg: #ffff00;
     --highlight-fg: #000000;
+    --stage: #000000;
+    --frame-top: #000000;
+    --frame-bottom: #000000;
+    --side-top: #000000;
+    --side-bottom: #000000;
+    --text: #ffffff;
+    --text-muted: #ffffff;
+    --control-border: #ffffff;
+    --control-fill: #000000;
+    --control-active: #000000;
+    --raise-hi: transparent;
+    --raise-lo: transparent;
+    --headline-fill: #ffffff;
+    --headline-hi: transparent;
+    --headline-lo: transparent;
+    --send-top: #ffff00;
+    --send-bottom: #ffff00;
+    --send-fg: #000000;
+    --guide: transparent;
   }
 }
 :root[data-theme="contrast"] {
@@ -111,6 +190,25 @@
   --danger-bg: #000000;
   --highlight-bg: #ffff00;
   --highlight-fg: #000000;
+  --stage: #000000;
+  --frame-top: #000000;
+  --frame-bottom: #000000;
+  --side-top: #000000;
+  --side-bottom: #000000;
+  --text: #ffffff;
+  --text-muted: #ffffff;
+  --control-border: #ffffff;
+  --control-fill: #000000;
+  --control-active: #000000;
+  --raise-hi: transparent;
+  --raise-lo: transparent;
+  --headline-fill: #ffffff;
+  --headline-hi: transparent;
+  --headline-lo: transparent;
+  --send-top: #ffff00;
+  --send-bottom: #ffff00;
+  --send-fg: #000000;
+  --guide: transparent;
 }
 
 /* Fonts and spacing. "Comfortable" meets the WCAG 1.4.12 text-spacing minimums by default. */

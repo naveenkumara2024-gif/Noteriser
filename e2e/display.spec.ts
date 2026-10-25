@@ -161,7 +161,9 @@ test.describe("display settings", () => {
   }) => {
     await page.addInitScript(([key]) => localStorage.setItem(key as string, "{not json"), [KEY]);
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1, name: "NoteBridge" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 1, name: "What are you studying today?" }),
+    ).toBeVisible();
     expect(await html(page, "data-theme")).toBeNull();
   });
 

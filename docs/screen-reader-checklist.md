@@ -16,7 +16,8 @@ confusing, even if it "works".
 
 ## 1. Landmarks and headings
 - [ ] Skip link: first Tab says "Skip to main content"; Enter lands on the page content.
-- [ ] Landmarks list (NVDA: `D` / rotor): banner, main, and the Source region are announced.
+- [ ] Landmarks list (NVDA: `D` / rotor): banner, navigation "History", main, complementary
+      "Verification activity" and the Source region are announced (Stage 12 shell).
 - [ ] Headings list (NVDA: `H`, or Insert+F7): one level-1 heading ("Lecture 7: CPU Scheduling
       Basics"), then level-2 headings: Reading level, Read aloud, Summary, Glossary, Practice
       questions, Source, Run report. No skipped levels.
@@ -67,3 +68,31 @@ confusing, even if it "works".
 Record in STAGE.md (Stage 6): who ran it, which screen reader and browser, and every problem found.
 If it was not possible to run, say so explicitly: Stage 6 is only marked done once the result is
 recorded or the check is waived in writing.
+
+## Stage 12 shell (history, composer, activity panel): added 2026-10-25
+Run with a window at least 1280 px wide first, then again at 800 px (columns become drawers).
+
+- [ ] Home: the one level-1 heading reads "What are you studying today?" as a single sentence (not
+      three fragments). The composer is announced as "Paste your lecture notes, edit text".
+- [ ] "Upload a file" and "Make study aids" are buttons with those names. While a run is going the
+      round button is called "Cancel" and there is exactly one Cancel.
+- [ ] Press **Use sample lecture**: focus moves into the notes box and "Sample lecture loaded" is
+      read. Tab once: you land on "Make study aids".
+- [ ] **Enter** adds a line in the notes box; **Ctrl+Enter** starts the run.
+- [ ] While running, the status line "Step n of 5: ..." is announced once per stage, not once per
+      item. The activity panel's list shows each stage with "(done)", "(in progress)" or "(waiting)".
+- [ ] Activity panel, Details tab: the log is a list of short lines (ids, kinds, verdict words) and is
+      not announced while you are elsewhere. It never reads the notes' own sentences.
+- [ ] History: "History" navigation; the tabs "Timeline" and "Project" announce selected state and
+      move with the arrow keys; the search box says "Search your runs, search"; **Ctrl+K** jumps to it
+      and typing announces "n results" or "No runs match ...".
+- [ ] Each history row reads title, status (only if not an ordinary run), then the time in words
+      ("3 hours ago"). The open run is announced as the current page.
+- [ ] Row delete: the trash button is reachable by Tab, announces which run it deletes, and the
+      confirmation reads "Delete this run and its source text permanently?".
+- [ ] Bell: the button says "Notifications, 1 new" after a run; the popover reads the finished run as
+      a link; Escape closes it and focus returns to the bell.
+- [ ] At 800 px: "Show history" opens a dialog named "History"; focus stays inside it; Escape closes it
+      and focus returns to the button.
+- [ ] Microphone: in a browser with an installed on-device speech pack the button "Dictate notes"
+      appears and says "Listening..."; in a browser without one there is no microphone button at all.

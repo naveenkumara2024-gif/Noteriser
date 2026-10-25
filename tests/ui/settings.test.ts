@@ -25,14 +25,30 @@ function fakeRoot() {
 
 describe("parseSettings", () => {
   it("accepts valid values", () => {
-    const s: Settings = { theme: "contrast", textSize: 150, font: "readable", spacing: "extra" };
+    const s: Settings = {
+      theme: "contrast",
+      textSize: 150,
+      font: "readable",
+      spacing: "extra",
+      sidebar: "closed",
+      panel: "open",
+      historyView: "project",
+    };
     expect(parseSettings(s)).toEqual(s);
   });
 
   it("falls back to the default for anything invalid, one field at a time", () => {
-    expect(parseSettings({ theme: "neon", textSize: "big", font: 3, spacing: null })).toEqual(
-      DEFAULT_SETTINGS,
-    );
+    expect(
+      parseSettings({
+        theme: "neon",
+        textSize: "big",
+        font: 3,
+        spacing: null,
+        sidebar: "left",
+        panel: 1,
+        historyView: "grid",
+      }),
+    ).toEqual(DEFAULT_SETTINGS);
     expect(parseSettings({ theme: "dark", font: "comic" })).toEqual({
       ...DEFAULT_SETTINGS,
       theme: "dark",
@@ -71,7 +87,14 @@ describe("loading and saving", () => {
       getItem: (k: string) => store.get(k) ?? null,
       setItem: (k: string, v: string) => void store.set(k, v),
     };
-    const s: Settings = { theme: "dark", textSize: 180, font: "readable", spacing: "comfortable" };
+    const s: Settings = {
+      ...DEFAULT_SETTINGS,
+      theme: "dark",
+      textSize: 180,
+      font: "readable",
+      spacing: "comfortable",
+      historyView: "project",
+    };
     saveSettings(storage, s);
     expect(loadSettings(storage)).toEqual(s);
     expect(() =>
@@ -90,11 +113,21 @@ describe("loading and saving", () => {
 describe("applySettings", () => {
   it("sets attributes and the text-scale variable; defaults remove the attributes", () => {
     const { root, attrs, vars } = fakeRoot();
-    applySettings(root, { theme: "dark", textSize: 150, font: "readable", spacing: "comfortable" });
+    applySettings(root, {
+      ...DEFAULT_SETTINGS,
+      theme: "dark",
+      textSize: 150,
+      font: "readable",
+      spacing: "comfortable",
+      sidebar: "closed",
+      panel: "open",
+    });
     expect(Object.fromEntries(attrs)).toEqual({
       "data-theme": "dark",
       "data-font": "readable",
       "data-spacing": "comfortable",
+      "data-sidebar-pref": "closed",
+      "data-panel-pref": "open",
     });
     expect(vars.get("--text-scale")).toBe("1.5");
 
@@ -131,6 +164,9 @@ describe("the no-flash head script", () => {
       { theme: "light", textSize: 120, font: "system", spacing: "comfortable" },
       { theme: "system", textSize: 100, font: "system", spacing: "default" },
       { theme: "neon", textSize: 12345, font: "comic", spacing: 7 },
+      { sidebar: "closed", panel: "closed", historyView: "project" },
+      { sidebar: "open", panel: "auto" },
+      { sidebar: "sideways", panel: 3 },
       { textSize: 143 },
       {},
     ];

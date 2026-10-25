@@ -187,7 +187,7 @@ export function ItemCard({
           onClick={() =>
             onSelect(sourcesOpen ? null : { itemId: envelope.itemId, ids: envelope.sourceIds })
           }
-          className={`hidden lg:inline-flex print:hidden ${BUTTON}`}
+          className={`hidden @3xl:inline-flex print:hidden ${BUTTON}`}
         >
           {sourcesOpen ? copy.results.hideSource : copy.results.showSource}
         </button>
@@ -251,7 +251,7 @@ export function ItemCard({
 
       {/* Narrow screens have no Source column: the sentences open under the item instead. */}
       <details
-        className="mt-3 lg:hidden print:hidden"
+        className="mt-3 @3xl:hidden print:hidden"
         open={mine}
         onToggle={(e) => {
           const open = e.currentTarget.open;

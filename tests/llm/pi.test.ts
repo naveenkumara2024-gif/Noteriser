@@ -273,6 +273,39 @@ describe("PiLlmClient", () => {
     });
   });
 
+  describe("a used-up quota", () => {
+    const daily =
+      '429: {"message":"Rate limit exceeded: free-models-per-day. Add 5 credits to unlock 1000 free model requests per day","code":429}';
+    const quota = (message: string) =>
+      fauxAssistantMessage([], { stopReason: "error", errorMessage: message });
+
+    it("is reported at once, without the minutes of back-off a rate limit gets", async () => {
+      const { faux, models, generator, judge, request } = setup();
+      const slow = new PiLlmClient({ models, generator, judge, retryDelayMs: 60_000 });
+      faux.setResponses([quota(daily), callTool({ answer: "never", n: 1 })]);
+      const started = Date.now();
+      const r = await slow.generateStructured(request());
+      expect(Date.now() - started).toBeLessThan(2_000);
+      expect(r.ok).toBe(false);
+      if (!r.ok) {
+        expect(r.error.code).toBe("provider");
+        expect(r.error.message).toMatch(/quota is used up.*not retried/);
+        expect(r.error.message).toContain("free-models-per-day");
+      }
+      expect(faux.state.callCount).toBe(1);
+    });
+
+    it("is not sent again to that model for a while: later calls fail without a request", async () => {
+      const { faux, client, request } = setup();
+      faux.setResponses([quota(daily), callTool({ answer: "never", n: 1 })]);
+      await client.generateStructured(request());
+      const again = await client.generateStructured(request());
+      expect(again.ok).toBe(false);
+      if (!again.ok) expect(again.error.message).toMatch(/quota is used up/);
+      expect(faux.state.callCount).toBe(1);
+    });
+  });
+
   describe("isTransientError", () => {
     it.each([
       "The model service is temporarily unavailable. Please try again.",
@@ -293,6 +326,9 @@ describe("PiLlmClient", () => {
       "400 invalid request: messages must not be empty",
       "403 forbidden",
       "temperature is not supported by this model",
+      "429: Rate limit exceeded: free-models-per-day. Add 5 credits",
+      "402 Payment Required: insufficient credits",
+      "You exceeded your daily quota",
     ])("does not retry: %s", (m) => {
       expect(isTransientError(m)).toBe(false);
     });

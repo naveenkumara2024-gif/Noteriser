@@ -88,7 +88,18 @@ async function createRuntime(): Promise<Runtime> {
     const { SqliteRunStore } = await import("@/store/sqlite");
     const [nli, embedder] = await Promise.all([HfNli.load(), HfEmbedder.load()]);
     const store = SqliteRunStore.open(process.env.NOTERISER_DB ?? "data/noteriser.db");
-    runtime = { ...common, mode: "live", deps: { llm: client.value, nli, embedder }, store };
+    runtime = {
+      ...common,
+      mode: "live",
+      // Model calls in flight at once. Lower it if the provider answers 429; raise it for a fast paid one.
+      deps: {
+        llm: client.value,
+        nli,
+        embedder,
+        maxInFlight: intFromEnv("LLM_MAX_IN_FLIGHT", 8, 1),
+      },
+      store,
+    };
   }
 
   startPurgeSchedule(runtime.store, {

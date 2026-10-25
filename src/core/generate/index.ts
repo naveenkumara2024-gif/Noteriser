@@ -18,10 +18,16 @@ export interface Drafts {
   questions: GenerationOutcome;
 }
 
-/** All three artefacts, one after another (keeps provider rate limits simple). */
+/**
+ * All three artefacts at the same time. They share nothing (each numbers its own items), so the
+ * wait is the slowest of the three rather than their sum. How many model calls are actually in
+ * flight is capped by the client the caller passes (see `limitInFlight`), not here.
+ */
 export async function generateDrafts(doc: SourceDoc, deps: GenerateDeps): Promise<Drafts> {
-  const summary = await generateSummary(doc, deps);
-  const glossary = await generateGlossary(doc, deps);
-  const questions = await generateQuestions(doc, deps);
+  const [summary, glossary, questions] = await Promise.all([
+    generateSummary(doc, deps),
+    generateGlossary(doc, deps),
+    generateQuestions(doc, deps),
+  ]);
   return { summary, glossary, questions };
 }

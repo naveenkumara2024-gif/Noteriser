@@ -162,6 +162,8 @@ export interface PipelineDeps {
   thresholds?: Thresholds;
   /** Parallel model calls inside one stage. */
   concurrency?: number;
+  /** Model calls in flight at once across the whole run (default 8). */
+  maxInFlight?: number;
   /** Per-run caps on length, model calls, cost and time. */
   limits?: RunLimits;
   /** How many questions to show. Default 5. */

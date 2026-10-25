@@ -49,7 +49,7 @@ export function SourcePanel({ doc, cited }: { doc: SourceDoc; cited: readonly st
   return (
     <aside
       aria-labelledby="source-heading"
-      className="hidden print:hidden lg:sticky lg:top-4 lg:block lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-y-auto lg:rounded-lg lg:border lg:border-line lg:p-4"
+      className="hidden print:hidden @3xl:sticky @3xl:top-[calc(var(--chrome,0px)+1rem)] @3xl:block @3xl:max-h-[calc(100dvh-var(--chrome,0px)-2rem)] @3xl:self-start @3xl:overflow-y-auto @3xl:rounded-lg @3xl:border @3xl:border-line @3xl:p-4"
       // A scrollable region must be reachable by keyboard.
       // biome-ignore lint/a11y/noNoninteractiveTabindex: scrollable region
       tabIndex={0}

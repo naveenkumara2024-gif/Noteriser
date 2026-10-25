@@ -81,7 +81,9 @@ src/
   demo/                   scripted fakes for fixtures/lecture7.md (lore §6 situation): powers `scripts/run.ts --fake`, the tests and Stage 5 fake mode
   config/                 env.ts (TypeBox-validated, fail fast)
   app/                    Next.js routes, pages, route handlers; app/server = request logic (input, SSE, rate limit, runtime/deps) kept out of the route files so it is unit-testable
-  ui/                     React components (copy.ts, StatusBadge, progress/results/…) and pure helpers (sse parser, progress reducer)
+  ui/                     React components (copy.ts, StatusBadge, results/…) and pure helpers (sse parser, progress reducer)
+    shell/                the window around every page (Stage 12): top bar, history sidebar, activity panel, RunSession (owns the run), Pane (dialog-based column/drawer)
+    home/                 the main page: headline + composer; dictation.ts is on-device only and behind an interface
 tests/                    mirrors src/; tests/architecture.test.ts enforces import boundaries
 ```
 
@@ -171,6 +173,10 @@ before writing the adapter. pi-ai and Transformers.js APIs move quickly; memory 
 - `next dev` rewrites `AGENTS.md` (Next's agent-rules block). Leave it; read `node_modules/next/dist/docs/` before using a Next API, as the bundled docs match the installed version.
 - `turbopack.root` is pinned to the project dir in `next.config.ts` (a stray lockfile in the home directory otherwise breaks root detection). Tailwind goes through the `@tailwindcss/turbopack` loader rule in the same file.
 - Display settings (theme, text size, font, spacing) are `<html>` attributes set by a head script before paint (`src/ui/settings.ts`); the script duplicates the parsing in miniature and a test keeps the two in step. Change one, change both.
+- The shell (`src/ui/shell`) is a three-column window of `<dialog>` panes: columns when the frame is wide, modal drawers when not. Breakpoints are **container queries in rem** (they follow the Text size setting; media queries in rem do not) and `use-frame-mode.ts` mirrors the same thresholds, so change shell.css and that file together. Layout choices (sidebar, panel, history view) live in the same settings object as the display settings; `sidebar` and `panel` also reach `<html>` before paint as `data-*-pref`. The run belongs to `RunSession`, not to the page that started it. A hidden pane renders nothing (otherwise its text duplicates the page's for tests and screen readers).
+- Dictation never calls the browser's cloud speech service: the button exists only if `SpeechRecognition.available({processLocally: true})` says `available`, and recognition refuses to start unless the browser accepts `processLocally`. Measured in Stage 12: that `available()` call **crashes headless Chromium**, so automation (`navigator.webdriver`) never probes; a headed Chromium answers `downloadable` for a missing local pack.
+- Speed: summary, glossary and questions are generated together; `limitInFlight` caps model calls across the whole run (`LLM_MAX_IN_FLIGHT`, default 8, wrapped *outside* the cost guard so queued calls are not counted); a used-up provider quota (`isQuotaExhausted` in `src/llm/pi.ts`) is never retried. `src/instrumentation.ts` loads the models at server start. The floor is the stage chain (generate -> verify -> repair), so a slower provider, not more parallelism, is what dominates live runs.
+- `GET /api/runs` lists the runs this browser holds an owner cookie for (titles and counts only, via the `RunIndex` port that both stores implement). Never add source or item text to it.
 - Read-aloud (`src/ui/tts.ts`) talks to an injected speech interface, so tests never need audio. Word-level highlighting relies on `boundary` events (confirmed in Chromium with local voices only); keep item-level highlighting working without them.
 - Plain-language mode never loosens the verifier: a rewrite is shown only if the full verifier says SUPPORTED. Do not tune thresholds for it.
 - Exports (`src/core/export`) are pure functions of a stored result; Markdown and text share `buildModel`. Goldens in `tests/golden/` change only deliberately (`UPDATE_GOLDEN=1 npx vitest run tests/core/export`, then read the diff). The audit file contains the source text and is owner-cookie gated.

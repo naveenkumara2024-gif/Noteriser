@@ -3,6 +3,7 @@ import { dirname } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { DraftItem } from "../core/generate/types";
 import type { RunEvent, RunResult } from "../core/pipeline/types";
+import { type RunIndex, type RunSummary, titleFrom } from "../core/ports/run-index";
 import type {
   Feedback,
   FeedbackKind,
@@ -78,7 +79,7 @@ interface Row {
 }
 
 /** Durable `RunStore` on Node's built-in `node:sqlite` (no native dependency). */
-export class SqliteRunStore implements RunStore {
+export class SqliteRunStore implements RunStore, RunIndex {
   private constructor(
     private readonly db: DatabaseSync,
     private readonly log: StoreLog | undefined,
@@ -272,5 +273,41 @@ export class SqliteRunStore implements RunStore {
   async exportJsonl(runId: string): Promise<string | undefined> {
     const run = await this.getRun(runId);
     return run ? toJsonl(run) : undefined;
+  }
+
+  /** `json_extract` pulls out the few fields needed, so whole result documents are not parsed. */
+  async summaries(runIds: readonly string[]): Promise<RunSummary[]> {
+    const ids = [...new Set(runIds)];
+    if (ids.length === 0) return [];
+    const rows = this.db
+      .prepare(
+        `SELECT run_id, created_at, status,
+           json_extract(doc_json, '$.title')             AS title,
+           json_extract(doc_json, '$.sections[0].title') AS first_section,
+           json_extract(result_json, '$.report.generated') AS generated,
+           json_extract(result_json, '$.report.supported') AS supported,
+           json_extract(result_json, '$.report.partial')   AS partial,
+           json_extract(result_json, '$.report.removed')   AS removed,
+           json_extract(result_json, '$.degraded')         AS degraded
+         FROM runs WHERE run_id IN (${ids.map(() => "?").join(",")})
+         ORDER BY created_at DESC`,
+      )
+      .all(...ids) as Row[];
+    return rows.map((r) => ({
+      runId: String(r.run_id),
+      title: titleFrom(r.title as string | null, r.first_section as string | null),
+      createdAt: String(r.created_at),
+      status: String(r.status) as RunStatus,
+      counts:
+        r.generated === null || r.generated === undefined
+          ? null
+          : {
+              generated: Number(r.generated),
+              supported: Number(r.supported),
+              partial: Number(r.partial),
+              removed: Number(r.removed),
+            },
+      degraded: Number(r.degraded ?? 0) === 1,
+    }));
   }
 }
