@@ -33,6 +33,7 @@ export function baseDeps(over: Partial<PipelineDeps> = {}): PipelineDeps {
 export async function runWith(
   over: Partial<PipelineDeps> = {},
   text: string = LECTURE7,
+  options: { plain?: boolean } = {},
 ): Promise<Harness> {
   const events: RunEvent[] = [];
   const store = (over.store as MemoryRunStore | undefined) ?? new MemoryRunStore();
@@ -44,7 +45,7 @@ export async function runWith(
       over.onEvent?.(e);
     },
   });
-  const result = await runPipeline({ document: { kind: "text", text } }, deps);
+  const result = await runPipeline({ document: { kind: "text", text }, ...options }, deps);
   return { result, events, store, deps };
 }
 
@@ -85,6 +86,19 @@ export function invariantViolations(h: Harness): string[] {
     } else if (!e.flagReason) {
       bad.push(`${e.itemId} flagged without a reason`);
     }
+  }
+  // Plain-language versions are held to the same invariant: shown only if all four checks passed.
+  for (const s of shown) {
+    const p = s.plain;
+    if (p?.status !== "simplified") continue;
+    const e = p.envelope;
+    if (e.itemId !== s.envelope.itemId)
+      bad.push(`${s.envelope.itemId} plain version has another id`);
+    if (e.verdict !== "SUPPORTED") bad.push(`${e.itemId} plain version is ${e.verdict}`);
+    if (!e.scores.quoteFound) bad.push(`${e.itemId} plain version without a verified quote`);
+    if (e.scores.entailment === null) bad.push(`${e.itemId} plain version without entailment`);
+    if (e.scores.judge !== "pass") bad.push(`${e.itemId} plain version without a judge pass`);
+    if (p.gradeAfter > p.gradeBefore) bad.push(`${e.itemId} plain version is harder to read`);
   }
   for (const x of result.removed) {
     if (x.reasons.length === 0) bad.push(`${x.envelope.itemId} removed without a reason`);

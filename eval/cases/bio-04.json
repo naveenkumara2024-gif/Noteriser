@@ -1,0 +1,58 @@
+{
+  "id": "bio-04",
+  "split": "test",
+  "subject": "biology",
+  "topic": "The immune response",
+  "notes": "# The immune response\n\n## Innate and adaptive immunity\n\nThe innate immune system responds quickly and in the same way to many different pathogens. Its defences include skin, inflammation and white blood cells called phagocytes. The adaptive immune system responds more slowly but targets a specific pathogen. Adaptive immunity relies on lymphocytes, which are B cells and T cells.\n\n## Memory\n\nB cells produce antibodies that bind to a specific antigen. After an infection some B cells and T cells remain as memory cells. Memory cells let the body respond faster if the same pathogen returns. Vaccines work by exposing the immune system to a harmless form of an antigen so that memory cells form.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "The innate system reacts fast and nonspecifically, while the adaptive system is slower but aimed at one particular pathogen.",
+      "sourceIds": ["S1.1", "S1.3"],
+      "evidenceQuote": "responds more slowly but targets a specific pathogen",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Vaccines expose the body to a harmless form of an antigen, which leads to the formation of memory cells.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "exposing the immune system to a harmless form of an antigen",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Memory cells",
+      "text": "B cells and T cells that remain after an infection and allow a faster response if the same pathogen returns.",
+      "sourceIds": ["S2.2", "S2.3"],
+      "evidenceQuote": "remain as memory cells",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Memory cells allow the body to respond faster to any new pathogen.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "respond faster if the same pathogen returns",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Phagocytes can destroy a bacterium within 20 minutes of contact.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "white blood cells called phagocytes",
+      "label": "bad",
+      "failureType": "invented_stat"
+    },
+    {
+      "type": "summary_point",
+      "text": "Antibodies bind to a specific antigen.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "antibodies are Y-shaped proteins that bind antigens",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

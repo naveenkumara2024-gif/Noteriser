@@ -1,0 +1,17 @@
+{
+  "id": "reg-005-initialism",
+  "split": "regression",
+  "subject": "regression",
+  "topic": "Found in Stage 3: OS (initials of 'operating system') was flagged as an invented acronym",
+  "notes": "# Scheduling basics\n\n## Basics\n\nCPU scheduling decides which process gets the CPU next. The dispatcher hands the CPU to the chosen process. Linear search takes O(n) time on average. The operating system keeps track of every process in a table called the process control block.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "The OS keeps a table called the process control block for every process.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "keeps track of every process in a table called the process control block",
+      "label": "good",
+      "failureType": null
+    }
+  ]
+}

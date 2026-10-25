@@ -1,0 +1,58 @@
+{
+  "id": "econ-02",
+  "split": "dev",
+  "subject": "economics",
+  "topic": "Inflation",
+  "notes": "# Inflation\n\n## Measuring inflation\n\nInflation is a sustained rise in the general level of prices in an economy. It is usually measured by the percentage change in a consumer price index over a year. A consumer price index tracks the cost of a fixed basket of goods and services bought by typical households. Deflation is a sustained fall in the general level of prices.\n\n## Causes and effects\n\nDemand-pull inflation occurs when total demand grows faster than the economy can produce. Cost-push inflation occurs when higher production costs, such as wages or raw materials, are passed on to buyers. Inflation erodes the purchasing power of money, so each unit of currency buys fewer goods. Central banks often respond to high inflation by raising interest rates.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Inflation is a sustained rise in the general price level, usually measured as the yearly percentage change in a consumer price index.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "percentage change in a consumer price index over a year",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Cost-push inflation happens when higher costs such as wages or raw materials are passed on to buyers.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "passed on to buyers",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Deflation",
+      "text": "A sustained fall in the general level of prices.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "a sustained fall in the general level of prices",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Inflation increases the purchasing power of money.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "erodes the purchasing power of money",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "Central banks often respond to high inflation by raising interest rates.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "higher interest rates cool an overheated economy",
+      "label": "bad",
+      "failureType": "fake_quote"
+    },
+    {
+      "type": "summary_point",
+      "text": "Most central banks aim for inflation of about 2 percent a year.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "Central banks often respond to high inflation",
+      "label": "bad",
+      "failureType": "invented_stat"
+    }
+  ]
+}

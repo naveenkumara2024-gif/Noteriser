@@ -1,6 +1,7 @@
 import { runPipeline } from "@/core/pipeline";
 import { ApiError, errorResponse } from "./errors";
 import { readDocument } from "./input";
+import { ownerCookie } from "./owner";
 import { clientKey } from "./rate-limit";
 import type { Runtime } from "./runtime";
 import { sseResponse } from "./sse";
@@ -24,7 +25,7 @@ export async function createRun(request: Request, rt: Runtime): Promise<Response
     );
   }
 
-  const document = parsed.value;
+  const { document, plain } = parsed.value;
   const runId = rt.newId();
   const started = Date.now();
   // Sizes and ids only: the source text itself never goes to a log (invariant 7).
@@ -33,6 +34,7 @@ export async function createRun(request: Request, rt: Runtime): Promise<Response
       runId,
       mode: rt.mode,
       input: document.kind === "file" ? "file" : "text",
+      plain,
       bytes: document.kind === "file" ? document.bytes.byteLength : document.text.length,
     },
     "run started",
@@ -41,12 +43,15 @@ export async function createRun(request: Request, rt: Runtime): Promise<Response
   return sseResponse({
     runId,
     signal: request.signal,
+    // This browser made the run, so it may download the audit file for it.
+    headers: { "Set-Cookie": ownerCookie(runId, rt.ttlHours, request.url.startsWith("https:")) },
     run: async (emit, signal) => {
       const result = await runPipeline(
-        { document, runId },
+        { document, runId, plain },
         {
           ...rt.deps,
           store: rt.store,
+          limits: rt.limits,
           clock: rt.clock,
           newId: rt.newId,
           signal,

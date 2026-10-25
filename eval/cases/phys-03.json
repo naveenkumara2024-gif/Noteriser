@@ -1,0 +1,58 @@
+{
+  "id": "phys-03",
+  "split": "test",
+  "subject": "physics",
+  "topic": "Electric circuits",
+  "notes": "# Electric circuits\n\n## Circuit quantities\n\nElectric current is the rate at which electric charge flows past a point in a circuit. Voltage is the energy given to each unit of charge by a source such as a battery. Resistance measures how strongly a component opposes the flow of current. Ohm's law states that the current through a conductor is proportional to the voltage across it when the temperature stays constant.\n\n## Series and parallel\n\nIn a series circuit the components are connected in one loop, so the same current flows through each of them. In a parallel circuit the components are connected on separate branches, so the voltage across each branch is the same. If one component in a series circuit fails, the whole circuit stops working. Household sockets are wired in parallel so that each appliance receives the full supply voltage.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Current is the rate of flow of charge, and voltage is the energy given to each unit of charge by a source.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "the rate at which electric charge flows past a point in a circuit",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "In a series circuit the same current flows through every component, but in a parallel circuit every branch has the same voltage.",
+      "sourceIds": ["S2.1", "S2.2"],
+      "evidenceQuote": "the voltage across each branch is the same",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Resistance",
+      "text": "How strongly a component opposes the flow of current.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "how strongly a component opposes the flow of current",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Ohm's law applies to every component in every circuit.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "the current through a conductor is proportional to the voltage across it",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "Fuses melt when the current through them becomes too large, which protects the wiring.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "Household sockets are wired in parallel",
+      "label": "bad",
+      "failureType": "outside_fact"
+    },
+    {
+      "type": "summary_point",
+      "text": "In a parallel circuit the same current flows through each branch.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "the voltage across each branch is the same",
+      "label": "bad",
+      "failureType": "scope_shift"
+    }
+  ]
+}

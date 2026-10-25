@@ -1,0 +1,58 @@
+{
+  "id": "econ-01",
+  "split": "test",
+  "subject": "economics",
+  "topic": "Supply and demand",
+  "notes": "# Supply and demand\n\n## Demand\n\nThe law of demand states that, when other things stay the same, a higher price reduces the quantity demanded. A demand curve slopes downward because buyers purchase less as the price rises. A change in income, tastes or the price of related goods shifts the whole demand curve, but a change in the good's own price does not.\n\n## Supply and equilibrium\n\nThe law of supply states that, when other things stay the same, a higher price increases the quantity supplied. Market equilibrium is the price at which the quantity demanded equals the quantity supplied. If the price is above equilibrium there is a surplus, and sellers tend to lower their prices. If the price is below equilibrium there is a shortage, and prices tend to rise. In the example in class, the equilibrium price was 8 dollars and the equilibrium quantity was 120 units.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A higher price reduces the quantity demanded when other things stay the same, so the demand curve slopes downward.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "a higher price reduces the quantity demanded",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "At equilibrium the quantity demanded equals the quantity supplied.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "the quantity demanded equals the quantity supplied",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Shortage",
+      "text": "What exists when the price is below equilibrium; prices then tend to rise.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "If the price is below equilibrium there is a shortage",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "In the class example the equilibrium price was 12 dollars and the equilibrium quantity was 120 units.",
+      "sourceIds": ["S2.5"],
+      "evidenceQuote": "the equilibrium quantity was 120 units",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "A change in the good's own price shifts the whole demand curve.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "shifts the whole demand curve",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "A higher price always reduces the quantity demanded for every good.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "a higher price reduces the quantity demanded",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    }
+  ]
+}

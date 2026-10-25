@@ -1,0 +1,58 @@
+{
+  "id": "cs-03",
+  "split": "test",
+  "subject": "computer science",
+  "topic": "Hash tables",
+  "notes": "# Hash tables\n\n## How hash tables work\n\nA hash table stores key-value pairs and finds a value by applying a hash function to its key. The hash function maps a key to an index in an array of buckets. Two different keys can map to the same index, which is called a collision. Chaining resolves collisions by storing all keys that share an index in a linked list.\n\n## Performance\n\nOpen addressing resolves collisions by probing for another empty slot in the array. With a good hash function and a low load factor, lookups take constant time on average. As the load factor approaches one, collisions become more frequent and lookups slow down. Most implementations resize the table and rehash every key when the load factor passes a threshold.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A hash function maps a key to an array index, and keys that land on the same index are a collision.",
+      "sourceIds": ["S1.2", "S1.3"],
+      "evidenceQuote": "maps a key to an index in an array of buckets",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Chaining handles collisions with a linked list per index, whereas open addressing probes for another empty slot.",
+      "sourceIds": ["S1.4", "S2.1"],
+      "evidenceQuote": "probing for another empty slot in the array",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Collision",
+      "text": "Two different keys mapping to the same index.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "Two different keys can map to the same index",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "As the load factor approaches one, lookups become faster.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "As the load factor approaches one",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "Lookups in a hash table take constant time even in the worst case.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "lookups take constant time on average",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Most implementations resize the table when the load factor passes a threshold.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "tables are doubled in size when they become full",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

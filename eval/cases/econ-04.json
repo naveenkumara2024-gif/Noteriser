@@ -1,0 +1,57 @@
+{
+  "id": "econ-04",
+  "split": "dev",
+  "subject": "economics",
+  "topic": "Gross domestic product",
+  "notes": "# Gross domestic product\n\n## Gross domestic product\n\nGross domestic product is the total market value of all final goods and services produced within a country in a given period. Only final goods are counted, because counting intermediate goods as well would count the same value twice. Real GDP adjusts for changes in prices, while nominal GDP does not. Economists use real GDP to compare output across different years.\n\n## Limits\n\nGDP does not include unpaid work such as housework or volunteering. GDP per person divides total GDP by the population and is often used as a rough measure of average living standards. A high GDP per person does not show how income is distributed among residents. Illegal and unreported activity is largely missing from official GDP figures. Statistics agencies in most countries publish a new GDP estimate every 3 months.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "GDP counts only final goods and services, since counting intermediate goods too would count the same value twice.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "counting intermediate goods as well would count the same value twice",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Real GDP adjusts for price changes, so economists use it to compare output across years.",
+      "sourceIds": ["S1.3", "S1.4"],
+      "evidenceQuote": "Economists use real GDP to compare output across different years",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "GDP leaves out unpaid work like housework and volunteering and says nothing about how income is distributed.",
+      "sourceIds": ["S2.1", "S2.3"],
+      "evidenceQuote": "does not show how income is distributed among residents",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "GDP includes the value of all goods and services produced by a country's citizens anywhere in the world.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "produced within a country in a given period",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "GDP per person is a rough measure of average living standards.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "GDP per person is the best single measure of well-being",
+      "label": "bad",
+      "failureType": "fake_quote"
+    },
+    {
+      "type": "summary_point",
+      "text": "Statistics agencies in most countries publish a new GDP estimate every 6 months.",
+      "sourceIds": ["S2.5"],
+      "evidenceQuote": "publish a new GDP estimate",
+      "label": "bad",
+      "failureType": "number_altered"
+    }
+  ]
+}

@@ -23,6 +23,7 @@ export const REDACT_FIELDS = [
   "user",
   "body",
   "content",
+  "note",
   "apiKey",
   "authorization",
 ] as const;

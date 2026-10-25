@@ -1,0 +1,58 @@
+{
+  "id": "hist-03",
+  "split": "test",
+  "subject": "history",
+  "topic": "The Black Death",
+  "notes": "# The Black Death\n\n## The plague\n\nThe Black Death was a plague pandemic that reached Europe in 1347. It is thought to have spread along trade routes, carried by fleas that lived on rats. Historians estimate that it killed between one third and one half of the population of Europe. Contemporaries did not understand the cause and blamed bad air, divine punishment and sometimes minority groups.\n\n## Aftermath\n\nLabour became scarce after so many deaths, so surviving workers could demand higher wages. Landowners in many regions tried to hold wages down by law. In England these wage laws did not succeed in stopping wages from rising.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "The Black Death reached Europe in 1347 and probably spread along trade routes on fleas carried by rats.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "carried by fleas that lived on rats",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "After so many deaths labour was scarce, so workers who survived could demand higher wages.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "surviving workers could demand higher wages",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Black Death",
+      "text": "A plague pandemic that reached Europe in 1347.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "a plague pandemic that reached Europe in 1347",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "The Black Death reached Europe in 1374.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "plague pandemic that reached Europe",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "Contemporaries understood the cause of the plague.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "the cause and blamed bad air",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "In England the wage laws succeeded in stopping wages from rising.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "In England these wage laws",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    }
+  ]
+}

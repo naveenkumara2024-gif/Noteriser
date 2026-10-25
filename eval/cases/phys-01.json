@@ -1,0 +1,58 @@
+{
+  "id": "phys-01",
+  "split": "test",
+  "subject": "physics",
+  "topic": "Newton's laws of motion",
+  "notes": "# Newton's laws of motion\n\n## Newton's laws\n\nNewton's first law states that an object stays at rest or moves at constant velocity unless a net force acts on it. Newton's second law states that the acceleration of an object is proportional to the net force on it and inversely proportional to its mass. In symbols the second law is written F = ma. Newton's third law states that when one object exerts a force on a second object, the second exerts an equal and opposite force on the first.\n\n## Examples\n\nA force of 10 newtons applied to a mass of 2 kilograms produces an acceleration of 5 metres per second squared. The two forces in a third-law pair act on different objects, so they do not cancel each other. Mass is a measure of how much matter an object contains, while weight is the gravitational force acting on it.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "An object keeps its state of rest or constant velocity unless a net force acts on it.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "stays at rest or moves at constant velocity unless a net force acts on it",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A force of 10 newtons on a mass of 2 kilograms gives an acceleration of 5 metres per second squared.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "produces an acceleration of 5 metres per second squared",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Weight",
+      "text": "The gravitational force acting on an object.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "weight is the gravitational force acting on it",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A force of 10 newtons applied to a mass of 2 kilograms produces an acceleration of 10 metres per second squared.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "applied to a mass of 2 kilograms",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "The two forces in a third-law pair act on different objects, so they cancel each other.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "act on different objects",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "Gravity near the surface of the Earth gives every falling object an acceleration of 9.8 metres per second squared.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "the gravitational force acting on it",
+      "label": "bad",
+      "failureType": "invented_stat"
+    }
+  ]
+}

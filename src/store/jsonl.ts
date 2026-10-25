@@ -10,7 +10,7 @@ export function toStoredEvent(event: RunEvent): StoredEvent {
 
 /**
  * One JSON object per line, in a stable order: the run, its source document, every event, every
- * draft and verification (with attempt number), and the final result. Contains source text, so it
+ * draft and verification (with attempt number), any feedback, and the final result. Contains source text, so it
  * is as sensitive as the run itself.
  */
 export function toJsonl(run: StoredRun): string {
@@ -23,6 +23,7 @@ export function toJsonl(run: StoredRun): string {
   for (const v of run.verifications) {
     lines.push({ kind: "verification", attempt: v.attempt, item: v.item });
   }
+  for (const f of run.feedback ?? []) lines.push({ kind: "feedback", feedback: f });
   if (run.result) lines.push({ kind: "result", result: run.result });
   return `${lines.map((l) => JSON.stringify(l)).join("\n")}\n`;
 }

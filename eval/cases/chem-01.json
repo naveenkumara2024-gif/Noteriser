@@ -1,0 +1,58 @@
+{
+  "id": "chem-01",
+  "split": "dev",
+  "subject": "chemistry",
+  "topic": "Acids and bases",
+  "notes": "# Acids and bases\n\n## The pH scale\n\nThe pH scale measures how acidic or basic a solution is. A solution with a pH below 7 is acidic, and a solution with a pH above 7 is basic. Pure water at room temperature has a pH of 7, which is neutral. Each step on the pH scale represents a tenfold change in hydrogen ion concentration.\n\n## Neutralisation\n\nA strong acid dissociates completely in water, while a weak acid dissociates only partly. When an acid reacts with a base, the products are usually a salt and water. A buffer is a solution that resists changes in pH when small amounts of acid or base are added.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Solutions with a pH below 7 are acidic and those above 7 are basic; pure water at room temperature is neutral at pH 7.",
+      "sourceIds": ["S1.2", "S1.3"],
+      "evidenceQuote": "has a pH of 7, which is neutral",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Every step on the pH scale means the hydrogen ion concentration changes by a factor of ten.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "tenfold change in hydrogen ion concentration",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Buffer",
+      "text": "A solution that resists changes in pH when small amounts of acid or base are added.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "resists changes in pH when small amounts of acid or base are added",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Each step on the pH scale represents a hundredfold change in hydrogen ion concentration.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "Each step on the pH scale represents",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "A weak acid dissociates completely in water, while a strong acid dissociates only partly.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "dissociates completely in water",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "Reacting an acid with a base always produces a salt and water.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "the products are usually a salt and water",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "hist-02",
+  "split": "dev",
+  "subject": "history",
+  "topic": "The printing press",
+  "notes": "# The printing press\n\n## The invention\n\nJohannes Gutenberg introduced movable type printing in Europe around 1450. Movable type uses individual metal letters that can be arranged into a page, inked and reused. Before this, books in Europe were copied by hand, which made them slow and costly to produce. The first major book printed with the new method was a Latin Bible.\n\n## Effects\n\nPrinting lowered the cost of books and made them available to more readers. The number of printed titles grew quickly during the following decades. Reformers such as Martin Luther used printed pamphlets to spread their ideas widely. Standard printed texts also helped to fix spelling and grammar in many languages.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Gutenberg introduced movable type printing in Europe around 1450, replacing slow and costly copying by hand.",
+      "sourceIds": ["S1.1", "S1.3"],
+      "evidenceQuote": "introduced movable type printing in Europe around 1450",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Printing made books cheaper and more widely available.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "lowered the cost of books and made them available to more readers",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Movable type",
+      "text": "Printing with individual metal letters that can be arranged into a page, inked and reused.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "individual metal letters that can be arranged into a page",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "By 1500 more than 20 million printed books were in circulation in Europe.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "The number of printed titles grew quickly",
+      "label": "bad",
+      "failureType": "invented_stat"
+    },
+    {
+      "type": "summary_point",
+      "text": "Printing lowered the cost of books only for wealthy readers.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "made them available to more readers",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Early printers often copied the page layout of illuminated manuscripts.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "books in Europe were copied by hand",
+      "label": "bad",
+      "failureType": "outside_fact"
+    }
+  ]
+}

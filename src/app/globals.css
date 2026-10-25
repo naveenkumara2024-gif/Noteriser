@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 /*
- * Colour tokens. Every foreground/background pair below is chosen for at least 4.5:1 (7:1 for body
- * text), and status is never carried by colour alone: StatusBadge always pairs an icon with words.
- * Stage 6 adds the high-contrast / forced-colors variants and the typography settings.
+ * Colour tokens. Every foreground/background pair is chosen for at least 4.5:1 (7:1 in high
+ * contrast), and status is never carried by colour alone: StatusBadge pairs an icon with words, a
+ * selected chip is also bold and underlined, a cited sentence also has a thick edge and the words
+ * "(Cited)". Settings (theme, text size, font, spacing) arrive as attributes on <html>, set by a
+ * script in <head> before first paint: see src/ui/settings.ts.
  */
 :root {
   --background: #ffffff;
@@ -22,10 +24,18 @@
   --danger-bg: #fee2e2;
   --highlight-bg: #fde68a;
   --highlight-fg: #171717;
+
+  --text-scale: 1;
+  --body-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --lh: 1.6;
+  --ls: normal;
+  --ws: normal;
+  --ps: 0;
 }
 
+/* Dark: when the device asks for it and the person has not chosen a theme, or when chosen. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --background: #0b0f14;
     --foreground: #e5e7eb;
     --muted: #a3aab5;
@@ -43,6 +53,81 @@
     --highlight-bg: #713f12;
     --highlight-fg: #fef3c7;
   }
+}
+:root[data-theme="dark"] {
+  --background: #0b0f14;
+  --foreground: #e5e7eb;
+  --muted: #a3aab5;
+  --surface: #141a22;
+  --border: #2a323d;
+  --border-strong: #8b94a3;
+  --accent: #93c5fd;
+  --accent-fg: #0b0f14;
+  --ok-fg: #bbf7d0;
+  --ok-bg: #052e16;
+  --warn-fg: #fde68a;
+  --warn-bg: #422006;
+  --danger-fg: #fecaca;
+  --danger-bg: #450a0a;
+  --highlight-bg: #713f12;
+  --highlight-fg: #fef3c7;
+}
+
+/* High contrast: black, white and yellow, 7:1 or better everywhere. */
+@media (prefers-contrast: more) {
+  :root:not([data-theme]) {
+    --background: #000000;
+    --foreground: #ffffff;
+    --muted: #ffffff;
+    --surface: #000000;
+    --border: #ffffff;
+    --border-strong: #ffffff;
+    --accent: #ffff00;
+    --accent-fg: #000000;
+    --ok-fg: #9dff9d;
+    --ok-bg: #000000;
+    --warn-fg: #ffd700;
+    --warn-bg: #000000;
+    --danger-fg: #ff9a9a;
+    --danger-bg: #000000;
+    --highlight-bg: #ffff00;
+    --highlight-fg: #000000;
+  }
+}
+:root[data-theme="contrast"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  --muted: #ffffff;
+  --surface: #000000;
+  --border: #ffffff;
+  --border-strong: #ffffff;
+  --accent: #ffff00;
+  --accent-fg: #000000;
+  --ok-fg: #9dff9d;
+  --ok-bg: #000000;
+  --warn-fg: #ffd700;
+  --warn-bg: #000000;
+  --danger-fg: #ff9a9a;
+  --danger-bg: #000000;
+  --highlight-bg: #ffff00;
+  --highlight-fg: #000000;
+}
+
+/* Fonts and spacing. "Comfortable" meets the WCAG 1.4.12 text-spacing minimums by default. */
+:root[data-font="readable"] {
+  --body-font: var(--font-readable), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+:root[data-spacing="comfortable"] {
+  --lh: 1.6;
+  --ls: 0.12em;
+  --ws: 0.16em;
+  --ps: 2em;
+}
+:root[data-spacing="extra"] {
+  --lh: 1.9;
+  --ls: 0.14em;
+  --ws: 0.2em;
+  --ps: 2.4em;
 }
 
 @theme inline {
@@ -64,17 +149,56 @@
   --color-mark-fg: var(--highlight-fg);
 }
 
+/* Text size: everything is in rem, so scaling the root scales the whole interface. */
+html {
+  font-size: calc(100% * var(--text-scale));
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.6;
+  font-family: var(--body-font);
+  line-height: var(--lh);
+  letter-spacing: var(--ls);
+  word-spacing: var(--ws);
+  /* At large text sizes on a narrow screen a long word must wrap, never force sideways scrolling. */
+  overflow-wrap: anywhere;
+}
+/* In the base layer so any explicit margin utility on a paragraph still wins. */
+@layer base {
+  p {
+    margin-block-end: var(--ps);
+  }
 }
 
-/* A visible focus ring on every interactive element, in a colour that has contrast on both themes. */
+/* Body text stays at a readable line length whatever the screen size. */
+.measure {
+  max-width: 70ch;
+}
+
+/* Native controls take the theme's accent instead of the browser's blue. */
+input[type="range"],
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+/* A visible focus ring on every interactive element, in a colour that has contrast on every theme. */
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* A pressed toggle is bold and underlined as well as tinted, so it never depends on colour. */
+[aria-pressed="true"] {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* The item being read aloud: a thick edge and visible words (see ItemCard), not just a tint. */
+[data-speaking="true"] {
+  border-left-width: 6px;
+  border-left-color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -82,5 +206,73 @@ body {
     scroll-behavior: auto;
     transition: none;
     animation: none;
+  }
+}
+
+/* Windows forced colours: the system palette wins, so keep borders, focus and highlights visible. */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+  [aria-current="true"],
+  [aria-pressed="true"],
+  [data-speaking="true"] {
+    outline: 2px solid Highlight;
+  }
+  button,
+  select,
+  input,
+  details {
+    border-color: ButtonText;
+  }
+}
+
+/*
+ * Print / Save as PDF. The page becomes a plain paper document: no controls, the light palette at
+ * normal size, every item's cited sentences written out beneath it (the Source column and the
+ * show/hide disclosures do not exist on paper), flags kept as text, and no item split across pages.
+ * The trust notice is repeated at the top because the header is hidden.
+ */
+@media print {
+  :root:root:root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --muted: #333333;
+    --surface: #ffffff;
+    --border: #666666;
+    --border-strong: #000000;
+    --ok-fg: #000000;
+    --ok-bg: #ffffff;
+    --warn-fg: #000000;
+    --warn-bg: #ffffff;
+    --danger-fg: #000000;
+    --danger-bg: #ffffff;
+    --highlight-bg: #ffffff;
+    --highlight-fg: #000000;
+    --text-scale: 1;
+  }
+  /* The text-size setting is an inline custom property; paper ignores it by not reading it. */
+  html {
+    font-size: 100%;
+  }
+  body {
+    font-size: 11pt;
+  }
+  main {
+    max-width: none;
+    padding: 0;
+  }
+  li[data-item-id],
+  tr {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  /* Show where a link points, since paper cannot be clicked. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
   }
 }

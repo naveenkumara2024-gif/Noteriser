@@ -1,0 +1,57 @@
+{
+  "id": "hist-01",
+  "split": "test",
+  "subject": "history",
+  "topic": "The Industrial Revolution",
+  "notes": "# The Industrial Revolution\n\n## Origins\n\nThe Industrial Revolution began in Britain in the second half of the eighteenth century. Textile production was one of the first industries to be mechanised. The steam engine, improved by James Watt in the 1770s, allowed factories to be built away from rivers. Coal supplied the energy for steam engines and for iron making.\n\n## Consequences\n\nLarge numbers of people moved from the countryside to growing industrial towns. Factory work was often long, dangerous and poorly paid, especially for women and children. Over time laws were introduced to limit working hours and to restrict child labour. Average living standards rose in the long run, although the gains arrived unevenly and slowly.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "The Industrial Revolution started in Britain in the later eighteenth century, with textiles among the first mechanised industries.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "began in Britain in the second half of the eighteenth century",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Watt's improved steam engine let factories be built away from rivers.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "allowed factories to be built away from rivers",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Many people moved to industrial towns, and over time laws limited working hours and child labour.",
+      "sourceIds": ["S2.1", "S2.3"],
+      "evidenceQuote": "laws were introduced to limit working hours",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "James Watt improved the steam engine in the 1870s.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "improved by James Watt",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "Factory work was long, dangerous and poorly paid for absolutely everyone.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "long, dangerous and poorly paid",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "Cotton for the British mills was largely imported from overseas plantations.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "Textile production was one of the first industries",
+      "label": "bad",
+      "failureType": "outside_fact"
+    }
+  ]
+}

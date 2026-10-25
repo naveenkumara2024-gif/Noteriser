@@ -12,6 +12,22 @@ export type StoredEvent = RunEvent extends infer E
     : E
   : never;
 
+export const FEEDBACK_KINDS = ["wrong", "unclear", "missing_context"] as const;
+export type FeedbackKind = (typeof FEEDBACK_KINDS)[number];
+
+/** An instructor's mark on one shown item (lore section 8.4 #17). The note is optional and short. */
+export interface Feedback {
+  itemId: string;
+  kind: FeedbackKind;
+  note: string;
+  /** ISO timestamp. */
+  at: string;
+}
+
+export interface StoredFeedback extends Feedback {
+  runId: string;
+}
+
 /** Everything kept about a run: the audit trail the review checklist and the evaluation read. */
 export interface StoredRun {
   runId: string;
@@ -23,6 +39,8 @@ export interface StoredRun {
   verifications: { attempt: 1 | 2; item: Verification }[];
   events: StoredEvent[];
   result?: RunResult;
+  /** Feedback on shown items; removed with the run when it is deleted or expires. */
+  feedback?: Feedback[];
 }
 
 /**
@@ -42,6 +60,10 @@ export interface RunStore {
     verifications: readonly Verification[],
   ): Promise<void>;
   saveResult(runId: string, result: RunResult): Promise<void>;
+  /** False if the run does not exist. Feedback lives and dies with its run. */
+  addFeedback(runId: string, feedback: Feedback): Promise<boolean>;
+  /** All feedback across runs, oldest first: input for `npm run feedback:export`. */
+  listFeedback(): Promise<StoredFeedback[]>;
   getRun(runId: string): Promise<StoredRun | undefined>;
   /** True if a run was deleted. Removes everything stored for it. */
   deleteRun(runId: string): Promise<boolean>;

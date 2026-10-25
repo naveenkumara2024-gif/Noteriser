@@ -1,0 +1,58 @@
+{
+  "id": "bio-01",
+  "split": "dev",
+  "subject": "biology",
+  "topic": "Cellular respiration",
+  "notes": "# Cellular respiration\n\n## Aerobic respiration\n\nCellular respiration converts glucose and oxygen into carbon dioxide, water and usable energy. Most of the energy is captured in a molecule called ATP. The process has three main stages: glycolysis, the citric acid cycle and the electron transport chain. Glycolysis takes place in the cytoplasm and does not require oxygen. The citric acid cycle and the electron transport chain take place in the mitochondria.\n\n## Oxygen and yield\n\nOxygen is the final electron acceptor in the electron transport chain. Without oxygen the electron transport chain stops and cells must rely on fermentation. Aerobic respiration yields about 30 to 32 molecules of ATP per glucose molecule. Fermentation yields only 2 molecules of ATP per glucose molecule.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Cellular respiration turns glucose and oxygen into carbon dioxide, water and energy that cells can use, mostly stored as ATP.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "converts glucose and oxygen into carbon dioxide, water and usable energy",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Glycolysis happens in the cytoplasm and works without oxygen, while the later stages happen in the mitochondria.",
+      "sourceIds": ["S1.4", "S1.5"],
+      "evidenceQuote": "does not require oxygen",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "ATP",
+      "text": "The molecule in which most of the energy from respiration is captured.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "Most of the energy is captured in a molecule called ATP",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Aerobic respiration yields about 36 molecules of ATP per glucose molecule.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "Aerobic respiration yields about",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "Glycolysis requires oxygen and takes place in the cytoplasm.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "takes place in the cytoplasm",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "Fermentation in muscle cells produces lactic acid, which causes soreness after exercise.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "must rely on fermentation",
+      "label": "bad",
+      "failureType": "outside_fact"
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { copy } from "@/ui/copy";
+import { DisplaySettings } from "@/ui/DisplaySettings";
+import { SettingsProvider } from "@/ui/SettingsProvider";
+import { NO_FLASH_SCRIPT } from "@/ui/settings";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,30 +12,54 @@ export const metadata: Metadata = {
   description: copy.tagline,
 };
 
+// Atkinson Hyperlegible (SIL Open Font License, see fonts/). Offered as a "readable font"; no
+// claim is made that it helps with dyslexia. Files are local so builds and pages need no network.
+const readable = localFont({
+  src: [
+    { path: "./fonts/atkinson-hyperlegible-latin-400-normal.woff2", weight: "400" },
+    { path: "./fonts/atkinson-hyperlegible-latin-700-normal.woff2", weight: "700" },
+  ],
+  variable: "--font-readable",
+  display: "swap",
+});
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    // The head script sets display attributes on <html> before hydration, so they differ from the server HTML.
+    <html lang="en" className={readable.variable} suppressHydrationWarning>
+      <head>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: a constant string we build, not user input
+          dangerouslySetInnerHTML={{ __html: NO_FLASH_SCRIPT }}
+        />
+      </head>
       <body className="min-h-screen">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-10 focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-accent-fg"
-        >
-          {copy.skipToContent}
-        </a>
-        <header className="border-b border-line">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-1 px-4 py-3">
-            <Link href="/" className="text-lg font-semibold">
-              {copy.productName}
-            </Link>
-            {/* Invariant 6: persistent, on every page, in words. */}
-            <p role="note" className="text-sm text-muted">
-              {copy.trustNotice}
-            </p>
-          </div>
-        </header>
-        <main id="main" tabIndex={-1} className="mx-auto max-w-6xl px-4 py-8 outline-none">
-          {children}
-        </main>
+        <SettingsProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-10 focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-accent-fg"
+          >
+            {copy.skipToContent}
+          </a>
+          <header className="border-b border-line print:hidden">
+            <div className="mx-auto flex max-w-6xl flex-wrap items-start gap-x-6 gap-y-2 px-4 py-3">
+              <Link
+                href="/"
+                className="inline-flex min-h-6 items-center py-1 text-lg font-semibold"
+              >
+                {copy.productName}
+              </Link>
+              {/* Invariant 6: persistent, on every page, in words. */}
+              <p role="note" className="measure flex-1 py-1 text-sm text-muted">
+                {copy.trustNotice}
+              </p>
+              <DisplaySettings />
+            </div>
+          </header>
+          <main id="main" tabIndex={-1} className="mx-auto max-w-6xl px-4 py-8 outline-none">
+            {children}
+          </main>
+        </SettingsProvider>
       </body>
     </html>
   );

@@ -1,0 +1,58 @@
+{
+  "id": "bio-03",
+  "split": "dev",
+  "subject": "biology",
+  "topic": "Photosynthesis",
+  "notes": "# Photosynthesis\n\n## Light reactions\n\nPhotosynthesis uses light energy to convert carbon dioxide and water into glucose and oxygen. In plants it takes place in chloroplasts, which contain the pigment chlorophyll. Chlorophyll absorbs mostly red and blue light and reflects green light. The light reactions occur in the thylakoid membranes and produce ATP and NADPH.\n\n## Calvin cycle\n\nThe Calvin cycle uses ATP and NADPH to build sugar from carbon dioxide. It takes place in the stroma of the chloroplast. The Calvin cycle does not use light directly, but it depends on the products of the light reactions. Oxygen is released as a by-product of splitting water during the light reactions.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Chlorophyll mostly absorbs red and blue light and reflects green light.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "absorbs mostly red and blue light",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "The Calvin cycle builds sugar from carbon dioxide using the ATP and NADPH made in the light reactions, and it takes place in the stroma.",
+      "sourceIds": ["S2.1", "S2.2", "S1.4"],
+      "evidenceQuote": "uses ATP and NADPH to build sugar from carbon dioxide",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Thylakoid membranes",
+      "text": "The membranes where the light reactions occur and ATP and NADPH are produced.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "occur in the thylakoid membranes",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "All photosynthesis in every kind of organism takes place in chloroplasts.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "In plants it takes place in chloroplasts",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "The light reactions also release hydrogen ions that build up inside the thylakoid space.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "splitting water during the light reactions",
+      "label": "bad",
+      "failureType": "outside_fact"
+    },
+    {
+      "type": "summary_point",
+      "text": "The Calvin cycle uses light directly.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "The Calvin cycle does not use light directly",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    }
+  ]
+}

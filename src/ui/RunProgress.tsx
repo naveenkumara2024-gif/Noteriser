@@ -1,5 +1,5 @@
 import { copy } from "./copy";
-import { type ProgressState, STAGES, stageStatus } from "./progress";
+import { type ProgressState, stageStatus, stagesFor } from "./progress";
 
 /**
  * Stage list for a running job. Only the "Step n of 5" line is a live region, so a screen reader
@@ -7,14 +7,17 @@ import { type ProgressState, STAGES, stageStatus } from "./progress";
  */
 export function RunProgress({
   progress,
+  plain,
   onCancel,
 }: {
   progress: ProgressState;
+  plain: boolean;
   onCancel: () => void;
 }) {
+  const stages = stagesFor(plain);
   const t = copy.progress;
   const active = progress.current;
-  const index = active ? STAGES.indexOf(active) + 1 : progress.finished.length;
+  const index = active ? stages.indexOf(active) + 1 : progress.finished.length;
   const label = active ? t.stageLabel[active] : t.stageLabel.parse;
 
   return (
@@ -23,10 +26,10 @@ export function RunProgress({
         {t.heading}
       </h2>
       <p role="status" className="mt-2 font-medium">
-        {t.step(Math.max(1, index), STAGES.length, label)}
+        {t.step(Math.max(1, index), stages.length, label)}
       </p>
       <ol className="mt-4 space-y-2">
-        {STAGES.map((stage) => {
+        {stages.map((stage) => {
           const status = stageStatus(progress, stage);
           return (
             <li key={stage} className="flex items-center gap-3">

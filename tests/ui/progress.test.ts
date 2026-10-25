@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { failedChecks } from "@/ui/checks";
-import { initialProgress, reduceProgress, STAGES, stageStatus } from "@/ui/progress";
+import { initialProgress, reduceProgress, STAGES, stageStatus, stagesFor } from "@/ui/progress";
 import { runWith } from "../support/pipeline";
 
 describe("progress reducer over a real (scripted) run", () => {
@@ -56,5 +56,19 @@ describe("failedChecks", () => {
       const text = failedChecks(contradicted).join(" ");
       expect(text).toMatch(/Entailment check|Second reviewer/);
     }
+  });
+});
+
+describe("plain-language stage", () => {
+  it("is part of the stage list only when asked for, and is last", () => {
+    expect(stagesFor(false)).toEqual(["parse", "generate", "verify", "repair", "assemble"]);
+    expect(stagesFor(true).at(-1)).toBe("plain");
+    expect(stagesFor(true)).toHaveLength(6);
+  });
+
+  it("completes in the reducer when a plain run finishes", async () => {
+    const h = await runWith(undefined, undefined, { plain: true });
+    const state = h.events.reduce(reduceProgress, initialProgress);
+    expect(stagesFor(true).every((s) => stageStatus(state, s) === "done")).toBe(true);
   });
 });

@@ -1,0 +1,57 @@
+{
+  "id": "cs-04",
+  "split": "dev",
+  "subject": "computer science",
+  "topic": "Database normalisation",
+  "notes": "# Database normalisation\n\n## Normal forms\n\nNormalisation organises a relational database to reduce redundancy and prevent update anomalies. A table is in first normal form when every column holds a single atomic value. A table is in second normal form when it is in first normal form and every non-key column depends on the whole primary key. A table is in third normal form when it is in second normal form and no non-key column depends on another non-key column.\n\n## Trade-offs\n\nNormalised designs need more joins to answer queries that span several tables. Some systems denormalise selected tables on purpose to make frequent reads faster. Denormalisation increases redundancy, so the application must keep the copies consistent.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A table is in first normal form when each column holds a single atomic value.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "every column holds a single atomic value",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Third normal form requires second normal form and also forbids non-key columns that depend on other non-key columns.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "no non-key column depends on another non-key column",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Denormalising can make frequent reads faster but adds redundancy that the application must keep consistent.",
+      "sourceIds": ["S2.2", "S2.3"],
+      "evidenceQuote": "make frequent reads faster",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Normalised designs also reduce the storage needed for indexes.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "reduce redundancy and prevent update anomalies",
+      "label": "bad",
+      "failureType": "outside_fact"
+    },
+    {
+      "type": "summary_point",
+      "text": "Every database should be normalised to third normal form without exception.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "no non-key column depends on another non-key column",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "A table is in third normal form when every column holds a single atomic value.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "every column holds a single atomic value",
+      "label": "bad",
+      "failureType": "number_altered"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "reg-003-capitalised-definition",
+  "split": "regression",
+  "subject": "regression",
+  "topic": "Found in Stage 3: a glossary definition starting with a capital was mistaken for a proper noun",
+  "notes": "# Scheduling basics\n\n## Basics\n\nCPU scheduling decides which process gets the CPU next. The dispatcher hands the CPU to the chosen process. Linear search takes O(n) time on average. The operating system keeps track of every process in a table called the process control block.\n",
+  "drafts": [
+    {
+      "type": "glossary",
+      "text": "The component that hands the CPU to the chosen process",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "hands the CPU to the chosen process",
+      "label": "good",
+      "failureType": null,
+      "term": "Dispatcher"
+    }
+  ]
+}

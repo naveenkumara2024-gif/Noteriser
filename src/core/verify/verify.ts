@@ -50,6 +50,11 @@ export interface Verification {
   closest: Match[];
   /** Judge tokens and cost for this item. */
   usage: Usage;
+  /**
+   * Exactly what `decide` was given. Re-deciding with other thresholds from these gives the verdict
+   * the verifier would have reached, without re-running any model: the evaluation sweep uses this.
+   */
+  checks: DecideInputs;
 }
 
 export interface Verifier {
@@ -170,20 +175,18 @@ export function createVerifier(doc: SourceDoc, deps: VerifyDeps): Verifier {
       }
     }
 
-    const decision = decide(
-      {
-        quote,
-        nli,
-        entities,
-        overGeneral,
-        judge,
-        distractors: {
-          ambiguous: findings.filter((f) => f.couldBeCorrect === true).map((f) => f.option),
-          novel: findings.filter((f) => f.novelEntities.length > 0).map((f) => f.option),
-        },
+    const checks: DecideInputs = {
+      quote,
+      nli,
+      entities,
+      overGeneral,
+      judge,
+      distractors: {
+        ambiguous: findings.filter((f) => f.couldBeCorrect === true).map((f) => f.option),
+        novel: findings.filter((f) => f.novelEntities.length > 0).map((f) => f.option),
       },
-      t,
-    );
+    };
+    const decision = decide(checks, t);
 
     // Explain a probably-wrong citation. Never affects the verdict.
     let closest: Match[] = [];
@@ -222,6 +225,7 @@ export function createVerifier(doc: SourceDoc, deps: VerifyDeps): Verifier {
       distractors: findings,
       closest,
       usage,
+      checks,
     };
   }
 
@@ -244,6 +248,14 @@ export function createVerifier(doc: SourceDoc, deps: VerifyDeps): Verifier {
       distractors: [],
       closest: [],
       usage: ZERO_USAGE,
+      checks: {
+        quote: { ok: false, reason },
+        nli: { status: "failed", reason },
+        entities: { hard: [], soft: [] },
+        overGeneral: [],
+        judge: { status: "failed", reason },
+        distractors: { ambiguous: [], novel: [] },
+      },
     };
   }
 

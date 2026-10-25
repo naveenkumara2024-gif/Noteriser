@@ -1,5 +1,5 @@
 import type { RemovalKind } from "@/core/pipeline";
-import { removalLabel, verdictLabel } from "./copy";
+import { copy, removalLabel, verdictLabel } from "./copy";
 
 type Tone = "ok" | "warn" | "danger";
 
@@ -36,6 +36,9 @@ export function StatusBadge(props: BadgeKind) {
       className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-sm font-medium ${TONE_CLASS[tone]}`}
     >
       <span aria-hidden="true">{GLYPH[tone]}</span>
+      {props.kind === "verdict" && props.verdict === "PARTIAL" && (
+        <span className="sr-only">{copy.results.warningPrefix}</span>
+      )}
       {label}
     </span>
   );

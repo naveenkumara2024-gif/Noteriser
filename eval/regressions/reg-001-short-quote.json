@@ -1,0 +1,25 @@
+{
+  "id": "reg-001-short-quote",
+  "split": "regression",
+  "subject": "regression",
+  "topic": "Found in Stage 3: a one-word or punctuation-only quote was accepted as evidence",
+  "notes": "# Scheduling basics\n\n## Basics\n\nCPU scheduling decides which process gets the CPU next. The dispatcher hands the CPU to the chosen process. Linear search takes O(n) time on average. The operating system keeps track of every process in a table called the process control block.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "CPU scheduling decides which process runs next.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "scheduling",
+      "label": "bad",
+      "failureType": "fake_quote"
+    },
+    {
+      "type": "summary_point",
+      "text": "The dispatcher hands the CPU to the chosen process.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": ".",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

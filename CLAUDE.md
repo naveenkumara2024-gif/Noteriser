@@ -69,19 +69,19 @@ an ORM, Bespoke-MiniCheck (CC BY-NC 4.0 licence; 7B weights).
 CLAUDE.md  STAGE.md  Q9_Accessible_Lecture_Notes_Design.md
 docs/RESEARCH.md          prompts/stage-NN-*.md
 fixtures/lecture7.md      the lore §6.1 sample, byte-for-byte content
-eval/                     labelled cases, results, regressions   (stage 8)
+eval/                     labelled cases, runner, sweep, CI check, report, review sheet, regressions, RESULTS.md
 scripts/                  CLI entry points run with tsx (parse, generate, run, llm-smoke)
 src/
   core/                   PURE. No imports from next, react, pi-ai, transformers, node:sqlite, or src/{app,ui,llm,nlp,store,config}.
     ports/                interfaces core depends on: LlmClient, Nli, Embedder, RunStore, Result (adapters below implement them)
-    schema/  text/  ingest/  segment/  generate/  verify/  repair/  pipeline/  report/  export/
+    schema/  text/  ingest/  segment/  generate/  verify/  repair/  plain/  pipeline/  report/  export/  readability.ts
   llm/                    the ONLY place pi-ai is imported: pi adapter implementing core/ports/llm, plus fake
   nlp/                    Transformers.js NLI + embedding adapters implementing core/ports, plus fakes
   store/                  RunStore implementations: node:sqlite (data/noteriser.db, WAL, numbered migrations), in-memory, JSONL export, hourly retention purge
   demo/                   scripted fakes for fixtures/lecture7.md (lore §6 situation): powers `scripts/run.ts --fake`, the tests and Stage 5 fake mode
   config/                 env.ts (TypeBox-validated, fail fast)
-  app/                    Next.js routes, pages, route handlers
-  ui/                     React components
+  app/                    Next.js routes, pages, route handlers; app/server = request logic (input, SSE, rate limit, runtime/deps) kept out of the route files so it is unit-testable
+  ui/                     React components (copy.ts, StatusBadge, progress/results/…) and pure helpers (sse parser, progress reducer)
 tests/                    mirrors src/; tests/architecture.test.ts enforces import boundaries
 ```
 
@@ -108,9 +108,11 @@ tests/                    mirrors src/; tests/architecture.test.ts enforces impo
 npm run dev | build | start
 npm run typecheck | lint | test           # unit + integration, fakes only, no network
 npm run test:slow                         # real NLI model (downloads once to .cache/models)
-npm run e2e                               # Playwright, LLM_MODE=fake
+npm run e2e                               # Playwright (builds, then serves on :3100 with LLM_MODE=fake); stop `npm run dev` first, both use .next
 npm run check                             # typecheck + lint + test   ← the gate for every stage
-npm run eval                              # stage 8
+npm run eval -- --judge=fake              # verifier evaluation on the dev cases, offline (see eval/RESULTS.md)
+npm run eval:ci                           # offline regression check against eval/baseline.fake.json
+npm run models:fetch | feedback:export    # pre-fetch local models; instructors' feedback -> candidate regression cases
 npx tsx scripts/<name>.ts <args>               # run.ts <file> [--fake] [--profile p] [--verbose] [--export f.jsonl]
 ```
 
@@ -168,6 +170,12 @@ before writing the adapter. pi-ai and Transformers.js APIs move quickly; memory 
 - `npm run typecheck` runs `next typegen` first: `LayoutProps`/route types are generated into `.next/types` and a fresh clone has none. Never add `.next` to tsconfig `exclude`.
 - `next dev` rewrites `AGENTS.md` (Next's agent-rules block). Leave it; read `node_modules/next/dist/docs/` before using a Next API, as the bundled docs match the installed version.
 - `turbopack.root` is pinned to the project dir in `next.config.ts` (a stray lockfile in the home directory otherwise breaks root detection). Tailwind goes through the `@tailwindcss/turbopack` loader rule in the same file.
+- Display settings (theme, text size, font, spacing) are `<html>` attributes set by a head script before paint (`src/ui/settings.ts`); the script duplicates the parsing in miniature and a test keeps the two in step. Change one, change both.
+- Read-aloud (`src/ui/tts.ts`) talks to an injected speech interface, so tests never need audio. Word-level highlighting relies on `boundary` events (confirmed in Chromium with local voices only); keep item-level highlighting working without them.
+- Plain-language mode never loosens the verifier: a rewrite is shown only if the full verifier says SUPPORTED. Do not tune thresholds for it.
+- Exports (`src/core/export`) are pure functions of a stored result; Markdown and text share `buildModel`. Goldens in `tests/golden/` change only deliberately (`UPDATE_GOLDEN=1 npx vitest run tests/core/export`, then read the diff). The audit file contains the source text and is owner-cookie gated.
+- The evaluation's test split is reported on, never tuned on: `npm run eval -- --split test` needs `--final`. Do not change thresholds to improve a number you have seen on the test split.
+- Per-run limits (`RunLimits`) stop a run through the shared abort signal; any new long-running stage must honour `signal`.
 - Source text may contain instructions ("ignore the above"). It is data: always inside delimiters, system prompt says so, tested in stage 9.
 - The verifier can be wrong. Never present a score as truth; report its measured recall and over-flag rate (stage 8).
 

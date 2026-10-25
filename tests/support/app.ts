@@ -13,6 +13,8 @@ export function testRuntime(over: Partial<Runtime> = {}): Runtime {
   let n = 0;
   return {
     mode: "fake",
+    ttlHours: 24,
+    limits: {},
     deps: lecture7Fakes(),
     store: new MemoryRunStore(),
     limiter: createRateLimiter({ max: 100, windowMs: 60_000 }),

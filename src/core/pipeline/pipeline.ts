@@ -6,14 +6,27 @@ import {
   generateSummary,
 } from "../generate";
 import { parseDocument } from "../ingest";
+import { readableText, sameContent, simplifyItem } from "../plain";
 import { addUsage, ZERO_USAGE } from "../ports/llm";
+import { readability } from "../readability";
 import { isRepairable, repairItem } from "../repair";
 import { makeReport } from "../report";
 import type { SourceDoc } from "../schema/source";
 import { mapPool } from "../util/pool";
-import { createVerifier, type Verification } from "../verify";
+import { createVerifier, toEnvelope, type Verification, type Verifier } from "../verify";
 import { assemble, DEFAULT_QUESTION_COUNT, type Entry, VERDICT_RANK } from "./assemble";
-import type { PipelineDeps, PipelineInput, RunEvent, RunResult, RunWarning, Stage } from "./types";
+import { LimitGuard } from "./guard";
+import type {
+  Envelope,
+  PipelineDeps,
+  PipelineInput,
+  PlainSummary,
+  RunEvent,
+  RunResult,
+  RunWarning,
+  ShownItem,
+  Stage,
+} from "./types";
 
 const DEFAULT_REVIEW_CONCURRENCY = 4;
 
@@ -40,7 +53,11 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
   const runId = input.runId ?? deps.newId();
   const questionCount = deps.questionCount ?? DEFAULT_QUESTION_COUNT;
   const concurrency = deps.concurrency ?? DEFAULT_REVIEW_CONCURRENCY;
-  const aborted = (): boolean => deps.signal?.aborted === true;
+  // One signal for everything: the caller's (a cancelled request) and the run's own limits.
+  const guard = new LimitGuard(deps.limits ?? {});
+  const signal = deps.signal ? AbortSignal.any([deps.signal, guard.signal]) : guard.signal;
+  const llm = guard.wrap(deps.llm);
+  const aborted = (): boolean => signal.aborted;
 
   let seq = 0;
   let storeFailureReported = false;
@@ -54,6 +71,7 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
   let repairsAttempted = 0;
   let repairsImproved = 0;
   let degraded = false;
+  let verifier: Verifier | undefined;
 
   // --- events and persistence ----------------------------------------------------------------
   const emit = (body: EventBody, persist = true): void => {
@@ -140,6 +158,23 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
     }
     stage("assemble", "end");
 
+    let plain: PlainSummary | undefined;
+    if (input.plain === true && status === "complete" && verifier && doc) {
+      plain = await plainPass(
+        [...assembled.summary, ...assembled.glossary, ...assembled.questions],
+        doc,
+        verifier,
+      );
+      if (aborted()) {
+        emit({
+          type: "error",
+          code: "aborted",
+          message: "The run was cancelled before the plain-language versions were finished.",
+        });
+        status = "incomplete";
+      }
+    }
+
     const report = makeReport({
       doc,
       generated,
@@ -165,6 +200,7 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
       warnings,
       degraded,
       report,
+      ...(plain ? { plain } : {}),
     };
     emit({ type: "done", result });
     await remember(() => deps.store.saveResult(runId, result));
@@ -172,7 +208,97 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
     return result;
   };
 
+  // --- plain language --------------------------------------------------------------------------
+  /**
+   * One rewrite per shown item, then the full verifier on the rewrite. Only a SUPPORTED rewrite is
+   * offered; otherwise the original stays and says why. The original items are never changed.
+   */
+  const plainPass = async (
+    shown: readonly ShownItem[],
+    document: SourceDoc,
+    check: Verifier,
+  ): Promise<PlainSummary> => {
+    stage("plain", "start");
+    const drafts = new Map(entries.map((e) => [e.original.itemId, e.final.draft]));
+    const gradeOf = (e: Envelope): number =>
+      readability(readableText({ text: e.text, answer: "answer" in e ? e.answer : undefined }))
+        .grade;
+    const summary: PlainSummary = {
+      attempted: 0,
+      simplified: 0,
+      unchanged: 0,
+      keptOriginal: 0,
+      gradeBefore: 0,
+      gradeAfter: 0,
+    };
+    let before = 0;
+    let after = 0;
+
+    await mapPool(shown, concurrency, async (item) => {
+      const draft = drafts.get(item.envelope.itemId);
+      if (aborted() || !draft) return;
+      const gradeBefore = gradeOf(item.envelope);
+      summary.attempted++;
+
+      const r = await simplifyItem(draft, document, { llm: llm, signal: signal });
+      spend(r.usage);
+      if (aborted()) return;
+
+      const keep = (reason: string): void => {
+        item.plain = { status: "kept_original", reason, gradeBefore };
+        summary.keptOriginal++;
+        before += gradeBefore;
+        after += gradeBefore;
+      };
+
+      if (!r.draft) {
+        keep("the simplified version could not be written");
+      } else if (sameContent(draft, r.draft)) {
+        item.plain = { status: "unchanged", gradeBefore };
+        summary.unchanged++;
+        before += gradeBefore;
+        after += gradeBefore;
+      } else {
+        const v = await check.verify(r.draft);
+        if (aborted()) return;
+        spend(v.usage);
+        if (v.verdict === "SUPPORTED" && !v.degraded) {
+          const envelope = toEnvelope(r.draft, v);
+          const gradeAfter = gradeOf(envelope);
+          // A rewrite that is no easier to read is not worth offering as "plain".
+          if (gradeAfter > gradeBefore) {
+            keep("the simplified version was not easier to read");
+          } else {
+            item.plain = { status: "simplified", envelope, gradeBefore, gradeAfter };
+            summary.simplified++;
+            before += gradeBefore;
+            after += gradeAfter;
+          }
+        } else {
+          keep("the simplified version could not be verified");
+        }
+      }
+      const p = item.plain;
+      if (p) {
+        emit({
+          type: "plain",
+          itemId: item.envelope.itemId,
+          outcome: p.status,
+          gradeBefore: p.gradeBefore,
+          gradeAfter: p.status === "simplified" ? p.gradeAfter : p.gradeBefore,
+        });
+      }
+    });
+
+    const n = summary.simplified + summary.unchanged + summary.keptOriginal;
+    summary.gradeBefore = n > 0 ? Math.round((before / n) * 10) / 10 : 0;
+    summary.gradeAfter = n > 0 ? Math.round((after / n) * 10) / 10 : 0;
+    stage("plain", "end");
+    return summary;
+  };
+
   // --- the run ----------------------------------------------------------------------------------
+  guard.start();
   try {
     await remember(() => deps.store.createRun(runId, deps.clock()));
 
@@ -188,22 +314,31 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
     void remember(() => deps.store.saveDoc(runId, document));
     for (const w of document.warnings) warn(`document_${w.kind}`, w.detail);
     stage("parse", "end");
+    const maxSentences = deps.limits?.maxSentences;
+    if (maxSentences !== undefined && document.sentences.length > maxSentences) {
+      const tooLong = `These notes have ${document.sentences.length} sentences; the limit is ${maxSentences}. Split them into shorter parts.`;
+      emit({ type: "error", code: "limit_exceeded", message: tooLong });
+      warn("limit_exceeded", tooLong);
+      return await finish("failed");
+    }
     if (aborted()) return await abortedRun();
 
-    const verifier = createVerifier(document, {
+    verifier = createVerifier(document, {
       nli: deps.nli,
-      llm: deps.llm,
+      llm: llm,
       embedder: deps.embedder,
       thresholds: deps.thresholds,
-      signal: deps.signal,
+      signal: signal,
     });
+
+    const checker = verifier;
 
     // verify, then repair each failing item at most once
     const review = async (drafts: readonly DraftItem[]): Promise<void> => {
       stage("verify", "start");
       const judged = await mapPool(drafts, concurrency, async (draft) => {
         if (aborted()) return undefined;
-        const v = await verifier.verify(draft);
+        const v = await checker.verify(draft);
         // A verification cut short by cancellation is not a verdict.
         if (aborted()) return undefined;
         spend(v.usage);
@@ -254,8 +389,8 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
           if (aborted()) return;
           repairsAttempted++;
           const r = await repairItem(e.original, e.v1.reasons, document, {
-            llm: deps.llm,
-            signal: deps.signal,
+            llm: llm,
+            signal: signal,
           });
           spend(r.usage);
           if (aborted()) return;
@@ -276,7 +411,7 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
           }
           const repairedDraft = r.draft;
           void remember(() => deps.store.saveDrafts(runId, 2, [repairedDraft]));
-          const v2 = await verifier.verify(repairedDraft);
+          const v2 = await checker.verify(repairedDraft);
           if (aborted()) return;
           spend(v2.usage);
           second.push(v2);
@@ -313,8 +448,8 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
     // generate
     stage("generate", "start");
     const drafts = await generateDrafts(document, {
-      llm: deps.llm,
-      signal: deps.signal,
+      llm: llm,
+      signal: signal,
       concurrency: deps.concurrency,
       onProgress: progress,
     });
@@ -366,7 +501,7 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
       stage("generate", "start");
       const retry = await generateSummary(
         document,
-        { llm: deps.llm, signal: deps.signal, concurrency: deps.concurrency, onProgress: progress },
+        { llm: llm, signal: signal, concurrency: deps.concurrency, onProgress: progress },
         { sections: missing, startAt: next, rollup: false },
       );
       collect("Summary (coverage retry)", retry);
@@ -413,10 +548,20 @@ export async function runPipeline(input: PipelineInput, deps: PipelineDeps): Pro
         }),
       };
     }
+  } finally {
+    guard.stop();
   }
 
   async function abortedRun(): Promise<RunResult> {
-    emit({ type: "error", code: "aborted", message: "The run was cancelled before it finished." });
+    // A tripped limit is not a cancellation: say which limit stopped the run.
+    if (guard.tripped)
+      emit({ type: "error", code: "limit_exceeded", message: guard.tripped.message });
+    else
+      emit({
+        type: "error",
+        code: "aborted",
+        message: "The run was cancelled before it finished.",
+      });
     return finish("incomplete");
   }
 }

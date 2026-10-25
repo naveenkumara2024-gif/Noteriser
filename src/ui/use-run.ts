@@ -6,7 +6,10 @@ import { copy } from "./copy";
 import { initialProgress, type ProgressState, reduceProgress } from "./progress";
 import { parseSse } from "./sse";
 
-export type RunInput = { kind: "text"; text: string } | { kind: "file"; file: File };
+export type RunInput = ({ kind: "text"; text: string } | { kind: "file"; file: File }) & {
+  /** Also write verified plain-language versions. */
+  plain: boolean;
+};
 
 export type RunPhase =
   | { name: "idle" }
@@ -46,7 +49,10 @@ export function useRun(onFinished: (runId: string) => void) {
             ? await fetch("/api/runs", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
-                body: JSON.stringify({ text: input.text }),
+                body: JSON.stringify({
+                  text: input.text,
+                  ...(input.plain ? { options: { plain: true } } : {}),
+                }),
                 signal: abort.signal,
               })
             : await fetch("/api/runs", {
@@ -54,6 +60,7 @@ export function useRun(onFinished: (runId: string) => void) {
                 body: (() => {
                   const form = new FormData();
                   form.set("file", input.file);
+                  if (input.plain) form.set("plain", "true");
                   return form;
                 })(),
                 signal: abort.signal,
@@ -79,18 +86,18 @@ export function useRun(onFinished: (runId: string) => void) {
           if (parsed.messages.length > 0) setPhase({ name: "running", progress });
         }
 
-        if (progress.runId) onFinished(progress.runId);
-        else if (progress.error?.code === "aborted") setPhase({ name: "cancelled" });
-        else {
+        const { runId, error } = progress;
+        if (error?.code === "aborted") setPhase({ name: "cancelled" });
+        // An unreadable document has nothing to show: keep the person on the form with the reason.
+        else if (!runId || error?.code === "parse_failed") {
           setPhase({
             name: "failed",
-            message: progress.error?.message ?? "The run ended without a result.",
+            message: error?.message ?? "The run ended without a result.",
           });
-        }
-      } catch (e) {
+        } else onFinished(runId);
+      } catch {
         if (abort.signal.aborted) setPhase({ name: "cancelled" });
         else setPhase({ name: "failed", message: copy.home.networkError });
-        void e;
       } finally {
         controller.current = null;
       }

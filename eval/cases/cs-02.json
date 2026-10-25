@@ -1,0 +1,58 @@
+{
+  "id": "cs-02",
+  "split": "dev",
+  "subject": "computer science",
+  "topic": "TCP",
+  "notes": "# TCP\n\n## Reliable delivery\n\nThe Transmission Control Protocol provides reliable, ordered delivery of a stream of bytes between two hosts. A connection is established with a three-way handshake before any data is sent. Each segment carries a sequence number so the receiver can put the data back in order. The receiver sends acknowledgements, and the sender retransmits a segment if no acknowledgement arrives in time.\n\n## Congestion and flow\n\nTCP controls how fast a sender transmits by using a congestion window. During slow start the window grows quickly, roughly doubling every round trip. When packet loss is detected, the sender reduces its window to relieve congestion. Flow control is separate from congestion control and prevents a fast sender from overwhelming a slow receiver. In contrast, UDP does not guarantee delivery or ordering.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "TCP sets up a connection with a three-way handshake and numbers each segment so the receiver can restore the order.",
+      "sourceIds": ["S1.2", "S1.3"],
+      "evidenceQuote": "three-way handshake",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "If an acknowledgement does not arrive in time, the sender retransmits the segment.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "retransmits a segment if no acknowledgement arrives in time",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Flow control",
+      "text": "A mechanism, separate from congestion control, that stops a fast sender from overwhelming a slow receiver.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "prevents a fast sender from overwhelming a slow receiver",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "UDP guarantees delivery and ordering.",
+      "sourceIds": ["S2.5"],
+      "evidenceQuote": "UDP does not guarantee delivery or ordering",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "Slow start typically ends once the window reaches 64 kilobytes.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "the window grows quickly",
+      "label": "bad",
+      "failureType": "invented_stat"
+    },
+    {
+      "type": "summary_point",
+      "text": "TCP never loses any data under any circumstances.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "reliable, ordered delivery of a stream of bytes",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    }
+  ]
+}

@@ -10,7 +10,11 @@ const JsonBody = Type.Object(
     text: Type.String(),
     options: Type.Optional(
       Type.Object(
-        { format: Type.Optional(Type.Union([Type.Literal("plain"), Type.Literal("markdown")])) },
+        {
+          format: Type.Optional(Type.Union([Type.Literal("plain"), Type.Literal("markdown")])),
+          /** Also write verified plain-language versions of every item. */
+          plain: Type.Optional(Type.Boolean()),
+        },
         { additionalProperties: false },
       ),
     ),
@@ -54,8 +58,14 @@ async function readCapped(request: Request, max: number): Promise<Uint8Array | u
   return body;
 }
 
-/** Request -> `DocumentInput`, or the 4xx explaining what to change. */
-export async function readDocument(request: Request): Promise<Result<DocumentInput, ApiError>> {
+/** What a run request asks for: the notes, and whether to also write plain-language versions. */
+export interface RunRequest {
+  document: DocumentInput;
+  plain: boolean;
+}
+
+/** Request -> the document and options, or the 4xx explaining what to change. */
+export async function readDocument(request: Request): Promise<Result<RunRequest, ApiError>> {
   const type = request.headers.get("content-type")?.split(";")[0]?.trim().toLowerCase() ?? "";
 
   if (type === "application/json") {
@@ -82,7 +92,10 @@ export async function readDocument(request: Request): Promise<Result<DocumentInp
     if (new TextEncoder().encode(parsed.text).byteLength > LIMITS.textBytes) {
       return err(tooLarge("The text", LIMITS.textBytes));
     }
-    return ok({ kind: "text", text: parsed.text, format: parsed.options?.format });
+    return ok({
+      document: { kind: "text", text: parsed.text, format: parsed.options?.format },
+      plain: parsed.options?.plain === true,
+    });
   }
 
   if (type === "multipart/form-data") {
@@ -117,9 +130,12 @@ export async function readDocument(request: Request): Promise<Result<DocumentInp
     }
     if (file.size > LIMITS.fileBytes) return err(tooLarge("The file", LIMITS.fileBytes));
     return ok({
-      kind: "file",
-      name: file.name,
-      bytes: new Uint8Array(await file.arrayBuffer()),
+      document: {
+        kind: "file",
+        name: file.name,
+        bytes: new Uint8Array(await file.arrayBuffer()),
+      },
+      plain: form.get("plain") === "true",
     });
   }
 

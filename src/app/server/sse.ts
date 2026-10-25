@@ -1,9 +1,9 @@
 import type { RunEvent } from "@/core/pipeline";
 
-export const HEARTBEAT_MS = 15_000;
+const HEARTBEAT_MS = 15_000;
 
 /** One event in the wire format: `event:` is the event type, `id:` its sequence number. */
-export function encodeEvent(event: RunEvent): string {
+function encodeEvent(event: RunEvent): string {
   return `event: ${event.type}\nid: ${event.seq}\ndata: ${JSON.stringify(event)}\n\n`;
 }
 
@@ -14,6 +14,8 @@ export interface SseOptions {
   /** The HTTP request's signal: a client that goes away aborts the run. */
   signal?: AbortSignal;
   heartbeatMs?: number;
+  /** Extra response headers (the owner cookie). */
+  headers?: Record<string, string>;
 }
 
 /**
@@ -81,6 +83,7 @@ export function sseResponse(options: SseOptions): Response {
       "Cache-Control": "no-store, no-transform",
       "X-Accel-Buffering": "no",
       "X-Run-Id": options.runId,
+      ...options.headers,
     },
   });
 }

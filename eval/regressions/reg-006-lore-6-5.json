@@ -1,0 +1,33 @@
+{
+  "id": "reg-006-lore-6-5",
+  "split": "regression",
+  "subject": "regression",
+  "topic": "Lore section 6.5: the drafts the verifier must never let through",
+  "notes": "# Lecture 7: CPU Scheduling Basics\n\n## 1. What is CPU scheduling?\n\nCPU scheduling is the method an operating system uses to decide which process in the ready queue gets the CPU next. Its goal is to keep the CPU busy and to give users acceptable response times. The component that hands the CPU to the chosen process is called the dispatcher. The time the dispatcher takes to stop one process and start another is called dispatch latency.\n\n## 2. Scheduling criteria\n\n- CPU utilization is the percentage of time the CPU is busy.\n- Throughput is the number of processes completed per unit time.\n- Turnaround time is the total time from submission of a process to its completion.\n- Waiting time is the total time a process spends in the ready queue.\n- Response time is the time from submission of a request until the first response is produced.\n\n## 3. Scheduling algorithms\n\nFirst-Come, First-Served (FCFS) schedules processes in the order they arrive. FCFS is non-preemptive and can cause the convoy effect, where short processes wait behind one long process.\n\nShortest Job First (SJF) selects the process with the smallest next CPU burst. SJF gives the minimum average waiting time for a given set of processes, but the length of the next burst must be predicted.\n\nRound Robin (RR) gives each process a fixed time slice called the time quantum, after which the process is preempted and placed at the end of the ready queue. If the time quantum is very large, RR behaves like FCFS; if it is very small, context-switch overhead increases.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Round Robin is the most widely used scheduler in modern operating systems.",
+      "sourceIds": ["S3.5"],
+      "evidenceQuote": "gives each process a fixed time slice",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "SJF is impossible to implement in practice.",
+      "sourceIds": ["S3.4"],
+      "evidenceQuote": "the minimum average waiting time for a given set of processes",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "A typical time quantum is 10 to 100 milliseconds.",
+      "sourceIds": ["S3.6"],
+      "evidenceQuote": "if it is very small, context-switch overhead increases",
+      "label": "bad",
+      "failureType": "invented_stat"
+    }
+  ]
+}

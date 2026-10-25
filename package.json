@@ -12,8 +12,15 @@
     "test": "vitest run",
     "test:slow": "vitest run --config vitest.slow.config.ts",
     "e2e": "playwright test",
-    "eval": "node -e \"console.log(\\\"eval: not implemented (stage 8)\\\")\"",
-    "check": "npm run typecheck && npm run lint && npm run test"
+    "eval": "tsx eval/run-verifier.ts",
+    "check": "npm run typecheck && npm run lint && npm run test",
+    "eval:ci": "tsx eval/ci.ts",
+    "eval:sweep": "tsx eval/sweep.ts",
+    "eval:report": "tsx eval/report.ts",
+    "eval:e2e": "tsx eval/run-e2e.ts",
+    "eval:kappa": "tsx eval/kappa.ts",
+    "feedback:export": "tsx scripts/feedback-export.ts",
+    "models:fetch": "tsx scripts/fetch-models.ts"
   },
   "dependencies": {
     "@earendil-works/pi-ai": "1.4.0",

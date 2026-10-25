@@ -1,0 +1,4048 @@
+{
+  "meta": {
+    "startedAt": "2026-10-24T19:37:51.295Z",
+    "wallSeconds": 360,
+    "split": "test",
+    "judge": "live",
+    "judgeLabel": "live nararouter:nemotron-3.5-lightning-free",
+    "nliModel": "Xenova/nli-deberta-v3-small",
+    "thresholds": {
+      "entailmentSupported": 0.85,
+      "entailmentPartial": 0.5,
+      "contradiction": 0.5,
+      "softNovelPartial": 3
+    },
+    "concurrency": 2,
+    "drafts": 72,
+    "degradedDrafts": 0,
+    "latencyMs": {
+      "mean": 9931,
+      "p50": 8430,
+      "p95": 18870
+    },
+    "usage": {
+      "inputTokens": 45162,
+      "outputTokens": 34382,
+      "costUsd": 0
+    }
+  },
+  "summary": {
+    "good": 36,
+    "bad": 36,
+    "recall": {
+      "n": 36,
+      "k": 36,
+      "rate": 1,
+      "lo": 0.9035781695514236,
+      "hi": 1
+    },
+    "hardRecall": {
+      "n": 36,
+      "k": 33,
+      "rate": 0.9166666666666666,
+      "lo": 0.7817298972308114,
+      "hi": 0.9712519107287082
+    },
+    "overFlag": {
+      "n": 36,
+      "k": 10,
+      "rate": 0.2777777777777778,
+      "lo": 0.15848170025813796,
+      "hi": 0.43992800216345146
+    },
+    "overReject": {
+      "n": 36,
+      "k": 4,
+      "rate": 0.1111111111111111,
+      "lo": 0.04406568908741834,
+      "hi": 0.2531512901503632
+    },
+    "balancedAccuracy": 0.8611111111111112,
+    "citationValidity": {
+      "n": 35,
+      "k": 35,
+      "rate": 1,
+      "lo": 0.9010957324106112,
+      "hi": 1
+    },
+    "slipped": 0,
+    "byType": {
+      "reversed_meaning": {
+        "caught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        }
+      },
+      "invented_stat": {
+        "caught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        }
+      },
+      "fake_quote": {
+        "caught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        }
+      },
+      "scope_shift": {
+        "caught": {
+          "n": 4,
+          "k": 4,
+          "rate": 1,
+          "lo": 0.5100999795960008,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 4,
+          "k": 1,
+          "rate": 0.25,
+          "lo": 0.045586062644636216,
+          "hi": 0.6993639475573634
+        }
+      },
+      "outside_fact": {
+        "caught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        }
+      },
+      "number_altered": {
+        "caught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        }
+      },
+      "negation_dropped": {
+        "caught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        }
+      },
+      "overgeneralisation": {
+        "caught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        },
+        "hardCaught": {
+          "n": 5,
+          "k": 5,
+          "rate": 1,
+          "lo": 0.5655085052479191,
+          "hi": 1
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "bio-02-d1",
+      "caseId": "bio-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Helicase separates the two strands of the double helix, and each strand becomes a template for a new strand.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9987120372010013,
+        "novelEntities": ["becomes"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9987120372010013,
+          "contradiction": 0.03446819073752565
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["becomes"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8582,
+      "usage": {
+        "inputTokens": 645,
+        "outputTokens": 244,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-02-d2",
+      "caseId": "bio-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Replication is semiconservative: every new DNA molecule keeps one of the original strands.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.01).",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.014316961436339386,
+        "novelEntities": [],
+        "overGeneral": ["every"],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.014316961436339386,
+          "contradiction": 0.00010564734770553749
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7841,
+      "usage": {
+        "inputTokens": 620,
+        "outputTokens": 277,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-02-d3",
+      "caseId": "bio-02",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "The enzyme that builds the new strand by adding nucleotides that pair with the template, and proofreads its work.",
+      "verdict": "CONTRADICTED",
+      "reasons": ["The notes say the opposite (contradiction 1.00)."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9932407114838605,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9932407114838605,
+          "contradiction": 0.998725366359236
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9071,
+      "usage": {
+        "inputTokens": 657,
+        "outputTokens": 344,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-02-d4",
+      "caseId": "bio-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "reversed_meaning",
+      "text": "Polymerase can add nucleotides to either end of a growing strand.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 0.94).",
+        "The cited text does not support this (entailment 0.01).",
+        "A second reviewer found the notes say the opposite of part of this: Polymerase can add nucleotides to either end of a growing strand.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.011669260803058608,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.011669260803058608,
+          "contradiction": 0.9426018207563455
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["Polymerase can add nucleotides to either end of a growing strand."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8767,
+      "usage": {
+        "inputTokens": 619,
+        "outputTokens": 356,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-02-d5",
+      "caseId": "bio-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "invented_stat",
+      "text": "DNA polymerase makes roughly one error in every billion nucleotides it copies.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: DNA polymerase makes roughly one error in every billion nucleotides it copies..",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00020403495078418515,
+        "novelEntities": ["roughly", "billion"],
+        "overGeneral": ["every"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00020403495078418515,
+          "contradiction": 0.03528485902439235
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["roughly", "billion"]
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "DNA polymerase makes roughly one error in every billion nucleotides it copies."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6087,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 277,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-02-d6",
+      "caseId": "bio-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "fake_quote",
+      "text": "Errors that escape proofreading can become mutations.",
+      "verdict": "UNSUPPORTED",
+      "reasons": ["The quote does not appear, word for word, in the cited sentence(s) S2.3."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": false,
+        "entailment": 0.9896905151241516,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": false,
+          "missingIds": [],
+          "reason": "The quote does not appear, word for word, in the cited sentence(s) S2.3."
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9896905151241516,
+          "contradiction": 0.00040137975888708945
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 5575,
+      "usage": {
+        "inputTokens": 604,
+        "outputTokens": 122,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-04-d1",
+      "caseId": "bio-04",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "The innate system reacts fast and nonspecifically, while the adaptive system is slower but aimed at one particular pathogen.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "Part of the cited text may contradict this (contradiction 0.98).",
+        "Uses words the notes never use: \"reacts\", \"nonspecifically\", \"aimed\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9941607489168214,
+        "novelEntities": ["reacts", "nonspecifically", "aimed"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9941607489168214,
+          "contradiction": 0.9832962117697549
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["reacts", "nonspecifically", "aimed"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7513,
+      "usage": {
+        "inputTokens": 648,
+        "outputTokens": 346,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-04-d2",
+      "caseId": "bio-04",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Vaccines expose the body to a harmless form of an antigen, which leads to the formation of memory cells.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "A second reviewer found parts the notes do not support: Vaccines expose the body to a harmless form of an antigen."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9982606285368797,
+        "novelEntities": ["expose", "leads"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9982606285368797,
+          "contradiction": 0.0002516501993403748
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["expose", "leads"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["Vaccines expose the body to a harmless form of an antigen"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 44603,
+      "usage": {
+        "inputTokens": 630,
+        "outputTokens": 2685,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-04-d3",
+      "caseId": "bio-04",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "B cells and T cells that remain after an infection and allow a faster response if the same pathogen returns.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.997691715501666,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.997691715501666,
+          "contradiction": 0.0001851276424318837
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8380,
+      "usage": {
+        "inputTokens": 643,
+        "outputTokens": 441,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-04-d4",
+      "caseId": "bio-04",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "scope_shift",
+      "text": "Memory cells allow the body to respond faster to any new pathogen.",
+      "verdict": "PARTIAL",
+      "reasons": ["A second reviewer found parts the notes do not support: to any new pathogen."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9646309059423062,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9646309059423062,
+          "contradiction": 0.0030695843950746494
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["to any new pathogen"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8145,
+      "usage": {
+        "inputTokens": 612,
+        "outputTokens": 411,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-04-d5",
+      "caseId": "bio-04",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "invented_stat",
+      "text": "Phagocytes can destroy a bacterium within 20 minutes of contact.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "Mentions \"20\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Phagocytes can destroy a bacterium within 20 minutes of contact..",
+        "Uses words the notes never use: \"destroy\", \"bacterium\", \"minutes\", \"contact\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00012141684166868679,
+        "novelEntities": ["20", "destroy", "bacterium", "minutes", "contact"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00012141684166868679,
+          "contradiction": 0.0008566451048621866
+        },
+        "entities": {
+          "hard": ["20"],
+          "soft": ["destroy", "bacterium", "minutes", "contact"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["Phagocytes can destroy a bacterium within 20 minutes of contact."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6857,
+      "usage": {
+        "inputTokens": 619,
+        "outputTokens": 328,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "bio-04-d6",
+      "caseId": "bio-04",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "fake_quote",
+      "text": "Antibodies bind to a specific antigen.",
+      "verdict": "UNSUPPORTED",
+      "reasons": ["The quote does not appear, word for word, in the cited sentence(s) S2.1."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": false,
+        "entailment": 0.9971313989047607,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": false,
+          "missingIds": [],
+          "reason": "The quote does not appear, word for word, in the cited sentence(s) S2.1."
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9971313989047607,
+          "contradiction": 0.00022230146357978605
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6758,
+      "usage": {
+        "inputTokens": 606,
+        "outputTokens": 140,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-01-d1",
+      "caseId": "cs-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A page table maps each page in a process's address space to a physical frame.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "Only partly supported by the cited text (entailment 0.52).",
+        "A second reviewer found parts the notes do not support: each page in a process's address space; physical frame."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.5177324727435069,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.5177324727435069,
+          "contradiction": 0.01467960740423537
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["each page in a process's address space", "physical frame"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 15261,
+      "usage": {
+        "inputTokens": 617,
+        "outputTokens": 1017,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-01-d2",
+      "caseId": "cs-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A page fault happens when a process touches a page that is not in physical memory, so the operating system must load it from disk.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9893505824367148,
+        "novelEntities": ["happens", "touches"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9893505824367148,
+          "contradiction": 0.0008809549695936185
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["happens", "touches"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7803,
+      "usage": {
+        "inputTokens": 656,
+        "outputTokens": 378,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-01-d3",
+      "caseId": "cs-01",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "A condition in which too many page faults make the system spend most of its time swapping pages.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9979932077918146,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9979932077918146,
+          "contradiction": 0.0006369727923377256
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9373,
+      "usage": {
+        "inputTokens": 634,
+        "outputTokens": 488,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-01-d4",
+      "caseId": "cs-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "scope_shift",
+      "text": "Page faults occur whenever a process accesses memory.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "A second reviewer found parts the notes do not support: Page faults occur whenever a process accesses memory.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.995598737068426,
+        "novelEntities": ["whenever"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.995598737068426,
+          "contradiction": 0.0011903656460384917
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["whenever"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["Page faults occur whenever a process accesses memory."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 11900,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 725,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-01-d5",
+      "caseId": "cs-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "outside_fact",
+      "text": "Modern processors usually organise page tables in several levels to save space.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Modern processors usually organise page tables in several levels to save space..",
+        "Uses words the notes never use: \"modern\", \"usually\", \"organise\", \"tables\", \"levels\", \"save\".",
+        "Adds wording the cited text does not use: \"usually\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.004482916045369069,
+        "novelEntities": ["modern", "usually", "organise", "tables", "levels", "save"],
+        "overGeneral": ["usually"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.004482916045369069,
+          "contradiction": 0.003607684618526289
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["modern", "usually", "organise", "tables", "levels", "save"]
+        },
+        "overGeneral": ["usually"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Modern processors usually organise page tables in several levels to save space."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9771,
+      "usage": {
+        "inputTokens": 613,
+        "outputTokens": 539,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-01-d6",
+      "caseId": "cs-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "invented_stat",
+      "text": "A typical page is 4096 bytes in size.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "Mentions \"4096\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: A typical page is 4096 bytes in size.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00016840800505454485,
+        "novelEntities": ["4096", "typical", "bytes"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00016840800505454485,
+          "contradiction": 0.0022520961088958267
+        },
+        "entities": {
+          "hard": ["4096"],
+          "soft": ["typical", "bytes"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["A typical page is 4096 bytes in size."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6529,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 219,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-03-d1",
+      "caseId": "cs-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A hash function maps a key to an array index, and keys that land on the same index are a collision.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9786973515530348,
+        "novelEntities": ["land"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9786973515530348,
+          "contradiction": 0.0550090770772815
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["land"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7110,
+      "usage": {
+        "inputTokens": 649,
+        "outputTokens": 326,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-03-d2",
+      "caseId": "cs-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Chaining handles collisions with a linked list per index, whereas open addressing probes for another empty slot.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9876118475824182,
+        "novelEntities": ["handles", "whereas"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9876118475824182,
+          "contradiction": 0.025492562427222986
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["handles", "whereas"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7845,
+      "usage": {
+        "inputTokens": 653,
+        "outputTokens": 292,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-03-d3",
+      "caseId": "cs-03",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "Two different keys mapping to the same index.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9920163004066054,
+        "novelEntities": ["mapping"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9920163004066054,
+          "contradiction": 0.0008284354039062331
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["mapping"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6648,
+      "usage": {
+        "inputTokens": 616,
+        "outputTokens": 220,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-03-d4",
+      "caseId": "cs-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "reversed_meaning",
+      "text": "As the load factor approaches one, lookups become faster.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: lookups become faster."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0008268384517187391,
+        "novelEntities": ["faster"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0008268384517187391,
+          "contradiction": 0.9985530131830161
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["faster"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["lookups become faster"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8023,
+      "usage": {
+        "inputTokens": 615,
+        "outputTokens": 380,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-03-d5",
+      "caseId": "cs-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "scope_shift",
+      "text": "Lookups in a hash table take constant time even in the worst case.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: even in the worst case.",
+        "Adds wording the cited text does not use: \"worst\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0045997768841264984,
+        "novelEntities": ["worst"],
+        "overGeneral": ["worst"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0045997768841264984,
+          "contradiction": 0.004671037768677092
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["worst"]
+        },
+        "overGeneral": ["worst"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["even in the worst case"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 18870,
+      "usage": {
+        "inputTokens": 620,
+        "outputTokens": 1256,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "cs-03-d6",
+      "caseId": "cs-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "fake_quote",
+      "text": "Most implementations resize the table when the load factor passes a threshold.",
+      "verdict": "UNSUPPORTED",
+      "reasons": ["The quote does not appear, word for word, in the cited sentence(s) S2.4."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": false,
+        "entailment": 0.9933274104657636,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": false,
+          "missingIds": [],
+          "reason": "The quote does not appear, word for word, in the cited sentence(s) S2.4."
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9933274104657636,
+          "contradiction": 0.000678404561831381
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9578,
+      "usage": {
+        "inputTokens": 617,
+        "outputTokens": 454,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-01-d1",
+      "caseId": "econ-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A higher price reduces the quantity demanded when other things stay the same, so the demand curve slopes downward.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9953103048145782,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9953103048145782,
+          "contradiction": 0.00046165806377289413
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7687,
+      "usage": {
+        "inputTokens": 649,
+        "outputTokens": 318,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-01-d2",
+      "caseId": "econ-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "At equilibrium the quantity demanded equals the quantity supplied.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9887338283929054,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9887338283929054,
+          "contradiction": 0.0012048171954496159
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6367,
+      "usage": {
+        "inputTokens": 613,
+        "outputTokens": 150,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-01-d3",
+      "caseId": "econ-01",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "What exists when the price is below equilibrium; prices then tend to rise.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9984317313560397,
+        "novelEntities": ["exists"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9984317313560397,
+          "contradiction": 0.0003332747316813623
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["exists"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6430,
+      "usage": {
+        "inputTokens": 623,
+        "outputTokens": 210,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-01-d4",
+      "caseId": "econ-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "number_altered",
+      "text": "In the class example the equilibrium price was 12 dollars and the equilibrium quantity was 120 units.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 0.99).",
+        "Mentions \"12\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: equilibrium price was 12 dollars."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0015449287048532585,
+        "novelEntities": ["12"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0015449287048532585,
+          "contradiction": 0.9947598372119446
+        },
+        "entities": {
+          "hard": ["12"],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["equilibrium price was 12 dollars"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 18009,
+      "usage": {
+        "inputTokens": 635,
+        "outputTokens": 866,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-01-d5",
+      "caseId": "econ-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "negation_dropped",
+      "text": "A change in the good's own price shifts the whole demand curve.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 0.90).",
+        "The cited text does not support this (entailment 0.09).",
+        "A second reviewer found the notes say the opposite of part of this: A change in the good's own price shifts the whole demand curve.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0894873060965984,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0894873060965984,
+          "contradiction": 0.9033376862167692
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["A change in the good's own price shifts the whole demand curve."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 10206,
+      "usage": {
+        "inputTokens": 630,
+        "outputTokens": 452,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-01-d6",
+      "caseId": "econ-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "overgeneralisation",
+      "text": "A higher price always reduces the quantity demanded for every good.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: always; for every good.",
+        "Adds wording the cited text does not use: \"always\", \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0020602428656834944,
+        "novelEntities": ["always"],
+        "overGeneral": ["always", "every"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0020602428656834944,
+          "contradiction": 0.012853648273306291
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["always"]
+        },
+        "overGeneral": ["always", "every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["always", "for every good"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 14558,
+      "usage": {
+        "inputTokens": 620,
+        "outputTokens": 850,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-03-d1",
+      "caseId": "econ-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Comparative advantage means a lower opportunity cost of producing a good than another country has.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9957317717179798,
+        "novelEntities": ["means"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9957317717179798,
+          "contradiction": 0.0011308101808914194
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["means"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6861,
+      "usage": {
+        "inputTokens": 626,
+        "outputTokens": 206,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-03-d2",
+      "caseId": "econ-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "In the example country A gives up 2 tonnes of wheat per car and country B gives up 3, so country A has the comparative advantage in cars.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.997131246050451,
+        "novelEntities": ["example"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.997131246050451,
+          "contradiction": 0.001555306291997113
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["example"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8829,
+      "usage": {
+        "inputTokens": 672,
+        "outputTokens": 381,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-03-d3",
+      "caseId": "econ-03",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "The value of the next best alternative that is given up.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9802417624348969,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9802417624348969,
+          "contradiction": 0.0030217319705111013
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 4702,
+      "usage": {
+        "inputTokens": 619,
+        "outputTokens": 108,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-03-d4",
+      "caseId": "econ-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "number_altered",
+      "text": "In the example country B gives up 2 tonnes of wheat for each car.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 0.97).",
+        "The cited text does not support this (entailment 0.02).",
+        "A second reviewer found the notes say the opposite of part of this: In the example country B gives up 2 tonnes of wheat for each car.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.023485477260502107,
+        "novelEntities": ["example"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.023485477260502107,
+          "contradiction": 0.9727017600961935
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["example"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["In the example country B gives up 2 tonnes of wheat for each car."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 11217,
+      "usage": {
+        "inputTokens": 629,
+        "outputTokens": 580,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-03-d5",
+      "caseId": "econ-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "negation_dropped",
+      "text": "Absolute advantage alone determines which country should produce a good.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: Absolute advantage alone determines which country should produce a good.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0005563564607918126,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0005563564607918126,
+          "contradiction": 0.9987221116812071
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": [
+            "Absolute advantage alone determines which country should produce a good."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8856,
+      "usage": {
+        "inputTokens": 611,
+        "outputTokens": 314,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "econ-03-d6",
+      "caseId": "econ-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "outside_fact",
+      "text": "Free trade agreements usually lower tariffs on the goods that countries specialise in.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Free trade agreements usually lower tariffs on the goods that countries specialise in..",
+        "Uses words the notes never use: \"free\", \"agreements\", \"usually\", \"tariffs\".",
+        "Adds wording the cited text does not use: \"usually\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0006623247191818055,
+        "novelEntities": ["free", "agreements", "usually", "tariffs"],
+        "overGeneral": ["usually"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0006623247191818055,
+          "contradiction": 0.0006674138888714279
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["free", "agreements", "usually", "tariffs"]
+        },
+        "overGeneral": ["usually"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Free trade agreements usually lower tariffs on the goods that countries specialise in."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 12162,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 553,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-01-d1",
+      "caseId": "hist-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "The Industrial Revolution started in Britain in the later eighteenth century, with textiles among the first mechanised industries.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9978862030135968,
+        "novelEntities": ["started", "later"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9978862030135968,
+          "contradiction": 0.0004771171876181223
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["started", "later"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8654,
+      "usage": {
+        "inputTokens": 642,
+        "outputTokens": 307,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-01-d2",
+      "caseId": "hist-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Watt's improved steam engine let factories be built away from rivers.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9985691775574018,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9985691775574018,
+          "contradiction": 0.00011531796237863747
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7317,
+      "usage": {
+        "inputTokens": 626,
+        "outputTokens": 221,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-01-d3",
+      "caseId": "hist-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Many people moved to industrial towns, and over time laws limited working hours and child labour.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "A second reviewer found parts the notes do not support: laws limited working hours and child labour."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9985281477141995,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9985281477141995,
+          "contradiction": 0.0008610111459346485
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["laws limited working hours and child labour"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 15101,
+      "usage": {
+        "inputTokens": 639,
+        "outputTokens": 1176,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-01-d4",
+      "caseId": "hist-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "number_altered",
+      "text": "James Watt improved the steam engine in the 1870s.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "Mentions \"1870\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: James Watt improved the steam engine in the 1870s."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00046833986186855923,
+        "novelEntities": ["1870"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00046833986186855923,
+          "contradiction": 0.996138601961151
+        },
+        "entities": {
+          "hard": ["1870"],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["James Watt improved the steam engine in the 1870s"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 28142,
+      "usage": {
+        "inputTokens": 627,
+        "outputTokens": 1297,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-01-d5",
+      "caseId": "hist-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "overgeneralisation",
+      "text": "Factory work was long, dangerous and poorly paid for absolutely everyone.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.01).",
+        "A second reviewer found parts the notes do not support: for absolutely everyone."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.008700502286602099,
+        "novelEntities": ["absolutely", "everyone"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.008700502286602099,
+          "contradiction": 0.007539468065250516
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["absolutely", "everyone"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["for absolutely everyone"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 14429,
+      "usage": {
+        "inputTokens": 617,
+        "outputTokens": 524,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-01-d6",
+      "caseId": "hist-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "outside_fact",
+      "text": "Cotton for the British mills was largely imported from overseas plantations.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "Mentions \"British\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Cotton for the British mills was largely imported from overseas plantations..",
+        "Uses words the notes never use: \"cotton\", \"mills\", \"imported\", \"overseas\", \"plantations\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00029928607986337444,
+        "novelEntities": ["British", "cotton", "mills", "imported", "overseas", "plantations"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00029928607986337444,
+          "contradiction": 0.014222359656052308
+        },
+        "entities": {
+          "hard": ["British"],
+          "soft": ["cotton", "mills", "imported", "overseas", "plantations"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Cotton for the British mills was largely imported from overseas plantations."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 11173,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 352,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-03-d1",
+      "caseId": "hist-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "The Black Death reached Europe in 1347 and probably spread along trade routes on fleas carried by rats.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9933868289340116,
+        "novelEntities": ["probably"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9933868289340116,
+          "contradiction": 0.001074647077329114
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["probably"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6296,
+      "usage": {
+        "inputTokens": 653,
+        "outputTokens": 336,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-03-d2",
+      "caseId": "hist-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "After so many deaths labour was scarce, so workers who survived could demand higher wages.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9981760213834532,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9981760213834532,
+          "contradiction": 0.00029421474707968707
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6039,
+      "usage": {
+        "inputTokens": 620,
+        "outputTokens": 233,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-03-d3",
+      "caseId": "hist-03",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "A plague pandemic that reached Europe in 1347.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9952628377240521,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9952628377240521,
+          "contradiction": 0.0007994916963750302
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7859,
+      "usage": {
+        "inputTokens": 620,
+        "outputTokens": 393,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-03-d4",
+      "caseId": "hist-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "number_altered",
+      "text": "The Black Death reached Europe in 1374.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "Mentions \"1374\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: reached Europe in 1374."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0011048183509628304,
+        "novelEntities": ["1374"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0011048183509628304,
+          "contradiction": 0.9955288384651014
+        },
+        "entities": {
+          "hard": ["1374"],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["reached Europe in 1374"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 13453,
+      "usage": {
+        "inputTokens": 616,
+        "outputTokens": 664,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-03-d5",
+      "caseId": "hist-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "negation_dropped",
+      "text": "Contemporaries understood the cause of the plague.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: Contemporaries understood the cause of the plague.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0005530450989110504,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0005530450989110504,
+          "contradiction": 0.9991411506172465
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["Contemporaries understood the cause of the plague."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6984,
+      "usage": {
+        "inputTokens": 616,
+        "outputTokens": 377,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "hist-03-d6",
+      "caseId": "hist-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "reversed_meaning",
+      "text": "In England the wage laws succeeded in stopping wages from rising.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: In England the wage laws succeeded in stopping wages from rising.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0003596342919017333,
+        "novelEntities": ["succeeded"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0003596342919017333,
+          "contradiction": 0.9993144275028639
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["succeeded"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["In England the wage laws succeeded in stopping wages from rising."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7445,
+      "usage": {
+        "inputTokens": 613,
+        "outputTokens": 393,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "law-02-d1",
+      "caseId": "law-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Informed consent is a voluntary agreement given after the person has been told the relevant facts, such as the purpose, risks and alternatives.",
+      "verdict": "CONTRADICTED",
+      "reasons": ["The notes say the opposite (contradiction 0.99)."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.994866203996795,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.994866203996795,
+          "contradiction": 0.9949671435860336
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7185,
+      "usage": {
+        "inputTokens": 661,
+        "outputTokens": 390,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "law-02-d2",
+      "caseId": "law-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A person with capacity may refuse treatment even when refusal is likely to harm them.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9956209264877175,
+        "novelEntities": ["refusal"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9956209264877175,
+          "contradiction": 0.0003742086152161569
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["refusal"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6223,
+      "usage": {
+        "inputTokens": 619,
+        "outputTokens": 261,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "law-02-d3",
+      "caseId": "law-02",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "A person's voluntary agreement to a treatment or study after being told the relevant facts.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9806085823056929,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9806085823056929,
+          "contradiction": 0.0012761903587401376
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 11159,
+      "usage": {
+        "inputTokens": 633,
+        "outputTokens": 693,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "law-02-d4",
+      "caseId": "law-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "overgeneralisation",
+      "text": "Consent is always valid once the person has signed a form.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 0.99).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: once the person has signed a form; Consent is always valid.",
+        "Uses words the notes never use: \"always\", \"once\", \"signed\", \"form\".",
+        "Adds wording the cited text does not use: \"always\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0002564833327978646,
+        "novelEntities": ["always", "once", "signed", "form"],
+        "overGeneral": ["always"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0002564833327978646,
+          "contradiction": 0.9945193347728551
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["always", "once", "signed", "form"]
+        },
+        "overGeneral": ["always"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["once the person has signed a form", "Consent is always valid"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9001,
+      "usage": {
+        "inputTokens": 617,
+        "outputTokens": 496,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "law-02-d5",
+      "caseId": "law-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "outside_fact",
+      "text": "Ethics committees must approve every research study before it begins.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Ethics committees must approve every research study before it begins..",
+        "Uses words the notes never use: \"ethics\", \"committees\", \"approve\", \"begins\".",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0001966566463668271,
+        "novelEntities": ["ethics", "committees", "approve", "begins"],
+        "overGeneral": ["every"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0001966566463668271,
+          "contradiction": 0.0037087050577617594
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["ethics", "committees", "approve", "begins"]
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Ethics committees must approve every research study before it begins."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6847,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 297,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "law-02-d6",
+      "caseId": "law-02",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "fake_quote",
+      "text": "Consent must be given freely, without pressure or manipulation.",
+      "verdict": "UNSUPPORTED",
+      "reasons": ["The quote does not appear, word for word, in the cited sentence(s) S1.4."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": false,
+        "entailment": 0.9897631091473131,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": false,
+          "missingIds": [],
+          "reason": "The quote does not appear, word for word, in the cited sentence(s) S1.4."
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9897631091473131,
+          "contradiction": 0.00045775899822195985
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 3842,
+      "usage": {
+        "inputTokens": 612,
+        "outputTokens": 113,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-01-d1",
+      "caseId": "phys-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "An object keeps its state of rest or constant velocity unless a net force acts on it.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9971513775981671,
+        "novelEntities": ["keeps", "state"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9971513775981671,
+          "contradiction": 0.0003255231460132202
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["keeps", "state"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 5121,
+      "usage": {
+        "inputTokens": 630,
+        "outputTokens": 219,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-01-d2",
+      "caseId": "phys-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A force of 10 newtons on a mass of 2 kilograms gives an acceleration of 5 metres per second squared.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9971607485883683,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9971607485883683,
+          "contradiction": 0.0004364296728822479
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6084,
+      "usage": {
+        "inputTokens": 641,
+        "outputTokens": 262,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-01-d3",
+      "caseId": "phys-01",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "The gravitational force acting on an object.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9933007960541756,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9933007960541756,
+          "contradiction": 0.0010384586045106335
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6677,
+      "usage": {
+        "inputTokens": 618,
+        "outputTokens": 298,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-01-d4",
+      "caseId": "phys-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "number_altered",
+      "text": "A force of 10 newtons applied to a mass of 2 kilograms produces an acceleration of 10 metres per second squared.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: produces an acceleration of 10 metres per second squared.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0007195939438347764,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0007195939438347764,
+          "contradiction": 0.9970682680104783
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["produces an acceleration of 10 metres per second squared."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 10507,
+      "usage": {
+        "inputTokens": 643,
+        "outputTokens": 667,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-01-d5",
+      "caseId": "phys-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "negation_dropped",
+      "text": "The two forces in a third-law pair act on different objects, so they cancel each other.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: they cancel each other."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0004155557004520441,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0004155557004520441,
+          "contradiction": 0.9993052721502923
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["they cancel each other"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 14799,
+      "usage": {
+        "inputTokens": 626,
+        "outputTokens": 874,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-01-d6",
+      "caseId": "phys-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "invented_stat",
+      "text": "Gravity near the surface of the Earth gives every falling object an acceleration of 9.8 metres per second squared.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 0.87).",
+        "Mentions \"9.8\", \"Earth\", which the notes never state.",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Gravity near the surface of the Earth gives every falling object an acceleration of 9.8 metres per second squared..",
+        "Uses words the notes never use: \"near\", \"surface\", \"falling\".",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.000101644314345232,
+        "novelEntities": ["9.8", "Earth", "near", "surface", "falling"],
+        "overGeneral": ["every"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.000101644314345232,
+          "contradiction": 0.8748615839475913
+        },
+        "entities": {
+          "hard": ["9.8", "Earth"],
+          "soft": ["near", "surface", "falling"]
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Gravity near the surface of the Earth gives every falling object an acceleration of 9.8 metres per second squared."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 10279,
+      "usage": {
+        "inputTokens": 631,
+        "outputTokens": 398,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-03-d1",
+      "caseId": "phys-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Current is the rate of flow of charge, and voltage is the energy given to each unit of charge by a source.",
+      "verdict": "CONTRADICTED",
+      "reasons": ["The notes say the opposite (contradiction 0.99)."],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9936574002426554,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9936574002426554,
+          "contradiction": 0.9936599970138499
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 15970,
+      "usage": {
+        "inputTokens": 653,
+        "outputTokens": 329,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-03-d2",
+      "caseId": "phys-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "In a series circuit the same current flows through every component, but in a parallel circuit every branch has the same voltage.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "Part of the cited text may contradict this (contradiction 0.95).",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9554702044661418,
+        "novelEntities": [],
+        "overGeneral": ["every"],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9554702044661418,
+          "contradiction": 0.9549098952705319
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 6382,
+      "usage": {
+        "inputTokens": 662,
+        "outputTokens": 261,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-03-d3",
+      "caseId": "phys-03",
+      "split": "test",
+      "type": "glossary",
+      "label": "good",
+      "failureType": null,
+      "text": "How strongly a component opposes the flow of current.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "A second reviewer found parts the notes do not support: Resistance is how strongly a component opposes the flow of current (i.e., resistance equals the degree of opposition)."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9867361582677502,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9867361582677502,
+          "contradiction": 0.002542442420685697
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Resistance is how strongly a component opposes the flow of current (i.e., resistance equals the degree of opposition)"
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 20006,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 1250,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-03-d4",
+      "caseId": "phys-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "overgeneralisation",
+      "text": "Ohm's law applies to every component in every circuit.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: every component; every circuit.",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0004978804942832216,
+        "novelEntities": ["applies"],
+        "overGeneral": ["every"],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0004978804942832216,
+          "contradiction": 0.0006947126482902005
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["applies"]
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["every component", "every circuit"]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8430,
+      "usage": {
+        "inputTokens": 623,
+        "outputTokens": 307,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-03-d5",
+      "caseId": "phys-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "outside_fact",
+      "text": "Fuses melt when the current through them becomes too large, which protects the wiring.",
+      "verdict": "UNSUPPORTED",
+      "reasons": [
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found parts the notes do not support: Fuses melt when the current through them becomes too large; which protects the wiring.",
+        "Uses words the notes never use: \"fuses\", \"melt\", \"becomes\", \"large\", \"protects\", \"wiring\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00012094786330627356,
+        "novelEntities": ["fuses", "melt", "becomes", "large", "protects", "wiring"],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00012094786330627356,
+          "contradiction": 0.013405530664986755
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["fuses", "melt", "becomes", "large", "protects", "wiring"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": [
+            "Fuses melt when the current through them becomes too large",
+            "which protects the wiring"
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9807,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 444,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "phys-03-d6",
+      "caseId": "phys-03",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "scope_shift",
+      "text": "In a parallel circuit the same current flows through each branch.",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "A second reviewer found parts the notes do not support: In a parallel circuit the same current flows through each branch.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9296289490791356,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "fail"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9296289490791356,
+          "contradiction": 0.0052060335321748915
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "fail",
+          "unsupportedParts": ["In a parallel circuit the same current flows through each branch."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8452,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 384,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "stat-01-d1",
+      "caseId": "stat-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A p-value is the probability of data at least as extreme as the observed data if the null hypothesis is true.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9837786691051928,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9837786691051928,
+          "contradiction": 0.007143403003665375
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 13869,
+      "usage": {
+        "inputTokens": 635,
+        "outputTokens": 978,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "stat-01-d2",
+      "caseId": "stat-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "A result is called statistically significant when its p-value falls below a chosen threshold, often 0.05.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.9877743884845864,
+        "novelEntities": ["falls"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.9877743884845864,
+          "contradiction": 0.0015552131865385003
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["falls"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 5270,
+      "usage": {
+        "inputTokens": 634,
+        "outputTokens": 193,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "stat-01-d3",
+      "caseId": "stat-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "good",
+      "failureType": null,
+      "text": "Testing many hypotheses on the same data raises the chance of a significant result arising by luck.",
+      "verdict": "SUPPORTED",
+      "reasons": [],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.995046859315571,
+        "novelEntities": ["raises", "arising"],
+        "overGeneral": [],
+        "judge": "pass"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.995046859315571,
+          "contradiction": 0.00069142329621142
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["raises", "arising"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "pass",
+          "unsupportedParts": []
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7893,
+      "usage": {
+        "inputTokens": 623,
+        "outputTokens": 422,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "stat-01-d4",
+      "caseId": "stat-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "negation_dropped",
+      "text": "A small p-value tells us the probability that the null hypothesis is true.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: A small p-value tells us the probability that the null hypothesis is true.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.0005094891999684578,
+        "novelEntities": [],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.0005094891999684578,
+          "contradiction": 0.9989669085255459
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": [
+            "A small p-value tells us the probability that the null hypothesis is true."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 8652,
+      "usage": {
+        "inputTokens": 618,
+        "outputTokens": 402,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "stat-01-d5",
+      "caseId": "stat-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "overgeneralisation",
+      "text": "Every statistically significant result is a large and important effect.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: Every statistically significant result is a large and important effect..",
+        "Adds wording the cited text does not use: \"every\"."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.000045230552745353434,
+        "novelEntities": [],
+        "overGeneral": ["every"],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.000045230552745353434,
+          "contradiction": 0.9997751308505165
+        },
+        "entities": {
+          "hard": [],
+          "soft": []
+        },
+        "overGeneral": ["every"],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": [
+            "Every statistically significant result is a large and important effect."
+          ]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 9270,
+      "usage": {
+        "inputTokens": 610,
+        "outputTokens": 593,
+        "costUsd": 0
+      }
+    },
+    {
+      "id": "stat-01-d6",
+      "caseId": "stat-01",
+      "split": "test",
+      "type": "summary_point",
+      "label": "bad",
+      "failureType": "reversed_meaning",
+      "text": "Failing to reject the null hypothesis proves that it is true.",
+      "verdict": "CONTRADICTED",
+      "reasons": [
+        "The notes say the opposite (contradiction 1.00).",
+        "The cited text does not support this (entailment 0.00).",
+        "A second reviewer found the notes say the opposite of part of this: Failing to reject the null hypothesis proves that it is true.."
+      ],
+      "degraded": false,
+      "scores": {
+        "quoteFound": true,
+        "entailment": 0.00035144719125689445,
+        "novelEntities": ["proves"],
+        "overGeneral": [],
+        "judge": "contradiction"
+      },
+      "checks": {
+        "quote": {
+          "ok": true,
+          "missingIds": [],
+          "reason": null
+        },
+        "nli": {
+          "status": "ok",
+          "entailment": 0.00035144719125689445,
+          "contradiction": 0.998794389693292
+        },
+        "entities": {
+          "hard": [],
+          "soft": ["proves"]
+        },
+        "overGeneral": [],
+        "judge": {
+          "status": "ok",
+          "outcome": "contradiction",
+          "unsupportedParts": ["Failing to reject the null hypothesis proves that it is true."]
+        },
+        "distractors": {
+          "ambiguous": [],
+          "novel": []
+        }
+      },
+      "latencyMs": 7627,
+      "usage": {
+        "inputTokens": 614,
+        "outputTokens": 325,
+        "costUsd": 0
+      }
+    }
+  ]
+}

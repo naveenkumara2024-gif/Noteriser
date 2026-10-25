@@ -9,8 +9,9 @@ import type { ItemEnvelope, QuestionItem, Verdict } from "../schema/items";
 import type { RunReport } from "../schema/report";
 import type { SourceDoc } from "../schema/source";
 import type { Thresholds } from "../verify";
+import type { RunLimits } from "./guard";
 
-export type Stage = "parse" | "generate" | "verify" | "repair" | "assemble";
+export type Stage = "parse" | "generate" | "verify" | "repair" | "assemble" | "plain";
 
 /**
  * Why an item is not shown. `unsupported` and `contradicted` are failures of the notes' support;
@@ -20,6 +21,26 @@ export type RemovalKind = "unsupported" | "contradicted" | "duplicate" | "surplu
 
 export type Envelope = ItemEnvelope | QuestionItem;
 
+/**
+ * A plain-language version of a shown item. `simplified` and `unchanged` were verified in full (the
+ * rewrite is SUPPORTED); `kept_original` means the rewrite could not be written or could not be
+ * verified, so the original wording stands.
+ */
+export type PlainVersion =
+  | { status: "simplified"; envelope: Envelope; gradeBefore: number; gradeAfter: number }
+  | { status: "unchanged"; gradeBefore: number }
+  | { status: "kept_original"; reason: string; gradeBefore: number };
+
+export interface PlainSummary {
+  attempted: number;
+  simplified: number;
+  unchanged: number;
+  keptOriginal: number;
+  /** Mean Flesch-Kincaid grade of the shown items as written, and as shown in plain-language view. */
+  gradeBefore: number;
+  gradeAfter: number;
+}
+
 export interface ShownItem {
   /** Verdict is SUPPORTED, or PARTIAL (then `flagged`). */
   envelope: Envelope;
@@ -28,6 +49,8 @@ export interface ShownItem {
   repaired: boolean;
   /** The draft's text before repair, when repair changed it. */
   originalText?: string;
+  /** Present when the run was asked for plain-language versions. */
+  plain?: PlainVersion;
 }
 
 export interface RemovedItem {
@@ -59,6 +82,8 @@ export interface RunResult {
   /** A check could not run for at least one item; the UI must say so. */
   degraded: boolean;
   report: RunReport;
+  /** Present when the run was asked for plain-language versions and got as far as writing them. */
+  plain?: PlainSummary;
 }
 
 interface EventBase {
@@ -100,11 +125,18 @@ export type RunEvent = EventBase &
         note?: string;
       }
     | { type: "removed"; itemId: string; kind: RemovalKind; reasons: string[] }
+    | {
+        type: "plain";
+        itemId: string;
+        outcome: PlainVersion["status"];
+        gradeBefore: number;
+        gradeAfter: number;
+      }
     | { type: "warning"; code: string; message: string }
     | { type: "done"; result: RunResult }
     | {
         type: "error";
-        code: "aborted" | "parse_failed" | "generation_failed" | "internal";
+        code: "aborted" | "limit_exceeded" | "parse_failed" | "generation_failed" | "internal";
         message: string;
       }
   );
@@ -113,6 +145,8 @@ export interface PipelineInput {
   document: DocumentInput;
   /** Defaults to a fresh id from `deps.newId`. */
   runId?: string;
+  /** Also write a verified plain-language version of every shown item. */
+  plain?: boolean;
 }
 
 export interface PipelineDeps {
@@ -128,6 +162,8 @@ export interface PipelineDeps {
   thresholds?: Thresholds;
   /** Parallel model calls inside one stage. */
   concurrency?: number;
+  /** Per-run caps on length, model calls, cost and time. */
+  limits?: RunLimits;
   /** How many questions to show. Default 5. */
   questionCount?: number;
 }

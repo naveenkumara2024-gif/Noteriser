@@ -242,6 +242,77 @@ const REPAIRED_GLOSSARY = term(
 );
 
 const isRepair = (req: RecordedRequest): boolean => req.user.includes("<item_to_repair>");
+const isSimplify = (req: RecordedRequest): boolean => req.user.includes("<item_to_simplify>");
+
+/**
+ * Plain-language rewrites, keyed by the original wording. They shorten sentences and reuse the
+ * notes' own words. Anything not listed comes back unchanged ("already plain"), and two are
+ * scripted to show the fallbacks: one rewrite adds a claim the notes do not make (the verifier
+ * rejects it), and the narrowed Preemption entry cannot be simplified at all.
+ */
+const PLAIN_TEXT: Record<string, string> = {
+  "CPU scheduling decides which process in the ready queue gets the CPU next and keeps the CPU busy with acceptable response times.":
+    "CPU scheduling decides which process gets the CPU next. It keeps the CPU busy. It gives acceptable response times.",
+  "The dispatcher gives the CPU to the chosen process, and the time it takes to switch is called dispatch latency.":
+    "The dispatcher gives the CPU to the chosen process. The time it takes to switch is called dispatch latency.",
+  // Rejected: the rewrite invents a claim.
+  "FCFS runs processes in arrival order and can cause the convoy effect, where short processes wait behind one long process.":
+    "FCFS runs processes in arrival order. It is the slowest method. It can cause the convoy effect.",
+  "SJF gives the minimum average waiting time, but the next burst length must be predicted.":
+    "SJF gives the minimum average waiting time. The next burst length must be predicted.",
+  "Round Robin gives each process a fixed time quantum; a very small quantum increases context-switch overhead.":
+    "Round Robin gives each process a fixed time quantum. A very small quantum increases context-switch overhead.",
+  "The component that hands the CPU to the chosen process.":
+    "The part that gives the CPU to the chosen process.",
+  "Total time from submission of a process to its completion.":
+    "The total time from submission of a process until it is complete.",
+  "Total time a process spends in the ready queue.":
+    "The total time a process waits in the ready queue.",
+  "Time from submission of a request until the first response is produced.":
+    "The time from submission of a request until the first response.",
+  "Short processes waiting behind one long process.":
+    "Short processes that wait behind one long process.",
+  "The fixed time slice each process gets in Round Robin.":
+    "The fixed slice of time each process gets in Round Robin.",
+};
+const PLAIN_QUESTION: Record<string, { question?: string; answer?: string }> = {
+  "What is the role of the dispatcher?": { answer: "It gives the CPU to the chosen process." },
+  "How does waiting time differ from turnaround time?": {
+    question: "How is waiting time different from turnaround time?",
+    answer:
+      "Waiting time is the time in the ready queue. Turnaround time is the total time from submission to completion.",
+  },
+  "SJF gives the minimum average waiting time for a given set of processes.": {
+    question: "SJF gives the minimum average waiting time.",
+  },
+  "Why can FCFS cause the convoy effect?": {
+    answer: "It is non-preemptive. Short processes wait behind one long process.",
+  },
+  "In Round Robin, what happens if the time quantum is made very small?": {
+    question: "What happens if the Round Robin time quantum is very small?",
+  },
+};
+
+/** The scripted answer to a plain-language rewrite request for one item. */
+function simplified(req: RecordedRequest) {
+  const json = /<item_to_simplify>\n([\s\S]*?)\n<\/item_to_simplify>/.exec(req.user)?.[1] ?? "{}";
+  const item = JSON.parse(json) as Record<string, unknown>;
+  const text = typeof item.text === "string" ? item.text : undefined;
+  if (text?.startsWith("A process being stopped after its time slice")) {
+    return insufficient("this cannot be said more simply without changing it");
+  }
+  if (typeof item.question === "string") {
+    const edit = PLAIN_QUESTION[item.question];
+    return reply([
+      edit
+        ? { ...item, question: edit.question ?? item.question, answer: edit.answer ?? item.answer }
+        : item,
+    ]);
+  }
+  return reply([
+    text !== undefined && PLAIN_TEXT[text] ? { ...item, text: PLAIN_TEXT[text] } : item,
+  ]);
+}
 const sectionOf = (req: RecordedRequest): number =>
   Number(/Section (\d+),/.exec(req.user)?.[1] ?? 0);
 
@@ -252,13 +323,23 @@ const sectionOf = (req: RecordedRequest): number =>
 export function lecture7Llm(overrides: Record<string, FakeStep | FakeStep[]> = {}): FakeLlmClient {
   return new FakeLlmClient({
     [TOOL_NAMES.summary]: (req) =>
-      isRepair(req)
-        ? insufficient("the notes do not say this")
-        : reply(SUMMARY[sectionOf(req)] ?? []),
+      isSimplify(req)
+        ? simplified(req)
+        : isRepair(req)
+          ? insufficient("the notes do not say this")
+          : reply(SUMMARY[sectionOf(req)] ?? []),
     [TOOL_NAMES.glossary]: (req) =>
-      isRepair(req) ? reply([REPAIRED_GLOSSARY]) : reply(GLOSSARY[sectionOf(req)] ?? []),
+      isSimplify(req)
+        ? simplified(req)
+        : isRepair(req)
+          ? reply([REPAIRED_GLOSSARY])
+          : reply(GLOSSARY[sectionOf(req)] ?? []),
     [TOOL_NAMES.questions]: (req) =>
-      isRepair(req) ? insufficient("the notes give no such number") : reply(QUESTIONS),
+      isSimplify(req)
+        ? simplified(req)
+        : isRepair(req)
+          ? insufficient("the notes give no such number")
+          : reply(QUESTIONS),
     submit_verdict: (req) => {
       const claim = /<claim>\n([\s\S]*?)\n<\/claim>/.exec(req.user)?.[1] ?? "";
       return /forcibly/i.test(claim)
@@ -284,7 +365,7 @@ export function lecture7Llm(overrides: Record<string, FakeStep | FakeStep[]> = {
 export function lecture7Nli(): FakeNli {
   return new FakeNli((_premise, hypothesis) => {
     if (/impossible/i.test(hypothesis)) return CONTRADICTED;
-    if (/most widely used|typical time quantum/i.test(hypothesis)) return NEUTRAL;
+    if (/most widely used|typical time quantum|slowest/i.test(hypothesis)) return NEUTRAL;
     // Moderate: the claim goes somewhat beyond its source, and so does the narrowed version.
     if (/^Preemption is/i.test(hypothesis)) {
       return { entailment: 0.7, neutral: 0.25, contradiction: 0.05 };

@@ -1,0 +1,58 @@
+{
+  "id": "econ-03",
+  "split": "test",
+  "subject": "economics",
+  "topic": "Comparative advantage",
+  "notes": "# Comparative advantage\n\n## Comparative advantage\n\nA country has an absolute advantage in a good if it can produce more of it with the same resources than another country can. A country has a comparative advantage if its opportunity cost of producing a good is lower than that of another country. Opportunity cost is the value of the next best alternative that is given up. Countries gain from trade when each specialises in the good in which it has a comparative advantage. Absolute advantage alone does not determine which country should produce a good.\n\n## Example\n\nSuppose country A can produce 10 cars or 20 tonnes of wheat with a year of labour. Suppose country B can produce 6 cars or 18 tonnes of wheat with the same labour. Country A gives up 2 tonnes of wheat for each car, while country B gives up 3 tonnes of wheat for each car. Country A therefore has the comparative advantage in cars even though it is also better at wheat in absolute terms.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Comparative advantage means a lower opportunity cost of producing a good than another country has.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "its opportunity cost of producing a good is lower than that of another country",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "In the example country A gives up 2 tonnes of wheat per car and country B gives up 3, so country A has the comparative advantage in cars.",
+      "sourceIds": ["S2.3", "S2.4"],
+      "evidenceQuote": "has the comparative advantage in cars",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Opportunity cost",
+      "text": "The value of the next best alternative that is given up.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "the value of the next best alternative that is given up",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "In the example country B gives up 2 tonnes of wheat for each car.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "country B gives up 3 tonnes of wheat for each car",
+      "label": "bad",
+      "failureType": "number_altered"
+    },
+    {
+      "type": "summary_point",
+      "text": "Absolute advantage alone determines which country should produce a good.",
+      "sourceIds": ["S1.5"],
+      "evidenceQuote": "which country should produce a good",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "Free trade agreements usually lower tariffs on the goods that countries specialise in.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "Countries gain from trade",
+      "label": "bad",
+      "failureType": "outside_fact"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "stat-01",
+  "split": "test",
+  "subject": "statistics",
+  "topic": "Hypothesis testing",
+  "notes": "# Hypothesis testing\n\n## Hypothesis tests\n\nA hypothesis test uses sample data to decide whether there is enough evidence to reject a null hypothesis. The null hypothesis usually states that there is no effect or no difference. The p-value is the probability of seeing data at least as extreme as the observed data if the null hypothesis is true. A result is called statistically significant when the p-value is below a chosen threshold, often 0.05.\n\n## Interpretation\n\nA small p-value does not tell us the probability that the null hypothesis is true. Failing to reject the null hypothesis does not prove that it is true. A statistically significant result is not necessarily a large or important effect. Testing many hypotheses on the same data increases the chance of finding a significant result by luck alone.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A p-value is the probability of data at least as extreme as the observed data if the null hypothesis is true.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "the probability of seeing data at least as extreme as the observed data",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A result is called statistically significant when its p-value falls below a chosen threshold, often 0.05.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "the p-value is below a chosen threshold, often 0.05",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Testing many hypotheses on the same data raises the chance of a significant result arising by luck.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "increases the chance of finding a significant result by luck alone",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A small p-value tells us the probability that the null hypothesis is true.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "tell us the probability that the null hypothesis is true",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    },
+    {
+      "type": "summary_point",
+      "text": "Every statistically significant result is a large and important effect.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "A statistically significant result",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "Failing to reject the null hypothesis proves that it is true.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "Failing to reject the null hypothesis",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    }
+  ]
+}

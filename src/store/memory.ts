@@ -1,6 +1,6 @@
 import type { DraftItem } from "../core/generate/types";
 import type { RunEvent, RunResult } from "../core/pipeline/types";
-import type { RunStore, StoredRun } from "../core/ports/store";
+import type { Feedback, RunStore, StoredFeedback, StoredRun } from "../core/ports/store";
 import type { SourceDoc } from "../core/schema/source";
 import type { Verification } from "../core/verify/verify";
 import { toJsonl, toStoredEvent } from "./jsonl";
@@ -72,6 +72,21 @@ export class MemoryRunStore implements RunStore {
     const run = this.need(runId);
     run.result = structuredClone(result);
     run.status = result.status;
+  }
+
+  async addFeedback(runId: string, feedback: Feedback): Promise<boolean> {
+    const run = this.runs.get(runId);
+    if (!run) return false;
+    run.feedback = [...(run.feedback ?? []), structuredClone(feedback)];
+    return true;
+  }
+
+  async listFeedback(): Promise<StoredFeedback[]> {
+    return [...this.runs.values()]
+      .flatMap((run) =>
+        (run.feedback ?? []).map((f) => ({ ...structuredClone(f), runId: run.runId })),
+      )
+      .sort((a, b) => a.at.localeCompare(b.at));
   }
 
   async getRun(runId: string): Promise<StoredRun | undefined> {

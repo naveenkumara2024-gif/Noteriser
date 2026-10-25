@@ -1,18 +1,15 @@
-import AxeBuilder from "@axe-core/playwright";
-import { expect, type Page, test } from "@playwright/test";
-import { runSample } from "./helpers";
+import { expect, test } from "@playwright/test";
+import { appAlert, expectNoSeriousViolations, runSample, seriousViolations } from "./helpers";
 
-/** Zero serious or critical violations (WCAG 2.2 A/AA rules and axe best practices). */
-async function expectNoSeriousViolations(page: Page, state: string) {
-  const results = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"])
-    .analyze();
-  const bad = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
-  expect(
-    bad.map((v) => `${v.id} (${v.impact}): ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`),
-    `axe violations on ${state}`,
-  ).toEqual([]);
-}
+// Guards against a vacuous pass: the checker must actually fail on a page that is broken.
+test("axe catches a planted violation", async ({ page }) => {
+  await page.setContent(
+    '<html lang="en"><head><title>t</title></head><body><main><button></button><img src="data:,"></main></body></html>',
+  );
+  const found = (await seriousViolations(page)).join(" ");
+  expect(found).toContain("button-name");
+  expect(found).toContain("image-alt");
+});
 
 test.describe("axe: zero serious or critical", () => {
   test("home", async ({ page }) => {
@@ -23,7 +20,7 @@ test.describe("axe: zero serious or critical", () => {
   test("home with an input error showing", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "Make study aids" }).click();
-    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(appAlert(page)).toBeVisible();
     await expectNoSeriousViolations(page, "home with error");
   });
 
@@ -69,7 +66,7 @@ test.describe("axe: zero serious or critical", () => {
 
     test("results with a source disclosure open", async ({ page }) => {
       await runSample(page);
-      await page.getByText("Show source").first().click();
+      await page.locator("summary", { hasText: "Show source" }).first().click();
       await expectNoSeriousViolations(page, "narrow results");
     });
   });

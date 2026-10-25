@@ -3,7 +3,15 @@ import { dirname } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { DraftItem } from "../core/generate/types";
 import type { RunEvent, RunResult } from "../core/pipeline/types";
-import type { RunStatus, RunStore, StoredEvent, StoredRun } from "../core/ports/store";
+import type {
+  Feedback,
+  FeedbackKind,
+  RunStatus,
+  RunStore,
+  StoredEvent,
+  StoredFeedback,
+  StoredRun,
+} from "../core/ports/store";
 import type { SourceDoc } from "../core/schema/source";
 import type { Verification } from "../core/verify/verify";
 import { toJsonl, toStoredEvent } from "./jsonl";
@@ -46,6 +54,17 @@ export const MIGRATIONS: readonly string[] = [
     json    TEXT    NOT NULL,
     PRIMARY KEY (run_id, item_id, attempt)
   );
+  `,
+  `
+  CREATE TABLE feedback (
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id  TEXT NOT NULL REFERENCES runs (run_id) ON DELETE CASCADE,
+    item_id TEXT NOT NULL,
+    kind    TEXT NOT NULL,
+    note    TEXT NOT NULL,
+    at      TEXT NOT NULL
+  );
+  CREATE INDEX feedback_run ON feedback (run_id);
   `,
 ];
 
@@ -172,6 +191,30 @@ export class SqliteRunStore implements RunStore {
     );
   }
 
+  async addFeedback(runId: string, feedback: Feedback): Promise<boolean> {
+    const exists = this.db.prepare("SELECT 1 FROM runs WHERE run_id = ?").get(runId);
+    if (!exists) return false;
+    this.db
+      .prepare("INSERT INTO feedback (run_id, item_id, kind, note, at) VALUES (?, ?, ?, ?, ?)")
+      .run(runId, feedback.itemId, feedback.kind, feedback.note, feedback.at);
+    // Item ids and the kind only: the note is the instructor's words about source text.
+    this.log?.info({ runId, itemId: feedback.itemId, kind: feedback.kind }, "feedback added");
+    return true;
+  }
+
+  async listFeedback(): Promise<StoredFeedback[]> {
+    const rows = this.db
+      .prepare("SELECT run_id, item_id, kind, note, at FROM feedback ORDER BY at, id")
+      .all() as Row[];
+    return rows.map((r) => ({
+      runId: String(r.run_id),
+      itemId: String(r.item_id),
+      kind: String(r.kind) as FeedbackKind,
+      note: String(r.note),
+      at: String(r.at),
+    }));
+  }
+
   async getRun(runId: string): Promise<StoredRun | undefined> {
     const run = this.db.prepare("SELECT * FROM runs WHERE run_id = ?").get(runId) as
       | Row
@@ -197,6 +240,14 @@ export class SqliteRunStore implements RunStore {
         "SELECT attempt, json FROM verifications WHERE run_id = ? ORDER BY item_id, attempt",
       ).map((r) => ({ attempt: attemptOf(r), item: parse<Verification>(r) })),
       ...(run.result_json ? { result: JSON.parse(String(run.result_json)) as RunResult } : {}),
+      feedback: all(
+        "SELECT item_id, kind, note, at FROM feedback WHERE run_id = ? ORDER BY at, id",
+      ).map((r) => ({
+        itemId: String(r.item_id),
+        kind: String(r.kind) as FeedbackKind,
+        note: String(r.note),
+        at: String(r.at),
+      })),
     };
   }
 

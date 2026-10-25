@@ -20,6 +20,7 @@ export function HomeForm({
   const router = useRouter();
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [plain, setPlain] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
@@ -60,14 +61,14 @@ export function HomeForm({
     setStatus(null);
     if (file) {
       setProblem(null);
-      void start({ kind: "file", file });
+      void start({ kind: "file", file, plain });
     } else if (text.trim() !== "") {
       if (new TextEncoder().encode(text).byteLength > LIMITS.textBytes) {
         setProblem(`The text is larger than the ${formatBytes(LIMITS.textBytes)} limit.`);
         return;
       }
       setProblem(null);
-      void start({ kind: "text", text });
+      void start({ kind: "text", text, plain });
     } else {
       setProblem(copy.home.noInput);
     }
@@ -143,6 +144,22 @@ export function HomeForm({
           )}
         </div>
 
+        <div>
+          <label className="inline-flex min-h-6 items-center gap-2 font-medium">
+            <input
+              type="checkbox"
+              checked={plain}
+              disabled={running}
+              onChange={(e) => setPlain(e.target.checked)}
+              aria-describedby="plain-hint"
+            />
+            {copy.home.plainOption}
+          </label>
+          <p id="plain-hint" className="measure text-sm text-muted">
+            {copy.home.plainHint}
+          </p>
+        </div>
+
         {problem && (
           <p
             role="alert"
@@ -179,7 +196,9 @@ export function HomeForm({
         </button>
       </form>
 
-      {phase.name === "running" && <RunProgress progress={phase.progress} onCancel={cancel} />}
+      {phase.name === "running" && (
+        <RunProgress progress={phase.progress} plain={plain} onCancel={cancel} />
+      )}
     </div>
   );
 }

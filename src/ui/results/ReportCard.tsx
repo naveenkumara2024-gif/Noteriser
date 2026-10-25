@@ -35,7 +35,7 @@ export function ReportCard({ report }: { report: RunReport }) {
       <h2 id="report-heading" className="text-xl font-semibold">
         {copy.report.heading}
       </h2>
-      <dl className="mt-3 grid grid-cols-[max-content_1fr] gap-x-6 gap-y-1">
+      <dl className="mt-3 grid grid-cols-[minmax(0,max-content)_minmax(0,1fr)] gap-x-6 gap-y-1">
         {rows.map(([name, value]) => (
           <div key={name} className="contents">
             <dt className="text-muted">{name}</dt>

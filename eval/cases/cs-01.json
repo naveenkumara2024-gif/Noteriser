@@ -1,0 +1,58 @@
+{
+  "id": "cs-01",
+  "split": "test",
+  "subject": "computer science",
+  "topic": "Paging and virtual memory",
+  "notes": "# Paging and virtual memory\n\n## Virtual memory\n\nVirtual memory gives each process its own address space that is independent of physical memory. The operating system divides the address space into fixed-size blocks called pages. Physical memory is divided into blocks of the same size called frames. A page table maps each page of a process to a frame.\n\n## Page faults\n\nA page fault occurs when a process accesses a page that is not currently in physical memory. The operating system then loads the page from disk, which is much slower than reading memory. If too many page faults occur, the system spends most of its time swapping pages, a condition called thrashing. A translation lookaside buffer caches recent page table entries to speed up address translation.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A page table maps each page in a process's address space to a physical frame.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "A page table maps each page of a process to a frame",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A page fault happens when a process touches a page that is not in physical memory, so the operating system must load it from disk.",
+      "sourceIds": ["S2.1", "S2.2"],
+      "evidenceQuote": "loads the page from disk",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Thrashing",
+      "text": "A condition in which too many page faults make the system spend most of its time swapping pages.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "spends most of its time swapping pages",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Page faults occur whenever a process accesses memory.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "accesses a page that is not currently in physical memory",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Modern processors usually organise page tables in several levels to save space.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "A page table maps each page of a process to a frame",
+      "label": "bad",
+      "failureType": "outside_fact"
+    },
+    {
+      "type": "summary_point",
+      "text": "A typical page is 4096 bytes in size.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "fixed-size blocks called pages",
+      "label": "bad",
+      "failureType": "invented_stat"
+    }
+  ]
+}

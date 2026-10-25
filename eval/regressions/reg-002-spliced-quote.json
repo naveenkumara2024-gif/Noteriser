@@ -1,0 +1,17 @@
+{
+  "id": "reg-002-spliced-quote",
+  "split": "regression",
+  "subject": "regression",
+  "topic": "Found in Stage 3: a quote spliced from fragments with the text between them left out",
+  "notes": "# Scheduling basics\n\n## Basics\n\nCPU scheduling decides which process gets the CPU next. The dispatcher hands the CPU to the chosen process. Linear search takes O(n) time on average. The operating system keeps track of every process in a table called the process control block.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Scheduling picks the next process and the dispatcher hands it the CPU.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "which process gets the CPU next and the dispatcher hands the CPU",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

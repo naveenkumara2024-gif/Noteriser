@@ -1,0 +1,58 @@
+{
+  "id": "law-03",
+  "split": "dev",
+  "subject": "law and ethics",
+  "topic": "Negligence",
+  "notes": "# Negligence\n\n## Negligence\n\nNegligence is a failure to take the care that a reasonable person would take in the same situation. To succeed in a negligence claim, a claimant must show a duty of care, a breach of that duty, and damage caused by the breach. A duty of care exists when harm to the other person was reasonably foreseeable. A breach occurs when the defendant's conduct falls below the standard of a reasonable person.\n\n## Causation and defences\n\nCausation requires that the damage would not have happened but for the defendant's breach. Damage that is too remote or unforeseeable is not recoverable. If the claimant partly caused their own harm, a court may reduce the damages in proportion to their share of the fault. Professionals are judged by the standard of a reasonably competent member of their profession.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A negligence claim needs a duty of care, a breach of it, and damage caused by the breach.",
+      "sourceIds": ["S1.2"],
+      "evidenceQuote": "a duty of care, a breach of that duty, and damage caused by the breach",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A court may reduce damages in proportion to the claimant's share of the fault if the claimant partly caused their own harm.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "reduce the damages in proportion to their share of the fault",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Causation",
+      "text": "The requirement that the damage would not have happened but for the defendant's breach.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "the damage would not have happened but for the defendant's breach",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A duty of care exists when harm was reasonably foreseeable.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "a duty of care is owed to everyone in the neighbourhood",
+      "label": "bad",
+      "failureType": "fake_quote"
+    },
+    {
+      "type": "summary_point",
+      "text": "A duty of care exists whenever any harm to another person is possible.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "harm to the other person was reasonably foreseeable",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Courts never award damages when the claimant contributed to their own harm.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "a court may reduce the damages",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "bio-02",
+  "split": "test",
+  "subject": "biology",
+  "topic": "DNA replication",
+  "notes": "# DNA replication\n\n## Copying DNA\n\nDNA replication produces two identical copies of a DNA molecule before a cell divides. The enzyme helicase unwinds the double helix and separates the two strands. Each separated strand then serves as a template for a new strand. DNA polymerase builds the new strand by adding nucleotides that pair with the template. Polymerase can only add nucleotides to the 3 prime end of a growing strand.\n\n## Accuracy\n\nDNA polymerase also proofreads its work and removes most mismatched nucleotides. Replication is called semiconservative because each new molecule keeps one original strand. Errors that escape proofreading can become mutations.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Helicase separates the two strands of the double helix, and each strand becomes a template for a new strand.",
+      "sourceIds": ["S1.2", "S1.3"],
+      "evidenceQuote": "unwinds the double helix and separates the two strands",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Replication is semiconservative: every new DNA molecule keeps one of the original strands.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "each new molecule keeps one original strand",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "DNA polymerase",
+      "text": "The enzyme that builds the new strand by adding nucleotides that pair with the template, and proofreads its work.",
+      "sourceIds": ["S1.4", "S2.1"],
+      "evidenceQuote": "adding nucleotides that pair with the template",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Polymerase can add nucleotides to either end of a growing strand.",
+      "sourceIds": ["S1.5"],
+      "evidenceQuote": "Polymerase can only add nucleotides",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "DNA polymerase makes roughly one error in every billion nucleotides it copies.",
+      "sourceIds": ["S2.1"],
+      "evidenceQuote": "proofreads its work",
+      "label": "bad",
+      "failureType": "invented_stat"
+    },
+    {
+      "type": "summary_point",
+      "text": "Errors that escape proofreading can become mutations.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "mutations are the raw material of evolution",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

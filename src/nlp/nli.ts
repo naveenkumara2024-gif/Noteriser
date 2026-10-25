@@ -49,7 +49,10 @@ export class HfNli implements Nli {
 
   /** Downloads the model on first use (cached afterwards). Reuse the instance: loading is slow. */
   static async load(options: HfNliOptions = {}): Promise<HfNli> {
-    hfEnv.cacheDir = resolve(options.cacheDir ?? ".cache/models");
+    // The cache folder is a runtime path, not something to bundle: keep Turbopack from tracing the project for it.
+    hfEnv.cacheDir = resolve(/* turbopackIgnore: true */ options.cacheDir ?? ".cache/models");
+    // NOTERISER_OFFLINE=1 (set in the Docker image) forbids any download: the models must already be on disk.
+    hfEnv.allowRemoteModels = process.env.NOTERISER_OFFLINE !== "1";
     const id = options.model ?? NLI_MODEL;
     const progress_callback = options.onProgress;
     const tokenizer = await AutoTokenizer.from_pretrained(id, { progress_callback });

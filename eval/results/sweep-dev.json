@@ -1,0 +1,368 @@
+{
+  "gridSize": 4144,
+  "lowestOverFlag": {
+    "thresholds": {
+      "entailmentSupported": 0.85,
+      "entailmentPartial": 0.5,
+      "contradiction": 0.5,
+      "softNovelPartial": 4
+    },
+    "metrics": {
+      "good": 36,
+      "bad": 36,
+      "recall": {
+        "n": 36,
+        "k": 36,
+        "rate": 1,
+        "lo": 0.9035781695514236,
+        "hi": 1
+      },
+      "hardRecall": {
+        "n": 36,
+        "k": 33,
+        "rate": 0.9166666666666666,
+        "lo": 0.7817298972308114,
+        "hi": 0.9712519107287082
+      },
+      "overFlag": {
+        "n": 36,
+        "k": 13,
+        "rate": 0.3611111111111111,
+        "lo": 0.2247538679218132,
+        "hi": 0.5242521960916802
+      },
+      "overReject": {
+        "n": 36,
+        "k": 4,
+        "rate": 0.1111111111111111,
+        "lo": 0.04406568908741834,
+        "hi": 0.2531512901503632
+      },
+      "balancedAccuracy": 0.8194444444444444,
+      "citationValidity": {
+        "n": 35,
+        "k": 35,
+        "rate": 1,
+        "lo": 0.9010957324106112,
+        "hi": 1
+      },
+      "slipped": 0,
+      "byType": {
+        "number_altered": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          }
+        },
+        "negation_dropped": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "outside_fact": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "overgeneralisation": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          }
+        },
+        "reversed_meaning": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "invented_stat": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "fake_quote": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          }
+        },
+        "scope_shift": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 2,
+            "rate": 0.4,
+            "lo": 0.1176182311592533,
+            "hi": 0.769280067791163
+          }
+        }
+      }
+    },
+    "distance": 0.16666666666666666
+  },
+  "feasible": 0,
+  "maxOverFlag": 0.15,
+  "current": {
+    "thresholds": {
+      "entailmentSupported": 0.85,
+      "entailmentPartial": 0.5,
+      "contradiction": 0.5,
+      "softNovelPartial": 3
+    },
+    "metrics": {
+      "good": 36,
+      "bad": 36,
+      "recall": {
+        "n": 36,
+        "k": 36,
+        "rate": 1,
+        "lo": 0.9035781695514236,
+        "hi": 1
+      },
+      "hardRecall": {
+        "n": 36,
+        "k": 33,
+        "rate": 0.9166666666666666,
+        "lo": 0.7817298972308114,
+        "hi": 0.9712519107287082
+      },
+      "overFlag": {
+        "n": 36,
+        "k": 14,
+        "rate": 0.3888888888888889,
+        "lo": 0.24784655417822943,
+        "hi": 0.5513582970325652
+      },
+      "overReject": {
+        "n": 36,
+        "k": 4,
+        "rate": 0.1111111111111111,
+        "lo": 0.04406568908741834,
+        "hi": 0.2531512901503632
+      },
+      "balancedAccuracy": 0.8055555555555556,
+      "citationValidity": {
+        "n": 35,
+        "k": 35,
+        "rate": 1,
+        "lo": 0.9010957324106112,
+        "hi": 1
+      },
+      "slipped": 0,
+      "byType": {
+        "number_altered": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          }
+        },
+        "negation_dropped": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "outside_fact": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "overgeneralisation": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          }
+        },
+        "reversed_meaning": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "invented_stat": {
+          "caught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 4,
+            "k": 4,
+            "rate": 1,
+            "lo": 0.5100999795960008,
+            "hi": 1
+          }
+        },
+        "fake_quote": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          }
+        },
+        "scope_shift": {
+          "caught": {
+            "n": 5,
+            "k": 5,
+            "rate": 1,
+            "lo": 0.5655085052479191,
+            "hi": 1
+          },
+          "hardCaught": {
+            "n": 5,
+            "k": 2,
+            "rate": 0.4,
+            "lo": 0.1176182311592533,
+            "hi": 0.769280067791163
+          }
+        }
+      }
+    },
+    "distance": 0
+  },
+  "best": null,
+  "top": [],
+  "neighbours": []
+}

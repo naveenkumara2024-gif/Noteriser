@@ -5,6 +5,8 @@ export type ApiErrorCode =
   | "unsupported_type"
   | "rate_limited"
   | "not_found"
+  | "not_ready"
+  | "forbidden"
   | "not_configured";
 
 /** A request we refuse with a 4xx (or 503) and a message the person can act on. */

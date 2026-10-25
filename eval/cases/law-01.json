@@ -1,0 +1,58 @@
+{
+  "id": "law-01",
+  "split": "dev",
+  "subject": "law and ethics",
+  "topic": "Contract formation",
+  "notes": "# Contract formation\n\n## Elements of a contract\n\nA valid contract requires an offer, acceptance, consideration and an intention to create legal relations. An offer is a clear statement of the terms on which one party is willing to be bound. Acceptance must match the terms of the offer, and a reply that changes the terms is a counter-offer. Consideration is something of value that each party gives or promises to give.\n\n## Limits\n\nA contract made by a person who lacks capacity, such as a young child, may not be enforceable. Silence does not normally count as acceptance. A party may withdraw an offer at any time before it is accepted. Agreements made as a social arrangement between friends usually lack an intention to create legal relations.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "A reply that changes the terms of an offer is not an acceptance but a counter-offer.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "a reply that changes the terms is a counter-offer",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Silence does not normally count as acceptance, and an offer can be withdrawn at any time before it is accepted.",
+      "sourceIds": ["S2.2", "S2.3"],
+      "evidenceQuote": "withdraw an offer at any time before it is accepted",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Consideration",
+      "text": "Something of value that each party gives or promises to give.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "something of value that each party gives or promises to give",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "An offer cannot be withdrawn once it has been made.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "withdraw an offer at any time before it is accepted",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "A contract is valid as long as there is an offer and an acceptance.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "requires an offer, acceptance, consideration",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Consideration is something of value that each party gives or promises to give.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "each party must give something in return of equal value",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

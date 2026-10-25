@@ -1,0 +1,17 @@
+{
+  "id": "reg-004-big-o-formula",
+  "split": "regression",
+  "subject": "regression",
+  "topic": "Found in Stage 3: the O in O(n) was flagged as an invented acronym",
+  "notes": "# Scheduling basics\n\n## Basics\n\nCPU scheduling decides which process gets the CPU next. The dispatcher hands the CPU to the chosen process. Linear search takes O(n) time on average. The operating system keeps track of every process in a table called the process control block.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Linear search takes O(n) time on average.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "takes O(n) time on average",
+      "label": "good",
+      "failureType": null
+    }
+  ]
+}

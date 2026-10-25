@@ -1,0 +1,58 @@
+{
+  "id": "law-02",
+  "split": "test",
+  "subject": "law and ethics",
+  "topic": "Informed consent",
+  "notes": "# Informed consent\n\n## Informed consent\n\nInformed consent is a person's voluntary agreement to a medical treatment or a research study after being told the relevant facts. The person must be given information about the purpose, the risks and the alternatives. Consent is valid only if the person has the capacity to understand the information. Consent must be given freely, without pressure or manipulation.\n\n## Exceptions\n\nIn an emergency, treatment may be given without consent if the person is unconscious and delay would cause serious harm. A person with capacity may refuse treatment even if refusing is likely to harm them. Researchers must tell participants that they may withdraw from a study at any time.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Informed consent is a voluntary agreement given after the person has been told the relevant facts, such as the purpose, risks and alternatives.",
+      "sourceIds": ["S1.1", "S1.2"],
+      "evidenceQuote": "information about the purpose, the risks and the alternatives",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "A person with capacity may refuse treatment even when refusal is likely to harm them.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "may refuse treatment even if refusing is likely to harm them",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Informed consent",
+      "text": "A person's voluntary agreement to a treatment or study after being told the relevant facts.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "voluntary agreement to a medical treatment or a research study",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Consent is always valid once the person has signed a form.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "Consent is valid only if the person has the capacity",
+      "label": "bad",
+      "failureType": "overgeneralisation"
+    },
+    {
+      "type": "summary_point",
+      "text": "Ethics committees must approve every research study before it begins.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "withdraw from a study at any time",
+      "label": "bad",
+      "failureType": "outside_fact"
+    },
+    {
+      "type": "summary_point",
+      "text": "Consent must be given freely, without pressure or manipulation.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "consent obtained by coercion is void",
+      "label": "bad",
+      "failureType": "fake_quote"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+#separator:tab
+#html:false
+#tags column:3
+Dispatcher	The component that hands the CPU to the chosen process.	S1.3
+Dispatch latency	The time the dispatcher takes to stop one process and start another.	S1.4
+Turnaround time	Total time from submission of a process to its completion.	S2.3
+Waiting time	Total time a process spends in the ready queue.	S2.4
+Response time	Time from submission of a request until the first response is produced.	S2.5
+Convoy effect	Short processes waiting behind one long process.	S3.2
+Time quantum	The fixed time slice each process gets in Round Robin.	S3.5
+Preemption	A process being stopped after its time slice and placed at the end of the ready queue.	S3.5 check-against-source
+What is the role of the dispatcher?	It hands the CPU to the process chosen by the scheduler.	S1.3
+How does waiting time differ from turnaround time?	Waiting time is the time spent in the ready queue; turnaround time is the total time from submission to completion.	S2.3 S2.4
+SJF gives the minimum average waiting time for a given set of processes.	True	S3.4
+"In Round Robin, what happens if the time quantum is made very small?
+A. RR behaves like FCFS
+B. Context-switch overhead increases
+C. Throughput becomes zero
+D. Processes are never preempted"	Context-switch overhead increases	S3.6
+FCFS schedules processes in the order they arrive.	True	S3.1

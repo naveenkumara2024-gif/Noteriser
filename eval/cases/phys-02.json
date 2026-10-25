@@ -1,0 +1,58 @@
+{
+  "id": "phys-02",
+  "split": "dev",
+  "subject": "physics",
+  "topic": "Thermodynamics",
+  "notes": "# Thermodynamics\n\n## The laws\n\nThe first law of thermodynamics states that energy cannot be created or destroyed, only transferred or converted. The change in a system's internal energy equals the heat added to it minus the work it does. The second law states that the total entropy of an isolated system never decreases. Heat flows spontaneously from a hotter object to a colder one, not the other way round.\n\n## Engines\n\nA heat engine converts some of the heat from a hot source into work and releases the rest to a cold sink. No heat engine can convert all of the heat it absorbs into work. The efficiency of an engine is the work done divided by the heat absorbed. A reversible engine operating between two temperatures has the maximum possible efficiency for those temperatures.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "The first law says energy is only transferred or converted, never created or destroyed.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "energy cannot be created or destroyed, only transferred or converted",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Heat flows spontaneously from hot to cold objects, and the entropy of an isolated system never decreases.",
+      "sourceIds": ["S1.3", "S1.4"],
+      "evidenceQuote": "the total entropy of an isolated system never decreases",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Efficiency",
+      "text": "The work an engine does divided by the heat it absorbs.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "the work done divided by the heat absorbed",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Heat flows spontaneously from a colder object to a hotter one.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "from a hotter object to a colder one",
+      "label": "bad",
+      "failureType": "reversed_meaning"
+    },
+    {
+      "type": "summary_point",
+      "text": "The most efficient practical engines reach about 60 percent efficiency.",
+      "sourceIds": ["S2.4"],
+      "evidenceQuote": "maximum possible efficiency",
+      "label": "bad",
+      "failureType": "invented_stat"
+    },
+    {
+      "type": "summary_point",
+      "text": "The third law of thermodynamics states that the total entropy of an isolated system never decreases.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "total entropy of an isolated system never decreases",
+      "label": "bad",
+      "failureType": "number_altered"
+    }
+  ]
+}

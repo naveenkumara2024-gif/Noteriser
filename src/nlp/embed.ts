@@ -11,7 +11,10 @@ export class HfEmbedder implements Embedder {
   private constructor(private readonly extractor: Extractor) {}
 
   static async load(options: { cacheDir?: string } = {}): Promise<HfEmbedder> {
-    hfEnv.cacheDir = resolve(options.cacheDir ?? ".cache/models");
+    // The cache folder is a runtime path, not something to bundle: keep Turbopack from tracing the project for it.
+    hfEnv.cacheDir = resolve(/* turbopackIgnore: true */ options.cacheDir ?? ".cache/models");
+    // NOTERISER_OFFLINE=1 (set in the Docker image) forbids any download: the models must already be on disk.
+    hfEnv.allowRemoteModels = process.env.NOTERISER_OFFLINE !== "1";
     const extractor = await pipeline("feature-extraction", EMBED_MODEL, { dtype: "q8" });
     return new HfEmbedder(extractor);
   }

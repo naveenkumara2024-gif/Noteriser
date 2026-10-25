@@ -1,3 +1,4 @@
+import { QUESTION_TYPE_LABEL, REMOVAL_LABEL, TRUST_NOTICE } from "@/core/export/labels";
 import type { Stage } from "@/core/pipeline";
 
 /** All user-facing strings live here so they can be localised later (CLAUDE.md §7). */
@@ -6,7 +7,7 @@ export const copy = {
   tagline:
     "Turn instructor-approved lecture notes into a summary, a glossary and five practice questions, each tied to the exact source sentence it came from.",
   // Lore §10: persistent label against over-trust.
-  trustNotice: "Generated from instructor-approved notes. Check flagged items against the source.",
+  trustNotice: TRUST_NOTICE,
   skipToContent: "Skip to main content",
 
   home: {
@@ -17,6 +18,9 @@ export const copy = {
     fileLabel: "Or upload a file",
     fileHint: "Accepted: .txt, .md, .pdf, .docx.",
     submit: "Make study aids",
+    plainOption: "Also write plain-language versions",
+    plainHint:
+      "Shorter sentences, checked against the notes again. Takes longer, and any version that cannot be verified is not used.",
     demoMode:
       "Demo mode: this server answers with scripted model output, so only the sample lecture gives meaningful results.",
     noInput: "Paste your notes, upload a file or use the sample lecture first.",
@@ -37,6 +41,7 @@ export const copy = {
       verify: "Checking every item against the source",
       repair: "Repairing weak items",
       assemble: "Putting the results together",
+      plain: "Writing and checking plain-language versions",
     } satisfies Record<Stage, string>,
     stageState: { waiting: "waiting", active: "in progress", done: "done" },
   },
@@ -77,6 +82,83 @@ export const copy = {
     deleteNo: "Keep it",
     deleteFailed: "The run could not be deleted. Try again.",
     newRun: "Start another",
+    expandAll: "Expand all sections",
+    collapseAll: "Collapse all sections",
+    warningPrefix: "Warning: ",
+  },
+
+  settings: {
+    title: "Display settings",
+    theme: "Theme",
+    themes: { system: "Match my device", light: "Light", dark: "Dark", contrast: "High contrast" },
+    textSize: "Text size",
+    font: "Font",
+    fonts: { system: "Standard", readable: "Readable font (Atkinson Hyperlegible)" },
+    spacing: "Spacing",
+    spacings: {
+      default: "Standard",
+      comfortable: "Comfortable (WCAG text-spacing minimums)",
+      extra: "Extra roomy",
+    },
+    reset: "Reset display settings",
+  },
+
+  read: {
+    group: "Read aloud",
+    readSummary: "Read summary aloud",
+    readGlossary: "Read glossary aloud",
+    pause: "Pause",
+    resume: "Resume",
+    stop: "Stop",
+    rate: "Speed",
+    voice: "Voice",
+    defaultVoice: "Default voice",
+    item: "Read aloud",
+    question: "Read question aloud",
+    answer: "Read answer aloud",
+    reading: "Reading aloud",
+    hint: "Uses your browser's voices. Nothing is sent to a server. Removed items are never read.",
+  },
+
+  plain: {
+    group: "Reading level",
+    original: "Original wording",
+    plainView: "Plain language",
+    summary: (n: { simplified: number; unchanged: number; keptOriginal: number }): string =>
+      `${n.simplified} simplified, ${n.unchanged} already plain, ${n.keptOriginal} kept as written.`,
+    grade: (before: number, after: number): string => `Reading grade ${before} to ${after}`,
+    gradeAverage: (before: number, after: number): string =>
+      `Average reading grade: ${before} as written, ${after} in plain language.`,
+    keptOriginal: "Kept original",
+    keptReason: (why: string): string => `${why[0]?.toUpperCase() ?? ""}${why.slice(1)}.`,
+    unchanged: "Already in plain language.",
+    verified: "Plain-language version, checked against the source like every other item.",
+  },
+
+  export: {
+    title: "Export and print",
+    markdown: "Markdown (.md)",
+    text: "Plain text (.txt)",
+    anki: "Anki flashcards (.tsv)",
+    audit: "Audit file (.json)",
+    auditWarning: "Contains the full source text. Only this browser can download it.",
+    plainWording: "Use the plain-language wording",
+    includeFlagged: "Include flagged items in the flashcards",
+    print: "Print / Save as PDF",
+    printNotice:
+      "Generated from instructor-approved notes. Check flagged items against the source.",
+    sourceHeading: "Source sentences cited",
+    answerKey: "Answer key",
+  },
+
+  feedback: {
+    open: "Report a problem with this item",
+    legend: "What is wrong?",
+    kinds: { wrong: "Wrong", unclear: "Unclear", missing_context: "Missing context" },
+    note: "Note (optional, up to 500 characters)",
+    send: "Send feedback",
+    thanks: (kind: string): string => `Thank you. Marked as "${kind}". It is kept with this run.`,
+    failed: "The feedback could not be saved. Try again.",
   },
 
   report: {
@@ -94,18 +176,9 @@ export const verdictLabel = {
   CONTRADICTED: "Contradicted by the notes",
 } as const;
 
-export const removalLabel = {
-  unsupported: "Not supported",
-  contradicted: "Contradicted by the notes",
-  duplicate: "Duplicate",
-  surplus: "Not needed",
-} as const;
+export const removalLabel = REMOVAL_LABEL;
 
-export const questionTypeLabel = {
-  mcq: "Multiple choice",
-  short: "Short answer",
-  true_false: "True or false",
-} as const;
+export const questionTypeLabel = QUESTION_TYPE_LABEL;
 
 export const docWarningLabel = {
   not_processed: "Not processed",

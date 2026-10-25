@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { runSample, SAMPLE_TITLE } from "./helpers";
+import { appAlert, citedLines, runSample, SAMPLE_TITLE } from "./helpers";
 
 const TRUST = "Generated from instructor-approved notes. Check flagged items against the source.";
 
@@ -13,7 +13,7 @@ test.describe("home", () => {
   test("asks for input instead of starting an empty run", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "Make study aids" }).click();
-    await expect(page.getByRole("alert")).toContainText("Paste your notes");
+    await expect(appAlert(page)).toContainText("Paste your notes");
     await expect(page).toHaveURL("/");
   });
 
@@ -24,7 +24,7 @@ test.describe("home", () => {
       mimeType: "application/octet-stream",
       buffer: Buffer.from("x"),
     });
-    await expect(page.getByRole("alert")).toContainText("not supported");
+    await expect(appAlert(page)).toContainText("not supported");
   });
 
   test("runs an uploaded file", async ({ page }) => {
@@ -44,7 +44,7 @@ test.describe("home", () => {
       buffer: Buffer.from("not a pdf"),
     });
     await page.getByRole("button", { name: "Make study aids" }).click();
-    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(appAlert(page)).toBeVisible();
     await expect(page).toHaveURL("/");
   });
 });
@@ -80,7 +80,7 @@ test.describe("results", () => {
       .getByRole("region", { name: "Practice questions" })
       .getByRole("listitem");
     await expect(questions.filter({ hasText: "Reveal answer" })).toHaveCount(5);
-    await expect(page.getByText("Supported", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText(/^✓s*Supported$/).first()).toBeVisible();
   });
 
   test("flags the partial item with words, the reason and an icon, not colour alone", async ({
@@ -128,14 +128,14 @@ test.describe("results", () => {
     expect(id).toMatch(/^S\d+\.\d+$/);
 
     await chip.click();
-    const line = page.locator(`#src-${id}`);
+    const line = page.locator(`[id="src-${id}"]`);
     await expect(line).toHaveAttribute("aria-current", "true");
     await expect(line).toContainText("(Cited)");
     await expect(line).toBeInViewport();
-    await expect(page.locator('[aria-current="true"]')).toHaveCount(1);
+    await expect(citedLines(page)).toHaveCount(1);
 
     await chip.click(); // pressing again clears it
-    await expect(page.locator('[aria-current="true"]')).toHaveCount(0);
+    await expect(citedLines(page)).toHaveCount(0);
   });
 
   test("Show source highlights all of an item's sentences", async ({ page }) => {
@@ -143,7 +143,7 @@ test.describe("results", () => {
     const item = page.getByRole("region", { name: "Summary" }).getByRole("listitem").first();
     const ids = await item.getByRole("button", { name: /^Source sentence S/ }).allTextContents();
     await item.getByRole("button", { name: "Show source" }).click();
-    await expect(page.locator('[aria-current="true"]')).toHaveCount(ids.length);
+    await expect(citedLines(page)).toHaveCount(ids.length);
   });
 
   test("reveals a question's answer and its citations only on request", async ({ page }) => {
@@ -198,8 +198,8 @@ test.describe("narrow screens", () => {
     await expect(page.getByRole("heading", { name: "Source", exact: true })).toBeHidden();
 
     const item = page.getByRole("region", { name: "Summary" }).getByRole("listitem").first();
-    await item.getByText("Show source").click();
-    await expect(item.locator('[aria-current="true"]').first()).toBeVisible();
+    await item.locator("summary", { hasText: "Show source" }).click();
+    await expect(item.locator('[aria-current="true"]:visible').first()).toBeVisible();
     await expect(item.getByText("(Cited)").first()).toBeVisible();
   });
 });

@@ -2,6 +2,10 @@ import type { RunEvent, Stage } from "@/core/pipeline";
 
 export const STAGES: readonly Stage[] = ["parse", "generate", "verify", "repair", "assemble"];
 
+/** The stage list for a run: plain-language versions add a last stage. */
+export const stagesFor = (plain: boolean): readonly Stage[] =>
+  plain ? [...STAGES, "plain"] : STAGES;
+
 export interface ProgressState {
   /** The stage currently running, if any. */
   current: Stage | null;

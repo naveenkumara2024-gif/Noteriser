@@ -161,6 +161,52 @@ describe("POST /api/runs: the event stream", () => {
   });
 });
 
+describe("POST /api/runs: plain-language option", () => {
+  const stageOf = (e: RunEvent) => (e.type === "stage" ? `${e.stage}:${e.status}` : null);
+
+  it("is off by default: no plain stage, no plain summary", async () => {
+    const all = await events(await createRun(jsonRequest({ text: LECTURE7 }), testRuntime()));
+    expect(all.map(stageOf)).not.toContain("plain:start");
+    const done = all.find((e) => e.type === "done");
+    expect(done?.type === "done" && done.result.plain).toBeUndefined();
+  });
+
+  it("is switched on by options.plain in JSON, and the stream carries the plain stage and result", async () => {
+    const all = await events(
+      await createRun(jsonRequest({ text: LECTURE7, options: { plain: true } }), testRuntime()),
+    );
+    expect(all.map(stageOf)).toContain("plain:start");
+    expect(all.filter((e) => e.type === "plain").length).toBe(19);
+    const done = all.find((e) => e.type === "done");
+    expect(done?.type === "done" && done.result.plain?.attempted).toBe(19);
+  });
+
+  it("is switched on by a plain=true field in an upload", async () => {
+    const form = new FormData();
+    form.set("file", new File([LECTURE7], "notes.md", { type: "text/markdown" }));
+    form.set("plain", "true");
+    const req = new Request("http://localhost/api/runs", { method: "POST", body: form });
+    const all = await events(await createRun(req, testRuntime()));
+    expect(all.map(stageOf)).toContain("plain:start");
+  });
+
+  it("is stored with the run, so a reload still shows plain-language versions", async () => {
+    const rt = testRuntime();
+    await readSse(await createRun(jsonRequest({ text: LECTURE7, options: { plain: true } }), rt));
+    const body = (await (await getRun("run-0001", rt)).json()) as { result: RunResult };
+    expect(body.result.plain?.simplified).toBe(11);
+    expect(body.result.summary.some((s) => s.plain?.status === "simplified")).toBe(true);
+  });
+
+  it("rejects a non-boolean value", async () => {
+    const res = await createRun(
+      jsonRequest({ text: LECTURE7, options: { plain: "yes" } }),
+      testRuntime(),
+    );
+    expect(await errorOf(res)).toMatchObject({ status: 400, code: "invalid_request" });
+  });
+});
+
 describe("POST /api/runs: rate limit", () => {
   it("returns 429 with Retry-After once the window is used up, per client", async () => {
     let now = 0;

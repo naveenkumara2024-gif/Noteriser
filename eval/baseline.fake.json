@@ -1,0 +1,614 @@
+{
+  "bio-01-d1": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "bio-01-d2": {
+    "verdict": "CONTRADICTED",
+    "correct": false
+  },
+  "bio-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "bio-01-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "bio-01-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "bio-02-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-02-d2": {
+    "verdict": "UNSUPPORTED",
+    "correct": false
+  },
+  "bio-02-d3": {
+    "verdict": "CONTRADICTED",
+    "correct": false
+  },
+  "bio-02-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "bio-02-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "bio-02-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "bio-03-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-03-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-03-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-03-d4": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "bio-03-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "bio-03-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "bio-04-d1": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "bio-04-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-04-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "bio-04-d4": {
+    "verdict": "SUPPORTED",
+    "correct": false
+  },
+  "bio-04-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "bio-04-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "chem-01-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "chem-01-d2": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "chem-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "chem-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "chem-01-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "chem-01-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-01-d1": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "cs-01-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-01-d4": {
+    "verdict": "SUPPORTED",
+    "correct": false
+  },
+  "cs-01-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-01-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-02-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-02-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-02-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-02-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "cs-02-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-02-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "cs-03-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-03-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-03-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-03-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "cs-03-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-03-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-04-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-04-d2": {
+    "verdict": "UNSUPPORTED",
+    "correct": false
+  },
+  "cs-04-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "cs-04-d4": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-04-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "cs-04-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-01-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-01-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-01-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-01-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "econ-02-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-02-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-02-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-02-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-02-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "econ-02-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "econ-03-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-03-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-03-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-03-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-03-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-03-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "econ-04-d1": {
+    "verdict": "UNSUPPORTED",
+    "correct": false
+  },
+  "econ-04-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "econ-04-d3": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "econ-04-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "econ-04-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "econ-04-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "hist-01-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-01-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "hist-01-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "hist-01-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "hist-02-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-02-d2": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "hist-02-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-02-d4": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "hist-02-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "hist-02-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "hist-03-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-03-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-03-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "hist-03-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "hist-03-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "hist-03-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "law-01-d1": {
+    "verdict": "CONTRADICTED",
+    "correct": false
+  },
+  "law-01-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "law-01-d5": {
+    "verdict": "SUPPORTED",
+    "correct": false
+  },
+  "law-01-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "law-02-d1": {
+    "verdict": "CONTRADICTED",
+    "correct": false
+  },
+  "law-02-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-02-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-02-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "law-02-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "law-02-d6": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "law-03-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-03-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-03-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "law-03-d4": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "law-03-d5": {
+    "verdict": "SUPPORTED",
+    "correct": false
+  },
+  "law-03-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "phys-01-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-01-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "phys-01-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "phys-01-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "phys-02-d1": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "phys-02-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-02-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-02-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "phys-02-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "phys-02-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "phys-03-d1": {
+    "verdict": "CONTRADICTED",
+    "correct": false
+  },
+  "phys-03-d2": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "phys-03-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-03-d4": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "phys-03-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "phys-03-d6": {
+    "verdict": "SUPPORTED",
+    "correct": false
+  },
+  "phys-04-d1": {
+    "verdict": "PARTIAL",
+    "correct": false
+  },
+  "phys-04-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-04-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "phys-04-d4": {
+    "verdict": "SUPPORTED",
+    "correct": false
+  },
+  "phys-04-d5": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "phys-04-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "stat-01-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "stat-01-d2": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "stat-01-d3": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "stat-01-d4": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "stat-01-d5": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "stat-01-d6": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "reg-001-short-quote-d1": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "reg-001-short-quote-d2": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "reg-002-spliced-quote-d1": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "reg-003-capitalised-definition-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "reg-004-big-o-formula-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "reg-005-initialism-d1": {
+    "verdict": "SUPPORTED",
+    "correct": true
+  },
+  "reg-006-lore-6-5-d1": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  },
+  "reg-006-lore-6-5-d2": {
+    "verdict": "CONTRADICTED",
+    "correct": true
+  },
+  "reg-006-lore-6-5-d3": {
+    "verdict": "UNSUPPORTED",
+    "correct": true
+  }
+}

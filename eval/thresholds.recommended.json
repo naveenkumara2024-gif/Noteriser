@@ -1,0 +1,20 @@
+{
+  "thresholds": {
+    "entailmentSupported": 0.85,
+    "entailmentPartial": 0.5,
+    "contradiction": 0.5,
+    "softNovelPartial": 3
+  },
+  "basis": {
+    "split": "dev",
+    "judge": "live nararouter:nemotron-3.5-lightning-free",
+    "decision": "keep-current",
+    "reason": "No point on the grid reaches over-flag <= 15%; the lowest reachable with recall >= 90% is 36.1% against 38.9% today, a difference within noise on 72 drafts. The over-flags come from checks that thresholds do not control; see eval/RESULTS.md.",
+    "drafts": 72,
+    "devMetricsAtCurrent": {
+      "recall": 1,
+      "overFlag": 0.3888888888888889
+    },
+    "applied": false
+  }
+}

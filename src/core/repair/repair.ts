@@ -36,7 +36,7 @@ export function isRepairable(verdict: Verdict): boolean {
 }
 
 /** The item in the same snake_case shape the generator schemas use, so the model recognises it. */
-function asGeneratorShape(item: DraftItem): Record<string, unknown> {
+export function asGeneratorShape(item: DraftItem): Record<string, unknown> {
   const evidence = { source_ids: item.sourceIds, evidence_quote: item.evidenceQuote };
   switch (item.type) {
     case "summary_point":
@@ -64,7 +64,7 @@ const KIND_RULE: Record<DraftItem["type"], string> = {
 };
 
 /** The sections the item is about: those it cites, else the one it was generated from, else all. */
-function contextSentences(item: DraftItem, doc: SourceDoc) {
+export function contextSentences(item: DraftItem, doc: SourceDoc) {
   const cited = new Set([
     ...item.sourceIds,
     ...(item.type === "question" ? item.answerSourceIds : []),
@@ -106,13 +106,26 @@ export function repairPrompt(item: DraftItem, reasons: readonly string[], doc: S
 }
 
 /** Runs the repair. Never throws: a failure is reported in `note` and the original stands. */
-export async function repairItem(
+export function repairItem(
   item: DraftItem,
   reasons: readonly string[],
   doc: SourceDoc,
   deps: RepairDeps,
 ): Promise<RepairResult> {
-  const prompt = repairPrompt(item, reasons, doc);
+  return regenerateItem(item, repairPrompt(item, reasons, doc), doc, deps);
+}
+
+/**
+ * One model call that returns a replacement for `item` in the generator's own schema, mapped back
+ * to a draft with the original id (and, for glossary entries, the original term). Repair and
+ * plain-language rewriting differ only in the prompt, so they share this. Never throws.
+ */
+export async function regenerateItem(
+  item: DraftItem,
+  prompt: Prompt,
+  doc: SourceDoc,
+  deps: RepairDeps,
+): Promise<RepairResult> {
   const known = knownIds(doc);
   const common = {
     role: "generator" as const,

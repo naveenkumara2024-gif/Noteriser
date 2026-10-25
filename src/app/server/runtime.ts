@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { Logger } from "pino";
 import { EnvError, parseEnv, warnIfJudgeEqualsGenerator } from "@/config/env";
 import { createLogger } from "@/config/logger";
-import type { PipelineDeps } from "@/core/pipeline";
+import type { PipelineDeps, RunLimits } from "@/core/pipeline";
 import type { LlmClient } from "@/core/ports/llm";
 import type { RunStore } from "@/core/ports/store";
 import { lecture7Fakes } from "@/demo";
@@ -17,6 +17,10 @@ export type BaseDeps = Omit<PipelineDeps, "clock" | "newId" | "onEvent" | "signa
 /** Everything a request handler needs. Built once per server process; tests build their own. */
 export interface Runtime {
   mode: "live" | "fake";
+  /** How long runs are kept; also how long the browser that made a run stays its owner. */
+  ttlHours: number;
+  /** Caps applied to every run (length, model calls, cost, time). */
+  limits: RunLimits;
   deps: BaseDeps;
   store: RunStore;
   limiter: RateLimiter;
@@ -31,6 +35,11 @@ function intFromEnv(name: string, fallback: number, min: number): number {
   return Number.isInteger(n) && n >= min ? n : fallback;
 }
 
+function numberFromEnv(name: string, fallback: number): number {
+  const n = Number(process.env[name]);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
 /** Test and demo aid: slows the scripted fakes so progress and cancelling are visible. */
 function delayed(llm: LlmClient, ms: number): LlmClient {
   if (ms <= 0) return llm;
@@ -42,14 +51,26 @@ function delayed(llm: LlmClient, ms: number): LlmClient {
   };
 }
 
-export async function createRuntime(): Promise<Runtime> {
+async function createRuntime(): Promise<Runtime> {
   const log = createLogger();
   const env = parseEnv({ ...process.env });
   const limiter = createRateLimiter({
     max: intFromEnv("RATE_LIMIT_RUNS", 6, 1),
     windowMs: intFromEnv("RATE_LIMIT_WINDOW_MINUTES", 10, 1) * 60_000,
   });
-  const common = { limiter, clock: () => new Date(), newId: () => randomUUID(), log };
+  const common = {
+    limiter,
+    ttlHours: env.runTtlHours,
+    limits: {
+      maxSentences: intFromEnv("MAX_SENTENCES", 600, 1),
+      maxLlmCalls: intFromEnv("MAX_LLM_CALLS", 800, 1),
+      maxCostUsd: numberFromEnv("MAX_COST_USD", 2),
+      timeoutMs: intFromEnv("RUN_TIMEOUT_MINUTES", 30, 1) * 60_000,
+    },
+    clock: () => new Date(),
+    newId: () => randomUUID(),
+    log,
+  };
 
   let runtime: Runtime;
   if (env.llmMode === "fake") {

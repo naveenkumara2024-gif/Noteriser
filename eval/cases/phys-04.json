@@ -1,0 +1,58 @@
+{
+  "id": "phys-04",
+  "split": "dev",
+  "subject": "physics",
+  "topic": "Waves",
+  "notes": "# Waves\n\n## Wave properties\n\nA wave transfers energy from one place to another without transferring matter. In a transverse wave the particles of the medium move at right angles to the direction of the wave. In a longitudinal wave the particles move back and forth parallel to the direction of the wave. Sound is a longitudinal wave and cannot travel through a vacuum.\n\n## The wave equation\n\nThe frequency of a wave is the number of complete waves that pass a point each second, measured in hertz. The wavelength is the distance between two matching points on neighbouring waves. The speed of a wave equals its frequency multiplied by its wavelength. When a wave moves into a different medium its frequency stays the same but its speed and wavelength change.\n",
+  "drafts": [
+    {
+      "type": "summary_point",
+      "text": "Waves carry energy from place to place without carrying matter along.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "transfers energy from one place to another without transferring matter",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "Wave speed equals frequency times wavelength.",
+      "sourceIds": ["S2.3"],
+      "evidenceQuote": "The speed of a wave equals its frequency multiplied by its wavelength",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "glossary",
+      "term": "Longitudinal wave",
+      "text": "A wave in which the particles move back and forth parallel to the direction of the wave.",
+      "sourceIds": ["S1.3"],
+      "evidenceQuote": "the particles move back and forth parallel to the direction of the wave",
+      "label": "good",
+      "failureType": null
+    },
+    {
+      "type": "summary_point",
+      "text": "The wavelength is the distance between any two points on neighbouring waves.",
+      "sourceIds": ["S2.2"],
+      "evidenceQuote": "the distance between two matching points on neighbouring waves",
+      "label": "bad",
+      "failureType": "scope_shift"
+    },
+    {
+      "type": "summary_point",
+      "text": "Sound cannot travel through a vacuum.",
+      "sourceIds": ["S1.4"],
+      "evidenceQuote": "sound needs particles to vibrate",
+      "label": "bad",
+      "failureType": "fake_quote"
+    },
+    {
+      "type": "summary_point",
+      "text": "A wave transfers energy together with matter from one place to another.",
+      "sourceIds": ["S1.1"],
+      "evidenceQuote": "transfers energy from one place to another",
+      "label": "bad",
+      "failureType": "negation_dropped"
+    }
+  ]
+}
